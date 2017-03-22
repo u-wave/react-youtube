@@ -1,25 +1,24 @@
-# react-dailymotion
+# @u-wave/react-youtube
 
-Dailymotion player component for React.
+YouTube player component for React.
 
-[Install] - [Usage] - [Demo] - [Props]
+[Install][] - [Usage][] - [Demo][] - [Props][]
 
 ## Install
 
 ```
-npm install --save react-dailymotion
+npm install --save @u-wave/react-youtube
 ```
 
 ## Usage
 
-[Demo] - [Demo source code]
+[Demo][] - [Demo source code][]
 
 ```js
-import Dailymotion from 'react-dailymotion';
+import YouTube from '@u-wave/react-youtube';
 
-<Dailymotion
+<YouTube
   video="x2to0hs"
-  uiTheme="light"
   autoplay
 />
 ```
@@ -38,16 +37,16 @@ import Dailymotion from 'react-dailymotion';
 | controls | bool |  | Whether to display the player controls or not. This parameter only removes the control bar, but keeps the startscreen and the endscreen (useful on mobile devices where the video tag needs a direct user interaction to start the playback). |
 | showEndScreen | bool |  | Whether to enable the end screen or not. |
 | mute | bool |  | Whether to mute the video or not. |
-| origin | string |  | The domain of the page hosting the Dailymotion player. You might want to specify origin for extra security. |
+| origin | string |  | The domain of the page hosting the YouTube player. You might want to specify origin for extra security. |
 | quality | enum:<br>&nbsp;'240'<br>&nbsp;'380'<br>&nbsp;'480'<br>&nbsp;'720'<br>&nbsp;'1080'<br>&nbsp;'1440'<br>&nbsp;'2160'<br> |  | Specifies the _suggested_ playback quality for the video. |
 | sharing | bool |  | Whether to display the sharing button or not. |
 | start | number |  | Specifies the time (in seconds) from which the video should start playing. |
 | subtitles | string |  | Specifies the selected subtitles language. |
 | syndication | string |  | Passes your syndication key to the player. |
-| uiHighlightColor | string |  | Change the default highlight colour used in the controls (hex value). See [the player customisation section](https://developer.dailymotion.com/player#player-customisation) in the Dailymotion docs for more on how this option is actually used. |
-| uiShowLogo | bool |  | Whether to display the Dailymotion logo or not. |
+| uiHighlightColor | string |  | Change the default highlight colour used in the controls (hex value). See [the player customisation section](https://developer.dailymotion.com/player#player-customisation) in the YouTube docs for more on how this option is actually used. |
+| uiShowLogo | bool |  | Whether to display the YouTube logo or not. |
 | uiShowStartScreenInfo | bool |  | Whether to show video information (title and owner) on the start screen. |
-| uiTheme | enum:<br>&nbsp;'light'<br>&nbsp;'dark'<br> | 'dark' | Choose the default base colour theme. See [the player customisation section](https://developer.dailymotion.com/player#player-customisation) in the Dailymotion docs for more on how this option is actually used. |
+| uiTheme | enum:<br>&nbsp;'light'<br>&nbsp;'dark'<br> | 'dark' | Choose the default base colour theme. See [the player customisation section](https://developer.dailymotion.com/player#player-customisation) in the YouTube docs for more on how this option is actually used. |
 | volume | number |  | Sets the player's volume to the specified level, a number between 0 and 1. |
 | onAdEnd | function |  | Sent when the player reaches the end of an Ad media resource. |
 | onAdPause | function |  | Sent when an Ad playback pauses. |
@@ -84,6 +83,6 @@ import Dailymotion from 'react-dailymotion';
 [Install]: #install
 [Usage]: #usage
 [Props]: #props
-[Demo]: https://u-wave.github.io/react-dailymotion
+[Demo]: https://u-wave.github.io/react-youtube
 [Demo source code]: ./example
 [MIT]: ./LICENSE
