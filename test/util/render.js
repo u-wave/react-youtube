@@ -5,10 +5,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { jsdom } from 'jsdom';
+import document from 'global/document';
 import createYouTube from './createYouTube';
 
-const document = jsdom('<!doctype html><html><body></body></html>');
 global.window = { document };
 global.document = document;
 
