@@ -23,9 +23,7 @@ function rollupBabelConfig() {
   const babelrc = readFileSync(joinpath(__dirname, '.babelrc'), 'utf8');
   const babelConfig = JSON.parse(babelrc);
   babelConfig.presets[0] = ['es2015', { loose: true, modules: false }];
-  babelConfig.plugins.push(
-    'external-helpers',
-    ['transform-react-remove-prop-types', { mode: 'wrap' }]);
+  babelConfig.plugins.push('external-helpers');
   babelConfig.babelrc = false;
   return babelConfig;
 }
