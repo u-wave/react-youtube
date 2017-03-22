@@ -59,6 +59,10 @@ import YouTube from '@u-wave/react-youtube';
 | onPlaybackRateChange | function |  |  |
 | onPlaybackQualityChange | function |  |  |
 
+## Related
+
+ - [react-dailymotion][] - A Dailymotion component with a similar API.
+
 ## License
 
 [MIT]
@@ -69,3 +73,4 @@ import YouTube from '@u-wave/react-youtube';
 [Demo]: https://u-wave.github.io/react-youtube
 [Demo source code]: ./example
 [MIT]: ./LICENSE
+[react-dailymotion]: https://github.com/u-wave/react-dailymotion
