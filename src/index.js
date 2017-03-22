@@ -197,6 +197,12 @@ class YouTube extends React.Component {
     this.updateProps(changes);
   }
 
+  componentWillUnmount() {
+    if (this.playerInstance) {
+      this.playerInstance.destroy();
+    }
+  }
+
   onPlayerReady = (event) => {
     if (typeof this.props.volume !== 'undefined') {
       event.target.setVolume(this.props.volume * 100);
@@ -214,6 +220,8 @@ class YouTube extends React.Component {
     if (typeof this.props.playbackRate !== 'undefined') {
       event.target.setPlaybackRate(this.props.playbackRate);
     }
+
+    this.playerInstance = event.target;
 
     this.resolvePlayer(event.target);
   }
