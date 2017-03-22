@@ -1,0 +1,7 @@
+{
+  "extends": "../.babelrc",
+  "plugins": [
+    "syntax-async-functions",
+    ["transform-regenerator", { "async": true }]
+  ]
+}

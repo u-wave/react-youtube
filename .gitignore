@@ -2,3 +2,4 @@ node_modules
 /lib
 /example/bundle.js
 /generated-docs.md
+.eslintcache
