@@ -1,0 +1,73 @@
+{
+  "name": "react-youtube",
+  "version": "0.0.0",
+  "description": "YouTube player component for React.",
+  "main": "lib/rollup.js",
+  "module": "lib/rollup.es.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "gulp",
+    "lint": "eslint gulpfile.js src example/app.js tools test",
+    "test": "npm run lint && mocha",
+    "docs": "node tools/generate-docs.js > generated-docs.md",
+    "example": "npm install && cd example && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/u-wave/react-youtube.git"
+  },
+  "keywords": [
+    "youtube",
+    "react",
+    "player",
+    "react-component",
+    "video"
+  ],
+  "author": "Renée Kooi <renee@kooi.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/u-wave/react-youtube/issues"
+  },
+  "homepage": "https://github.com/u-wave/react-youtube#readme",
+  "dependencies": {
+    "load-script": "^1.0.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.3.2",
+    "babel-plugin-transform-regenerator": "^6.22.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-register": "^6.24.0",
+    "doctrine": "^2.0.0",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "expect": "^1.20.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-newer": "^1.3.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-util": "^3.0.8",
+    "gulp-watch": "^4.3.11",
+    "jsdom": "^9.12.0",
+    "mocha": "^3.2.0",
+    "proxyquire": "^1.7.11",
+    "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-docgen": "^2.13.0",
+    "react-dom": "^15.4.2",
+    "regenerator-runtime": "^0.10.3",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "through2": "^2.0.3"
+  }
+}
