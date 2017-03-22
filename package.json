@@ -1,5 +1,5 @@
 {
-  "name": "react-youtube",
+  "name": "@u-wave/react-youtube",
   "version": "0.0.0",
   "description": "YouTube player component for React.",
   "main": "lib/rollup.js",
