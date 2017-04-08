@@ -1,5 +1,5 @@
-import * as React from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 import eventNames from './eventNames';
 import loadSdk from './loadSdk';
 
@@ -8,34 +8,34 @@ class YouTube extends React.Component {
     /**
      * An 11-character string representing a YouTube video ID..
      */
-    video: React.PropTypes.string,
+    video: PropTypes.string,
     /**
      * DOM ID for the player element.
      */
-    id: React.PropTypes.string,
+    id: PropTypes.string,
     /**
      * CSS className for the player element.
      */
-    className: React.PropTypes.string,
+    className: PropTypes.string,
     /**
      * Width of the player element.
      */
-    width: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.string,
+    width: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
     ]),
     /**
      * Height of the player element.
      */
-    height: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.string,
+    height: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
     ]),
 
     /**
      * Pause the video.
      */
-    paused: React.PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
+    paused: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
 
     // Player parameters
 
@@ -44,104 +44,104 @@ class YouTube extends React.Component {
      *
      * https://developers.google.com/youtube/player_parameters#autoplay
      */
-    autoplay: React.PropTypes.bool,
+    autoplay: PropTypes.bool,
     /**
      * Whether to show captions below the video.
      *
      * https://developers.google.com/youtube/player_parameters#cc_load_policy
      */
-    showCaptions: React.PropTypes.bool,
+    showCaptions: PropTypes.bool,
     /**
      * Whether to show video controls.
      *
      * https://developers.google.com/youtube/player_parameters#controls
      */
-    controls: React.PropTypes.bool,
+    controls: PropTypes.bool,
     /**
      * Ignore keyboard controls.
      *
      * https://developers.google.com/youtube/player_parameters#disablekb
      */
-    disableKeyboard: React.PropTypes.bool,
+    disableKeyboard: PropTypes.bool,
     /**
      * Whether to display the fullscreen button.
      *
      * https://developers.google.com/youtube/player_parameters#fs
      */
-    allowFullscreen: React.PropTypes.bool,
+    allowFullscreen: PropTypes.bool,
     /**
      * The player's interface language. The parameter value is an ISO 639-1
      * two-letter language code or a fully specified locale.
      *
      * https://developers.google.com/youtube/player_parameters#hl
      */
-    lang: React.PropTypes.string,
+    lang: PropTypes.string,
     /**
      * Whether to show annotations on top of the video.
      *
      * https://developers.google.com/youtube/player_parameters#iv_load_policy
      */
-    annotations: React.PropTypes.bool,
+    annotations: PropTypes.bool,
     /**
      * Time in seconds at which to start playing the video.
      *
      * https://developers.google.com/youtube/player_parameters#start
      */
-    startSeconds: React.PropTypes.number,
+    startSeconds: PropTypes.number,
     /**
      * Time in seconds at which to stop playing the video.
      *
      * https://developers.google.com/youtube/player_parameters#end
      */
-    endSeconds: React.PropTypes.number,
+    endSeconds: PropTypes.number,
     /**
      * Remove most YouTube logos from the player.
      *
      * https://developers.google.com/youtube/player_parameters#modestbranding
      */
-    modestBranding: React.PropTypes.bool,
+    modestBranding: PropTypes.bool,
     /**
      * Whether to play the video inline on iOS, instead of fullscreen.
      *
      * https://developers.google.com/youtube/player_parameters#playsinline
      */
-    playsInline: React.PropTypes.bool,
+    playsInline: PropTypes.bool,
     /**
      * Whether to show related videos after the video is over.
      *
      * https://developers.google.com/youtube/player_parameters#rel
      */
-    showRelatedVideos: React.PropTypes.bool,
+    showRelatedVideos: PropTypes.bool,
     /**
      * Whether to show video information (uploader, title, etc) before the video
      * starts.
      *
      * https://developers.google.com/youtube/player_parameters#showinfo
      */
-    showInfo: React.PropTypes.bool,
+    showInfo: PropTypes.bool,
 
     /**
      * The playback volume, **as a number between 0 and 1**.
      */
-    volume: React.PropTypes.number,
+    volume: PropTypes.number,
 
     /**
      * Whether the video's sound should be muted.
      */
-    muted: React.PropTypes.bool,
+    muted: PropTypes.bool,
 
     /**
      * The suggested playback quality.
      *
      * https://developers.google.com/youtube/iframe_api_reference#Playback_quality
      */
-    suggestedQuality: React.PropTypes.string,
+    suggestedQuality: PropTypes.string,
     /**
      * Playback speed.
      *
      * https://developers.google.com/youtube/iframe_api_reference#setPlaybackRate
      */
-    playbackRate: React.PropTypes.number,
+    playbackRate: PropTypes.number,
 
     // Events
     /* eslint-disable react/no-unused-prop-types */
@@ -149,26 +149,26 @@ class YouTube extends React.Component {
     /**
      * Sent when the YouTube player API has loaded.
      */
-    onReady: React.PropTypes.func,
+    onReady: PropTypes.func,
     /**
      * Sent when the player triggers an error.
      */
-    onError: React.PropTypes.func,
+    onError: PropTypes.func,
     /**
      * Sent when playback has been started or resumed.
      */
-    onPlay: React.PropTypes.func,
+    onPlay: PropTypes.func,
     /**
      * Sent when playback has been paused.
      */
-    onPause: React.PropTypes.func,
+    onPause: PropTypes.func,
     /**
      * Sent when playback has stopped.
      */
-    onEnd: React.PropTypes.func,
-    onStateChange: React.PropTypes.func,
-    onPlaybackRateChange: React.PropTypes.func,
-    onPlaybackQualityChange: React.PropTypes.func,
+    onEnd: PropTypes.func,
+    onStateChange: PropTypes.func,
+    onPlaybackRateChange: PropTypes.func,
+    onPlaybackQualityChange: PropTypes.func,
 
     /* eslint-enable react/no-unused-prop-types */
   };

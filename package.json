@@ -30,7 +30,8 @@
   },
   "homepage": "https://github.com/u-wave/react-youtube#readme",
   "dependencies": {
-    "load-script": "^1.0.0"
+    "load-script": "^1.0.0",
+    "prop-types": "^15.5.4"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0"
