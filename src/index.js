@@ -221,8 +221,6 @@ class YouTube extends React.Component {
       event.target.setPlaybackRate(this.props.playbackRate);
     }
 
-    this.playerInstance = event.target;
-
     this.resolvePlayer(event.target);
   }
 
@@ -315,6 +313,9 @@ class YouTube extends React.Component {
         this.resolvePlayer = resolve;
 
         const player = new YT.Player(this.container, this.getInitialOptions());
+        // Store the instance directly so we can destroy it sync in
+        // `componentWilLUnmount`.
+        this.playerInstance = player;
 
         Object.keys(eventNames).forEach((dmName) => {
           const reactName = eventNames[dmName];
