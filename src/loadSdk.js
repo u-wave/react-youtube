@@ -1,5 +1,5 @@
 /* global window */
-import loadScript from 'load-script';
+import loadScript from 'load-script2';
 
 function loadSdk() {
   return new Promise((resolve, reject) => {
