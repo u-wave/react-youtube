@@ -61,7 +61,8 @@ import YouTube from '@u-wave/react-youtube';
 
 ## Related
 
- - [react-dailymotion][] - A Dailymotion component with a similar API.
+ - [react-dailymotion][] - A Dailymotion component with a similar declarative API.
+ - [@u-wave/react-vimeo][] - A Vimeo component with a similar declarative API.
 
 ## License
 
@@ -74,3 +75,4 @@ import YouTube from '@u-wave/react-youtube';
 [Demo source code]: ./example
 [MIT]: ./LICENSE
 [react-dailymotion]: https://github.com/u-wave/react-dailymotion
+[@u-wave/react-vimeo]: https://github.com/u-wave/react-vimeo
