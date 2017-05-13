@@ -317,9 +317,9 @@ class YouTube extends React.Component {
         // `componentWilLUnmount`.
         this.playerInstance = player;
 
-        Object.keys(eventNames).forEach((dmName) => {
-          const reactName = eventNames[dmName];
-          player.addEventListener(dmName, (event) => {
+        Object.keys(eventNames).forEach((ytName) => {
+          const reactName = eventNames[ytName];
+          player.addEventListener(ytName, (event) => {
             if (this.props[reactName]) {
               this.props[reactName](event);
             }
