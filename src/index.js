@@ -155,9 +155,17 @@ class YouTube extends React.Component {
      */
     onError: PropTypes.func,
     /**
+     * Sent when the video is cued and ready to play.
+     */
+    onCued: PropTypes.func,
+    /**
+     * Sent when the video is buffering.
+     */
+    onBuffering: PropTypes.func,
+    /**
      * Sent when playback has been started or resumed.
      */
-    onPlay: PropTypes.func,
+    onPlaying: PropTypes.func,
     /**
      * Sent when playback has been paused.
      */
@@ -184,6 +192,11 @@ class YouTube extends React.Component {
     playsInline: false,
     showRelatedVideos: true,
     showInfo: true,
+    onCued: () => {},
+    onBuffering: () => {},
+    onPlaying: () => {},
+    onPause: () => {},
+    onEnd: () => {},
   };
 
   componentDidMount() {
@@ -224,6 +237,29 @@ class YouTube extends React.Component {
     this.resolvePlayer(event.target);
   }
 
+  onPlayerStateChange = (event) => {
+    const State = YT.PlayerState; // eslint-disable-line no-undef
+    switch (event.data) {
+      case State.CUED:
+        this.props.onCued(event);
+        break;
+      case State.BUFFERING:
+        this.props.onBuffering(event);
+        break;
+      case State.PAUSED:
+        this.props.onPause(event);
+        break;
+      case State.PLAYING:
+        this.props.onPlaying(event);
+        break;
+      case State.ENDED:
+        this.props.onEnd(event);
+        break;
+      default:
+        // Nothing
+    }
+  }
+
   /**
    * @private
    */
@@ -256,6 +292,7 @@ class YouTube extends React.Component {
       playerVars: this.getPlayerParameters(),
       events: {
         onReady: this.onPlayerReady,
+        onStateChange: this.onPlayerStateChange,
       },
     };
   }
