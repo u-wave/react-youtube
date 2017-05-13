@@ -52,9 +52,11 @@ import YouTube from '@u-wave/react-youtube';
 | playbackRate | number |  | Playback speed.<br>https://developers.google.com/youtube/iframe_api_reference#setPlaybackRate |
 | onReady | function |  | Sent when the YouTube player API has loaded. |
 | onError | function |  | Sent when the player triggers an error. |
-| onPlay | function |  | Sent when playback has been started or resumed. |
-| onPause | function |  | Sent when playback has been paused. |
-| onEnd | function |  | Sent when playback has stopped. |
+| onCued | function | () => {} | Sent when the video is cued and ready to play. |
+| onBuffering | function | () => {} | Sent when the video is buffering. |
+| onPlaying | function | () => {} | Sent when playback has been started or resumed. |
+| onPause | function | () => {} | Sent when playback has been paused. |
+| onEnd | function | () => {} | Sent when playback has stopped. |
 | onStateChange | function |  |  |
 | onPlaybackRateChange | function |  |  |
 | onPlaybackQualityChange | function |  |  |
