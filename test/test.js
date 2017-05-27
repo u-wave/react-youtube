@@ -31,12 +31,16 @@ describe('YouTube', () => {
       video: 'x2y5kyu',
     });
     expect(sdkMock.Player).toHaveBeenCalled();
-    expect(sdkMock.Player.calls[0].arguments[1]).toMatch({ videoId: 'x2y5kyu' });
+    expect(sdkMock.Player.calls[0].arguments[1]).toMatch({
+      videoId: 'x2y5kyu',
+    });
 
     await rerender({ video: 'x3pn5cb' });
 
     expect(playerMock.loadVideoById).toHaveBeenCalled();
-    expect(playerMock.loadVideoById.calls[0].arguments[0]).toEqual('x3pn5cb');
+    expect(playerMock.loadVideoById.calls[0].arguments[0]).toMatch({
+      videoId: 'x3pn5cb',
+    });
   });
 
   it('should pause the video using the "paused" prop', async () => {
@@ -113,5 +117,34 @@ describe('YouTube', () => {
 
     expect(playerMock.getIframe().setWidth).toHaveBeenCalledWith('100%');
     expect(playerMock.getIframe().setHeight).toHaveBeenCalledWith(800);
+  });
+
+  it('should respect start/endSeconds', async () => {
+    const { sdkMock, playerMock, rerender } = await render({
+      video: 'pRKqlw0DaDI',
+      startSeconds: 30,
+      endSeconds: 60,
+    });
+
+    expect(sdkMock.Player.calls[0].arguments[1]).toMatch({
+      videoId: 'pRKqlw0DaDI',
+      playerVars: {
+        start: 30,
+        end: 60,
+      },
+    });
+
+    await rerender({
+      video: 'hlk7o5T56iw',
+      startSeconds: 40,
+      endSeconds: undefined,
+    });
+
+    expect(playerMock.loadVideoById).toHaveBeenCalled();
+    expect(playerMock.loadVideoById.calls[0].arguments[0]).toMatch({
+      videoId: 'hlk7o5T56iw',
+      startSeconds: 40,
+      endSeconds: undefined,
+    });
   });
 });
