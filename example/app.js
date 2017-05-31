@@ -12,9 +12,11 @@ const videos = [
 
 const qualities = ['auto', '240', '380', '480', '720', '1080', '1440', '2160'];
 
-const hashVideoRx = /^#!\/video\/(\d)$/
-const defaultVideo = hashVideoRx.test(location.hash) ?
-  parseInt(location.hash.replace(hashVideoRx, '$1'), 10) :
+const hashVideoRx = /^#!\/video\/(\d)$/;
+const hash = typeof location !== 'undefined' ?
+  location.hash : ''; // eslint-disable-line no-undef
+const defaultVideo = hashVideoRx.test(hash) ?
+  parseInt(hash.replace(hashVideoRx, '$1'), 10) :
   0;
 
 class App extends React.Component {
