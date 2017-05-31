@@ -113,7 +113,7 @@ class App extends React.Component {
             volume={this.state.volume}
             paused={this.state.paused}
             onPause={this.handlePlayerPause}
-            onPlay={this.handlePlayerPlay}
+            onPlaying={this.handlePlayerPlay}
           />
         </div>
       </div>
