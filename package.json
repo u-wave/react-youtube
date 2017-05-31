@@ -1,6 +1,6 @@
 {
   "name": "@u-wave/react-youtube",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "YouTube player component for React.",
   "main": "lib/rollup.js",
   "module": "lib/rollup.es.js",
