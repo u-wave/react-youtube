@@ -332,11 +332,15 @@ class YouTube extends React.Component {
             player.getIframe()[name] = value; // eslint-disable-line no-param-reassign
             break;
           case 'video':
-            player.loadVideoById({
-              videoId: value,
-              startSeconds: this.props.startSeconds || 0,
-              endSeconds: this.props.endSeconds,
-            });
+            if (!value) {
+              player.stopVideo();
+            } else {
+              player.loadVideoById({
+                videoId: value,
+                startSeconds: this.props.startSeconds || 0,
+                endSeconds: this.props.endSeconds,
+              });
+            }
             break;
           default:
             // Nothing

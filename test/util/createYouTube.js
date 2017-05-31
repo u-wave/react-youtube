@@ -39,6 +39,7 @@ export default function createYouTube() {
     pauseVideo: createSpy().andCall(() => {
       isPaused = true;
     }),
+    stopVideo: createSpy(),
     getPlayerState() {
       return isPaused ? 2 : 1;
     },

@@ -43,6 +43,20 @@ describe('YouTube', () => {
     });
   });
 
+  it('should stop the video when "video" prop becomes null', async () => {
+    const { sdkMock, playerMock, rerender } = await render({
+      video: 'ZuuVjuLNvFY',
+    });
+    expect(sdkMock.Player.calls[0].arguments[1]).toMatch({
+      videoId: 'ZuuVjuLNvFY',
+    });
+
+    await rerender({ video: null });
+    expect(playerMock.stopVideo).toHaveBeenCalled();
+    await rerender({ video: 'ld8ugY47cps' });
+    expect(playerMock.loadVideoById).toHaveBeenCalled();
+  });
+
   it('should pause the video using the "paused" prop', async () => {
     const { playerMock, rerender } = await render({
       video: 'x2y5kyu',

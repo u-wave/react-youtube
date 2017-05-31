@@ -7,6 +7,7 @@ const videos = [
   { id: 'ZuuVjuLNvFY', name: 'JUNNY - kontra (Feat. Lil Gimch, Keeflow)' },
   { id: 'PYE7jXNjFWw', name: 'T W L V - Follow' },
   { id: 'ld8ugY47cps', name: 'SLCHLD - I can\'t love you anymore' },
+  { id: null, name: '<none>' },
 ];
 
 const qualities = ['auto', '240', '380', '480', '720', '1080', '1440', '2160'];
