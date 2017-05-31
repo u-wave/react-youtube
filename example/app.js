@@ -1,6 +1,6 @@
 /* global document */
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import YouTube from '../';
 
 const videos = [
@@ -63,6 +63,7 @@ class App extends React.Component {
           <div className="collection">
             {videos.map((choice, index) => (
               <a
+                key={choice.id}
                 href={`#!/video/${index}`}
                 className={`collection-item ${video === choice ? 'active' : ''}`}
                 onClick={() => this.selectVideo(index)}
@@ -95,7 +96,7 @@ class App extends React.Component {
           <h3>Quality</h3>
           <select className="browser-default" onChange={this.handleQuality}>
             {qualities.map(quality => (
-              <option value={quality}>{quality}</option>
+              <option key={quality} value={quality}>{quality}</option>
             ))}
           </select>
         </div>
