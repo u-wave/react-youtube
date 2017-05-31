@@ -7,7 +7,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "rollup -c",
-    "lint": "eslint --cache .",
+    "lint": "eslint --cache --fix .",
     "test": "npm run lint && cross-env BABEL_ENV=test mocha",
     "docs": "node tools/generate-docs.js > generated-docs.md",
     "example": "npm install && cd example && npm install"
