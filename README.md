@@ -73,7 +73,7 @@ import YouTube from '@u-wave/react-youtube';
 [Install]: #install
 [Usage]: #usage
 [Props]: #props
-[Demo]: https://u-wave.github.io/react-youtube
+[Demo]: https://react-youtube-demo.surge.sh
 [Demo source code]: ./example
 [MIT]: ./LICENSE
 [react-dailymotion]: https://github.com/u-wave/react-dailymotion
