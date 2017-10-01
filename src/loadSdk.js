@@ -14,10 +14,11 @@ function loadSdk() {
     loadScript('https://www.youtube.com/iframe_api', (err) => {
       if (err) {
         reject(err);
+      } else {
+        window.YT.ready(() => {
+          resolve(window.YT);
+        });
       }
-      window.YT.ready(() => {
-        resolve(window.YT);
-      });
     });
   });
 }
