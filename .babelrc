@@ -6,9 +6,6 @@
     }],
     "react"
   ],
-  "plugins": [
-    "transform-class-properties"
-  ],
 
   "env": {
     "test": {

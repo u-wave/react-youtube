@@ -4,6 +4,14 @@ import eventNames from './eventNames';
 import loadSdk from './loadSdk';
 
 class YouTube extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onPlayerReady = this.onPlayerReady.bind(this);
+    this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
+    this.refContainer = this.refContainer.bind(this);
+  }
+
   componentDidMount() {
     this.createPlayer();
   }
@@ -21,7 +29,7 @@ class YouTube extends React.Component {
     }
   }
 
-  onPlayerReady = (event) => {
+  onPlayerReady(event) {
     if (typeof this.props.volume !== 'undefined') {
       event.target.setVolume(this.props.volume * 100);
     }
@@ -42,7 +50,7 @@ class YouTube extends React.Component {
     this.resolvePlayer(event.target);
   }
 
-  onPlayerStateChange = (event) => {
+  onPlayerStateChange(event) {
     const State = YT.PlayerState; // eslint-disable-line no-undef
     switch (event.data) {
       case State.CUED:
@@ -186,7 +194,7 @@ class YouTube extends React.Component {
   /**
    * @private
    */
-  refContainer = (container) => {
+  refContainer(container) {
     this.container = container;
   }
 
