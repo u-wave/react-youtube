@@ -8,7 +8,7 @@
     "prepublish": "npm run build",
     "build": "rollup -c",
     "lint": "eslint --cache --fix .",
-    "test": "npm run lint && cross-env BABEL_ENV=test mocha",
+    "test": "npm run lint && cross-env NODE_ENV=test mocha",
     "docs": "node tools/generate-docs.js > generated-docs.md",
     "example": "npm install && cd example && npm install"
   },
@@ -37,13 +37,12 @@
     "react": "^0.14.0 || >= 15.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^7.2.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-register": "^6.26.0",
+    "@babel/core": "^7.0.0-beta.31",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.31",
+    "@babel/preset-env": "^7.0.0-beta.31",
+    "@babel/preset-react": "^7.0.0-beta.31",
+    "@babel/register": "^7.0.0-beta.31",
+    "babel-eslint": "^8.0.2",
     "cross-env": "^5.0.5",
     "doctrine": "^2.0.0",
     "eslint": "^4.7.2",
@@ -60,8 +59,8 @@
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
     "regenerator-runtime": "^0.11.0",
-    "rollup": "^0.50.0",
-    "rollup-plugin-babel": "^3.0.2",
+    "rollup": "^0.51.2",
+    "rollup-plugin-babel": "^4.0.0-beta.0",
     "through2": "^2.0.3"
   }
 }
