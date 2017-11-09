@@ -1,4 +1,4 @@
-/* global document */
+/* eslint-env browser */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import YouTube from '../';
@@ -13,8 +13,8 @@ const videos = [
 const qualities = ['auto', '240', '380', '480', '720', '1080', '1440', '2160'];
 
 const hashVideoRx = /^#!\/video\/(\d)$/;
-const hash = typeof location !== 'undefined' ?
-  location.hash : ''; // eslint-disable-line no-undef
+const hash = typeof window.location !== 'undefined' ?
+  window.location.hash : ''; // eslint-disable-line no-undef
 const defaultVideo = hashVideoRx.test(hash) ?
   parseInt(hash.replace(hashVideoRx, '$1'), 10) :
   0;
@@ -76,13 +76,13 @@ class App extends React.Component {
           </div>
           <h3>Paused</h3>
           <p>
-            <input
-              type="checkbox"
-              id="paused"
-              checked={this.state.paused}
-              onChange={this.handlePause}
-            />
             <label htmlFor="paused">
+              <input
+                type="checkbox"
+                id="paused"
+                checked={this.state.paused}
+                onChange={this.handlePause}
+              />
               Paused
             </label>
           </p>
