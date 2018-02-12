@@ -1,5 +1,7 @@
+/* global window */
 import React from 'react';
 import PropTypes from 'prop-types';
+import stringify from 'qs-stringify';
 import eventNames from './eventNames';
 import loadSdk from './loadSdk';
 
@@ -10,6 +12,11 @@ class YouTube extends React.Component {
     this.onPlayerReady = this.onPlayerReady.bind(this);
     this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
     this.refContainer = this.refContainer.bind(this);
+
+    const query = this.getPlayerParameters();
+    query.enablejsapi = 1;
+    query.origin = props.origin;
+    this.src = `https://www.youtube.com/embed/${props.video}?${stringify(query)}`;
   }
 
   componentDidMount() {
@@ -137,12 +144,6 @@ class YouTube extends React.Component {
               player.playVideo();
             }
             break;
-          case 'id':
-          case 'className':
-          case 'width':
-          case 'height':
-            player.getIframe()[name] = value; // eslint-disable-line no-param-reassign
-            break;
           case 'video':
             if (!value) {
               player.stopVideo();
@@ -197,11 +198,19 @@ class YouTube extends React.Component {
   }
 
   render() {
+    const {
+      id, className, width, height,
+    } = this.props;
     return (
-      <div
-        id={this.props.id}
-        className={this.props.className}
+      <iframe
         ref={this.refContainer}
+        src={this.src}
+        id={id}
+        className={className}
+        width={width}
+        height={height}
+        title="YouTube embed"
+        frameBorder={0}
       />
     );
   }
@@ -235,6 +244,11 @@ if (process.env.NODE_ENV !== 'production') {
       PropTypes.number,
       PropTypes.string,
     ]),
+
+    /**
+     * The domain that is embedding this player.
+     */
+    origin: PropTypes.string,
 
     /**
      * Pause the video.
@@ -397,6 +411,9 @@ YouTube.defaultProps = {
   playsInline: false,
   showRelatedVideos: true,
   showInfo: true,
+  origin: typeof window !== 'undefined' && window.location
+    ? `${window.location.protocol}//${window.location.host}`
+    : null,
   onCued: () => {},
   onBuffering: () => {},
   onPlaying: () => {},

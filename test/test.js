@@ -5,17 +5,27 @@ import render from './util/render';
 import createYouTube from './util/createYouTube';
 
 describe('YouTube', () => {
-  it('should render a div with an ID and className', () => {
+  it('should render an iframe with an ID and className', () => {
     const { YouTube } = createYouTube();
     const renderer = createRenderer();
     renderer.render(<YouTube id="myId" className="myClassName" />);
     expect(renderer.getRenderOutput()).toMatch({
-      type: 'div',
+      type: 'iframe',
       props: {
         id: 'myId',
         className: 'myClassName',
       },
     });
+  });
+
+  it('should load the initial embed url', () => {
+    const { YouTube } = createYouTube();
+    const renderer = createRenderer();
+    renderer.render(<YouTube video="x2y5kyu" />);
+    expect(renderer.getRenderOutput()).toMatch({
+      type: 'iframe',
+    });
+    expect(renderer.getRenderOutput().props.src).toMatch(/embed\/x2y5kyu\?/);
   });
 
   it('should create a YouTube player when mounted', async () => {
@@ -111,26 +121,6 @@ describe('YouTube', () => {
     expect(playerMock.setPlaybackQuality).toHaveBeenCalledWith('720hd');
     await rerender({ suggestedQuality: 'highres' });
     expect(playerMock.setPlaybackQuality).toHaveBeenCalledWith('highres');
-  });
-
-  it('should set the iframe width/height using the width/height props', async () => {
-    const { sdkMock, playerMock, rerender } = await render({
-      video: 'x2y5kyu',
-      width: 640,
-      height: 320,
-    });
-    expect(sdkMock.Player.calls[0].arguments[1]).toMatch({
-      width: 640,
-      height: 320,
-    });
-
-    await rerender({
-      width: '100%',
-      height: 800,
-    });
-
-    expect(playerMock.getIframe().setWidth).toHaveBeenCalledWith('100%');
-    expect(playerMock.getIframe().setHeight).toHaveBeenCalledWith(800);
   });
 
   it('should respect start/endSeconds', async () => {
