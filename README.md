@@ -1,7 +1,5 @@
 # @u-wave/react-youtube
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/u-wave/react-youtube.svg)](https://greenkeeper.io/)
-
 YouTube player component for React.
 
 [Install][] - [Usage][] - [Demo][] - [Props][]
