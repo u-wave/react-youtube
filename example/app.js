@@ -20,41 +20,51 @@ const defaultVideo = hashVideoRx.test(hash) ?
   0;
 
 class App extends React.Component {
-  state = {
-    video: defaultVideo,
-    suggestedQuality: 'auto',
-    volume: 1,
-    paused: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      video: defaultVideo,
+      suggestedQuality: 'auto',
+      volume: 1,
+      paused: false,
+    };
+
+    this.handlePause = this.handlePause.bind(this);
+    this.handlePlayerPause = this.handlePlayerPause.bind(this);
+    this.handlePlayerPlay = this.handlePlayerPlay.bind(this);
+    this.handleVolume = this.handleVolume.bind(this);
+    this.handleQuality = this.handleQuality.bind(this);
+  }
 
   selectVideo(index) {
     this.setState({ video: index });
   }
 
-  handlePause = (event) => {
+  handlePause(event) {
     this.setState({
       paused: event.target.checked,
     });
-  };
+  }
 
-  handlePlayerPause = () => {
+  handlePlayerPause() {
     this.setState({ paused: true });
-  };
-  handlePlayerPlay = () => {
+  }
+  handlePlayerPlay() {
     this.setState({ paused: false });
-  };
+  }
 
-  handleVolume = (event) => {
+  handleVolume(event) {
     this.setState({
       volume: parseFloat(event.target.value),
     });
-  };
+  }
 
-  handleQuality = (event) => {
+  handleQuality(event) {
     this.setState({
       suggestedQuality: qualities[event.target.selectedIndex],
     });
-  };
+  }
 
   render() {
     const video = videos[this.state.video];
