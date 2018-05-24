@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build",
-    "build": "browserify -t babelify -e app.js > bundle.js",
+    "build": "cross-env NODE_ENV=cjs browserify -t babelify -e app.js > bundle.js",
     "start": "ecstatic .",
     "deploy": "npm install && surge . -d react-youtube-demo.surge.sh"
   },
@@ -16,7 +16,9 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "babelify": "^7.3.0",
-    "browserify": "^13.0.1"
+    "@babel/core": "7.0.0-beta.47",
+    "babelify": "^9.0.0",
+    "browserify": "^13.0.1",
+    "cross-env": "^5.1.6"
   }
 }

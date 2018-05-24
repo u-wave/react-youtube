@@ -6,9 +6,13 @@ module.exports = (api) => {
     loose: true,
   };
 
+  if (process.env.NODE_ENV === 'cjs') {
+    envOptions.modules = 'commonjs';
+  }
+
   if (process.env.NODE_ENV === 'test') {
-    envOptions.modules = 'commonjs'
-    envOptions.targets = { node: 'current' }
+    envOptions.modules = 'commonjs';
+    envOptions.targets = { node: 'current' };
   }
 
   return {
@@ -17,4 +21,4 @@ module.exports = (api) => {
       '@babel/react',
     ],
   };
-}
+};
