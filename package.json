@@ -2,8 +2,8 @@
   "name": "@u-wave/react-youtube",
   "version": "0.4.2",
   "description": "YouTube player component for React.",
-  "main": "lib/rollup.js",
-  "module": "lib/rollup.es.js",
+  "main": "dist/react-youtube.js",
+  "module": "dist/react-youtube.es.js",
   "scripts": {
     "prepublish": "npm run build",
     "build": "rollup -c",
