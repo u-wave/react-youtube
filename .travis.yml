@@ -4,3 +4,12 @@ node_js:
   - "stable"
   - "8"
   - "6"
+
+before_deploy:
+  - cd example && npm install
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: ./example/
+  on: deploy
