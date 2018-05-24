@@ -4,3 +4,16 @@ node_js:
   - "stable"
   - "8"
   - "6"
+
+before_deploy:
+  - cd example && npm install && cd ..
+  - mkdir _deploy
+  - cp example/bundle.js example/index.html _deploy
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: _deploy
+  on:
+    branch: master
+    node: stable
