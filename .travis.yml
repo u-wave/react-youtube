@@ -6,8 +6,9 @@ node_js:
   - "6"
 
 before_deploy:
-  - cd example && npm install
-  - mkdir _deploy && cp example/bundle.js example/index.html _deploy
+  - cd example && npm install && cd ..
+  - mkdir _deploy
+  - cp example/bundle.js example/index.html _deploy
 deploy:
   provider: pages
   skip-cleanup: true
