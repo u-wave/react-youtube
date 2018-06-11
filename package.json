@@ -1,6 +1,6 @@
 {
   "name": "@u-wave/react-youtube",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "YouTube player component for React.",
   "main": "dist/react-youtube.js",
   "module": "dist/react-youtube.es.js",
