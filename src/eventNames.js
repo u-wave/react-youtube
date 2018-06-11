@@ -1,8 +1,8 @@
-export default {
-  ready: 'onReady',
-  stateChange: 'onStateChange',
-  playbackQualityChange: 'onPlaybackQualityChange',
-  playbackRateChange: 'onPlaybackRateChange',
-  error: 'onError',
-  apiChange: 'onApiChange',
-};
+export default [
+  'onReady',
+  'onStateChange',
+  'onPlaybackQualityChange',
+  'onPlaybackRateChange',
+  'onError',
+  'onApiChange',
+];
