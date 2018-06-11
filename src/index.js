@@ -147,11 +147,16 @@ class YouTube extends React.Component {
             if (!value) {
               player.stopVideo();
             } else {
-              player.loadVideoById({
+              const opts = {
                 videoId: value,
                 startSeconds: this.props.startSeconds || 0,
                 endSeconds: this.props.endSeconds,
-              });
+              };
+              if (this.props.autoplay) {
+                player.loadVideoById(opts);
+              } else {
+                player.cueVideoById(opts);
+              }
             }
             break;
           default:

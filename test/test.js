@@ -37,8 +37,8 @@ describe('YouTube', () => {
 
     await rerender({ video: 'x3pn5cb' });
 
-    expect(playerMock.loadVideoById).toHaveBeenCalled();
-    expect(playerMock.loadVideoById.calls[0].arguments[0]).toMatch({
+    expect(playerMock.cueVideoById).toHaveBeenCalled();
+    expect(playerMock.cueVideoById.calls[0].arguments[0]).toMatch({
       videoId: 'x3pn5cb',
     });
   });
@@ -54,7 +54,7 @@ describe('YouTube', () => {
     await rerender({ video: null });
     expect(playerMock.stopVideo).toHaveBeenCalled();
     await rerender({ video: 'ld8ugY47cps' });
-    expect(playerMock.loadVideoById).toHaveBeenCalled();
+    expect(playerMock.cueVideoById).toHaveBeenCalled();
   });
 
   it('should pause the video using the "paused" prop', async () => {
@@ -154,11 +154,31 @@ describe('YouTube', () => {
       endSeconds: undefined,
     });
 
-    expect(playerMock.loadVideoById).toHaveBeenCalled();
-    expect(playerMock.loadVideoById.calls[0].arguments[0]).toMatch({
+    expect(playerMock.cueVideoById).toHaveBeenCalled();
+    expect(playerMock.cueVideoById.calls[0].arguments[0]).toMatch({
       videoId: 'hlk7o5T56iw',
       startSeconds: 40,
       endSeconds: undefined,
     });
+  });
+
+  it('should only call loadVideoById when autoplay is enabled', async () => {
+    const { playerMock, rerender } = await render({
+      video: 'x2y5kyu',
+    });
+    await rerender({ video: 'x3pn5cb' });
+
+    expect(playerMock.cueVideoById).toHaveBeenCalled();
+    expect(playerMock.loadVideoById).toNotHaveBeenCalled();
+
+    playerMock.cueVideoById.reset();
+
+    await rerender({
+      autoplay: true,
+      video: 'r6534246435',
+    });
+
+    expect(playerMock.cueVideoById).toNotHaveBeenCalled();
+    expect(playerMock.loadVideoById).toHaveBeenCalled();
   });
 });

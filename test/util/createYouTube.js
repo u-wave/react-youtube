@@ -33,6 +33,7 @@ export default function createYouTube() {
     setPlaybackQuality: createSpy(),
     setPlaybackRate: createSpy(),
     loadVideoById: createSpy(),
+    cueVideoById: createSpy(),
     playVideo: createSpy().andCall(() => {
       isPaused = false;
     }),
