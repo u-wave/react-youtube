@@ -17,6 +17,7 @@ class YouTube extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // eslint-disable-next-line react/destructuring-assignment
     const changes = Object.keys(this.props).filter(name => this.props[name] !== prevProps[name]);
 
     this.updateProps(changes);
@@ -29,43 +30,58 @@ class YouTube extends React.Component {
   }
 
   onPlayerReady(event) {
-    if (typeof this.props.volume !== 'undefined') {
-      event.target.setVolume(this.props.volume * 100);
+    const {
+      volume,
+      muted,
+      suggestedQuality,
+      playbackRate,
+    } = this.props;
+
+    if (typeof volume !== 'undefined') {
+      event.target.setVolume(volume * 100);
     }
-    if (typeof this.props.muted !== 'undefined') {
-      if (this.props.muted) {
+    if (typeof muted !== 'undefined') {
+      if (muted) {
         event.target.mute();
       } else {
         event.target.unMute();
       }
     }
-    if (typeof this.props.suggestedQuality !== 'undefined') {
-      event.target.setPlaybackQuality(this.props.suggestedQuality);
+    if (typeof suggestedQuality !== 'undefined') {
+      event.target.setPlaybackQuality(suggestedQuality);
     }
-    if (typeof this.props.playbackRate !== 'undefined') {
-      event.target.setPlaybackRate(this.props.playbackRate);
+    if (typeof playbackRate !== 'undefined') {
+      event.target.setPlaybackRate(playbackRate);
     }
 
     this.resolvePlayer(event.target);
   }
 
   onPlayerStateChange(event) {
+    const {
+      onCued,
+      onBuffering,
+      onPause,
+      onPlaying,
+      onEnd,
+    } = this.props;
+
     const State = YT.PlayerState; // eslint-disable-line no-undef
     switch (event.data) {
       case State.CUED:
-        this.props.onCued(event);
+        onCued(event);
         break;
       case State.BUFFERING:
-        this.props.onBuffering(event);
+        onBuffering(event);
         break;
       case State.PAUSED:
-        this.props.onPause(event);
+        onPause(event);
         break;
       case State.PLAYING:
-        this.props.onPlaying(event);
+        onPlaying(event);
         break;
       case State.ENDED:
-        this.props.onEnd(event);
+        onEnd(event);
         break;
       default:
         // Nothing
@@ -76,6 +92,7 @@ class YouTube extends React.Component {
    * @private
    */
   getPlayerParameters() {
+    /* eslint-disable react/destructuring-assignment */
     return {
       autoplay: this.props.autoplay,
       cc_load_policy: this.props.showCaptions ? 1 : 0,
@@ -91,12 +108,14 @@ class YouTube extends React.Component {
       rel: this.props.showRelatedVideos ? 1 : 0,
       showinfo: this.props.showInfo ? 1 : 0,
     };
+    /* eslint-enable react/destructuring-assignment */
   }
 
   /**
    * @private
    */
   getInitialOptions() {
+    /* eslint-disable react/destructuring-assignment */
     return {
       videoId: this.props.video,
       width: this.props.width,
@@ -107,6 +126,7 @@ class YouTube extends React.Component {
         onStateChange: this.onPlayerStateChange,
       },
     };
+    /* eslint-enable react/destructuring-assignment */
   }
 
   /**
@@ -115,6 +135,7 @@ class YouTube extends React.Component {
   updateProps(propNames) {
     this.player.then((player) => {
       propNames.forEach((name) => {
+        // eslint-disable-next-line react/destructuring-assignment
         const value = this.props[name];
         switch (name) {
           case 'muted':
@@ -147,12 +168,13 @@ class YouTube extends React.Component {
             if (!value) {
               player.stopVideo();
             } else {
+              const { startSeconds, endSeconds, autoplay } = this.props;
               const opts = {
                 videoId: value,
-                startSeconds: this.props.startSeconds || 0,
-                endSeconds: this.props.endSeconds,
+                startSeconds: startSeconds || 0,
+                endSeconds,
               };
-              if (this.props.autoplay) {
+              if (autoplay) {
                 player.loadVideoById(opts);
               } else {
                 player.cueVideoById(opts);
@@ -170,25 +192,28 @@ class YouTube extends React.Component {
    * @private
    */
   createPlayer() {
-    this.player = loadSdk().then(YT =>
-      new Promise((resolve) => {
-        this.resolvePlayer = resolve;
+    const { volume } = this.props;
 
-        const player = new YT.Player(this.container, this.getInitialOptions());
-        // Store the instance directly so we can destroy it sync in
-        // `componentWilLUnmount`.
-        this.playerInstance = player;
+    this.player = loadSdk().then(YT => new Promise((resolve) => {
+      this.resolvePlayer = resolve;
 
-        eventNames.forEach((name) => {
-          player.addEventListener(name, (event) => {
-            if (this.props[name]) {
-              this.props[name](event);
-            }
-          });
+      const player = new YT.Player(this.container, this.getInitialOptions());
+      // Store the instance directly so we can destroy it sync in
+      // `componentWillUnmount`.
+      this.playerInstance = player;
+
+      eventNames.forEach((name) => {
+        player.addEventListener(name, (event) => {
+          // eslint-disable-next-line react/destructuring-assignment
+          const handler = this.props[name];
+          if (handler) {
+            handler(event);
+          }
         });
-      }));
+      });
+    }));
 
-    if (typeof this.props.volume === 'number') {
+    if (typeof volume === 'number') {
       this.updateProps(['volume']);
     }
   }
@@ -201,10 +226,12 @@ class YouTube extends React.Component {
   }
 
   render() {
+    const { id, className } = this.props;
+
     return (
       <div
-        id={this.props.id}
-        className={this.props.className}
+        id={id}
+        className={className}
         ref={this.refContainer}
       />
     );

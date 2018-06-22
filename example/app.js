@@ -1,7 +1,7 @@
 /* eslint-env browser */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import YouTube from '../';
+import YouTube from '..';
 
 const videos = [
   { id: 'ZuuVjuLNvFY', name: 'JUNNY - kontra (Feat. Lil Gimch, Keeflow)' },
@@ -13,18 +13,18 @@ const videos = [
 const qualities = ['auto', '240', '380', '480', '720', '1080', '1440', '2160'];
 
 const hashVideoRx = /^#!\/video\/(\d)$/;
-const hash = typeof window.location !== 'undefined' ?
-  window.location.hash : ''; // eslint-disable-line no-undef
-const defaultVideo = hashVideoRx.test(hash) ?
-  parseInt(hash.replace(hashVideoRx, '$1'), 10) :
-  0;
+const hash = typeof window.location !== 'undefined'
+  ? window.location.hash : ''; // eslint-disable-line no-undef
+const defaultVideo = hashVideoRx.test(hash)
+  ? parseInt(hash.replace(hashVideoRx, '$1'), 10)
+  : 0;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      video: defaultVideo,
+      videoIndex: defaultVideo,
       suggestedQuality: 'auto',
       volume: 1,
       paused: false,
@@ -38,7 +38,7 @@ class App extends React.Component {
   }
 
   selectVideo(index) {
-    this.setState({ video: index });
+    this.setState({ videoIndex: index });
   }
 
   handlePause(event) {
@@ -50,6 +50,7 @@ class App extends React.Component {
   handlePlayerPause() {
     this.setState({ paused: true });
   }
+
   handlePlayerPlay() {
     this.setState({ paused: false });
   }
@@ -67,11 +68,17 @@ class App extends React.Component {
   }
 
   render() {
-    const video = videos[this.state.video];
+    const {
+      videoIndex, volume, paused, suggestedQuality,
+    } = this.state;
+
+    const video = videos[videoIndex];
     return (
       <div className="row">
         <div className="col s3">
-          <h3>Video</h3>
+          <h3>
+            Video
+          </h3>
           <div className="collection">
             {videos.map((choice, index) => (
               <a
@@ -84,29 +91,39 @@ class App extends React.Component {
               </a>
             ))}
           </div>
-          <h3>Paused</h3>
+          <h3>
+            Paused
+          </h3>
           <p>
             <input
               type="checkbox"
               id="paused"
-              checked={this.state.paused}
+              checked={paused}
               onChange={this.handlePause}
             />
-            <label htmlFor="paused">Paused</label>
+            <label htmlFor="paused">
+              Paused
+            </label>
           </p>
-          <h3>Volume</h3>
+          <h3>
+            Volume
+          </h3>
           <input
             type="range"
-            value={this.state.volume}
+            value={volume}
             min={0}
             max={1}
             step={0.01}
             onChange={this.handleVolume}
           />
-          <h3>Quality</h3>
+          <h3>
+            Quality
+          </h3>
           <select className="browser-default" onChange={this.handleQuality}>
             {qualities.map(quality => (
-              <option key={quality} value={quality}>{quality}</option>
+              <option key={quality} value={quality}>
+                {quality}
+              </option>
             ))}
           </select>
         </div>
@@ -117,9 +134,9 @@ class App extends React.Component {
             height={480}
             autoplay
             controls={false}
-            suggestedQuality={this.state.suggestedQuality}
-            volume={this.state.volume}
-            paused={this.state.paused}
+            suggestedQuality={suggestedQuality}
+            volume={volume}
+            paused={paused}
             onPause={this.handlePlayerPause}
             onPlaying={this.handlePlayerPlay}
           />
