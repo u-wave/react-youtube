@@ -40,7 +40,7 @@
     "@babel/core": "7.0.0-beta.51",
     "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.51",
     "@babel/preset-env": "7.0.0-beta.51",
-    "@babel/preset-react": "7.0.0-beta.51",
+    "@babel/preset-react": "7.0.0-beta.52",
     "@babel/register": "7.0.0-beta.51",
     "cross-env": "^5.1.6",
     "doctrine": "^2.0.0",
