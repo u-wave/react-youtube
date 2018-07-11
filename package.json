@@ -54,7 +54,7 @@
     "mocha": "^5.2.0",
     "proxyquire": "^2.0.1",
     "react": "^16.4.0",
-    "react-docgen": "^2.20.1",
+    "react-docgen": "^3.0.0-beta12",
     "react-dom": "^16.4.0",
     "react-test-renderer": "^16.4.0",
     "rollup": "^0.62.0",
