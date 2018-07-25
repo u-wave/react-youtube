@@ -5,7 +5,7 @@
   "main": "dist/react-youtube.js",
   "module": "dist/react-youtube.es.js",
   "scripts": {
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "build": "rollup -c",
     "lint": "eslint --cache --fix .",
     "test": "npm run lint && cross-env NODE_ENV=test mocha",
