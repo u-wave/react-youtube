@@ -57,7 +57,7 @@
     "react-docgen": "^3.0.0-beta12",
     "react-dom": "^16.4.0",
     "react-test-renderer": "^16.4.0",
-    "rollup": "^0.63.0",
+    "rollup": "^0.64.0",
     "rollup-plugin-babel": "^4.0.0-beta.4"
   },
   "greenkeeper": {
