@@ -7,8 +7,10 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "rollup -c",
-    "lint": "eslint --cache --fix .",
-    "test": "npm run lint && cross-env NODE_ENV=test mocha",
+    "test:lint": "eslint --cache --fix .",
+    "test:types": "tsd",
+    "test:mocha": "cross-env NODE_ENV=test mocha",
+    "test": "npm run test:types && npm run test:mocha && npm run test:lint",
     "docs": "node tools/generate-docs.js > generated-docs.md",
     "example": "npm install && cd example && npm install"
   },
