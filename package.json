@@ -34,7 +34,7 @@
   "dependencies": {
     "@types/react": "^0.14.0 || ^15.0.0 || ^16.0.0",
     "@types/youtube": "0.0.38",
-    "load-script2": "^1.0.1",
+    "load-script2": "^2.0.0",
     "prop-types": "^15.6.1"
   },
   "peerDependencies": {
