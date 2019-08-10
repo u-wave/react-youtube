@@ -120,7 +120,7 @@ class App extends React.Component {
             Quality
           </h5>
           <select className="browser-default" onChange={this.handleQuality}>
-            {qualities.map(quality => (
+            {qualities.map((quality) => (
               <option key={quality} value={quality}>
                 {quality}
               </option>

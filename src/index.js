@@ -18,7 +18,7 @@ class YouTube extends React.Component {
 
   componentDidUpdate(prevProps) {
     // eslint-disable-next-line react/destructuring-assignment
-    const changes = Object.keys(this.props).filter(name => this.props[name] !== prevProps[name]);
+    const changes = Object.keys(this.props).filter((name) => this.props[name] !== prevProps[name]);
 
     this.updateProps(changes);
   }
@@ -194,7 +194,7 @@ class YouTube extends React.Component {
   createPlayer() {
     const { volume } = this.props;
 
-    this.player = loadSdk().then(YT => new Promise((resolve) => {
+    this.player = loadSdk().then((YT) => new Promise((resolve) => {
       this.resolvePlayer = resolve;
 
       const player = new YT.Player(this.container, this.getInitialOptions());
