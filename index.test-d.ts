@@ -7,7 +7,7 @@ import YouTube from '.'
 
 {
   let onCued = (event: YT.OnStateChangeEvent) => {
-    event.data === 5
+    if (event.data === 5) {}
   }
   React.createElement(YouTube, { onCued })
 }
