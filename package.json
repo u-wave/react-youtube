@@ -54,7 +54,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
-    "expect": "^1.20.2",
+    "expect": "^25.1.0",
     "min-react-env": "^1.0.1",
     "mocha": "^7.0.0",
     "proxyquire": "^2.1.3",
