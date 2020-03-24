@@ -351,6 +351,8 @@ if (process.env.NODE_ENV !== 'production') {
      * Whether to show video information (uploader, title, etc) before the video
      * starts.
      *
+     * **This parameter has been deprecated and has no effect.**
+     *
      * https://developers.google.com/youtube/player_parameters#showinfo
      */
     showInfo: PropTypes.bool,
