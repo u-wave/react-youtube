@@ -65,10 +65,11 @@ import YouTube from '@u-wave/react-youtube';
 
  - [react-dailymotion][] - A Dailymotion component with a similar declarative API.
  - [@u-wave/react-vimeo][] - A Vimeo component with a similar declarative API.
+ - [react-youtube][] - A widely-used YouTube component. Its API matches the YouTube iframe API more closely, and it doesn't support prop-based volume/quality/playback changes.
 
 ## License
 
-[MIT]
+[MIT][]
 
 [Install]: #install
 [Usage]: #usage
@@ -78,3 +79,4 @@ import YouTube from '@u-wave/react-youtube';
 [MIT]: ./LICENSE
 [react-dailymotion]: https://github.com/u-wave/react-dailymotion
 [@u-wave/react-vimeo]: https://github.com/u-wave/react-vimeo
+[react-youtube]: https://github.com/tjallingt/react-youtube
