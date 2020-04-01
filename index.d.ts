@@ -15,6 +15,10 @@ export interface YouTubeProps {
    */
   className?: string;
   /**
+  * Inline style for container element.
+  */
+  style?: React.CSSProperties;
+  /**
    * Width of the player element.
    */
   width?: number | string;

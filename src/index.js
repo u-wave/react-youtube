@@ -226,12 +226,13 @@ class YouTube extends React.Component {
   }
 
   render() {
-    const { id, className } = this.props;
+    const { id, className, style } = this.props;
 
     return (
       <div
         id={id}
         className={className}
+        style={style}
         ref={this.refContainer}
       />
     );
@@ -252,6 +253,10 @@ if (process.env.NODE_ENV !== 'production') {
      * CSS className for the player element.
      */
     className: PropTypes.string,
+    /**
+     * Inline style for container element.
+     */
+    style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     /**
      * Width of the player element.
      */
