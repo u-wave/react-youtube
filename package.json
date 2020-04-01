@@ -1,44 +1,16 @@
 {
   "name": "@u-wave/react-youtube",
-  "version": "0.7.0",
   "description": "YouTube player component for React.",
-  "main": "dist/react-youtube.js",
-  "module": "dist/react-youtube.es.js",
-  "scripts": {
-    "prepare": "npm run build",
-    "build": "rollup -c",
-    "test:lint": "eslint --cache --fix .",
-    "test:types": "tsd",
-    "test:mocha": "cross-env NODE_ENV=test mocha",
-    "test": "npm run test:types && npm run test:mocha && npm run test:lint",
-    "docs": "node tools/generate-docs.js > generated-docs.md",
-    "example": "npm install && cd example && npm install"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/u-wave/react-youtube.git"
-  },
-  "keywords": [
-    "youtube",
-    "react",
-    "player",
-    "react-component",
-    "video"
-  ],
+  "version": "0.7.0",
   "author": "Renée Kooi <renee@kooi.me>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/u-wave/react-youtube/issues"
   },
-  "homepage": "https://github.com/u-wave/react-youtube#readme",
   "dependencies": {
     "@types/react": "^16.9.17",
     "@types/youtube": "0.0.38",
     "load-script2": "^1.0.1",
     "prop-types": "^15.7.2"
-  },
-  "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
@@ -65,5 +37,34 @@
     "rollup": "^2.0.2",
     "rollup-plugin-babel": "^4.3.3",
     "tsd": "^0.11.0"
-  }
+  },
+  "homepage": "https://github.com/u-wave/react-youtube#readme",
+  "keywords": [
+    "player",
+    "react",
+    "react-component",
+    "video",
+    "youtube"
+  ],
+  "license": "MIT",
+  "main": "dist/react-youtube.js",
+  "module": "dist/react-youtube.es.js",
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0 || ^16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/u-wave/react-youtube.git"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "docs": "node tools/generate-docs.js > generated-docs.md",
+    "example": "npm install && cd example && npm install",
+    "prepare": "npm run build",
+    "test": "npm run test:types && npm run test:mocha && npm run test:lint",
+    "test:lint": "eslint --cache --fix .",
+    "test:mocha": "cross-env NODE_ENV=test mocha",
+    "test:types": "tsd"
+  },
+  "sideEffects": false
 }
