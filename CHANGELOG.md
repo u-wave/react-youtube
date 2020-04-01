@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.7.1 - 2020-04-01
+ * Set `sideEffects: false` in package.json.
+ * Add `style` pass-through property to set CSS properties on the container element. (@Authchirion in #90)
+ * Document that the `showInfo` prop is deprecated.
+
 ## 0.7.0 - 2019-06-12
  * Add typescript definitions.
 
