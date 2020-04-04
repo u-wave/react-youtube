@@ -11,6 +11,17 @@ jobs:
     - node_js: stable
       name: Test on stable Node.js
       script: npm run test:mocha
+      before_deploy:
+        - cd example && npm install && cd ..
+        - mkdir _deploy
+        - cp example/bundle.js example/index.html _deploy
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        local-dir: _deploy
+        on:
+          branch: master
     - node_js: 12
       name: Test on Node.js 12
       script: npm run test:mocha
@@ -22,16 +33,3 @@ jobs:
       before_script:
         - nvm install 8 && nvm use 8
       script: npm run test:mocha
-
-before_deploy:
-  - cd example && npm install && cd ..
-  - mkdir _deploy
-  - cp example/bundle.js example/index.html _deploy
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  local-dir: _deploy
-  on:
-    branch: master
-    node: stable
