@@ -3,15 +3,25 @@ language: node_js
 jobs:
   include:
     - node_js: stable
+      name: Check linting
+      script: npm run test:lint
+    - node_js: stable
+      name: Check types
+      script: npm run test:types
+    - node_js: stable
       name: Test on stable Node.js
+      script: npm run test:mocha
     - node_js: 12
       name: Test on Node.js 12
+      script: npm run test:mocha
     - node_js: 10
       name: Test on Node.js 10
+      script: npm run test:mocha
     - node_js: 12
       name: Test on Node.js 8
       before_script:
         - nvm install 8 && nvm use 8
+      script: npm run test:mocha
 
 before_deploy:
   - cd example && npm install && cd ..
