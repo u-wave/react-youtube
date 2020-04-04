@@ -63,7 +63,7 @@
     "prepare": "npm run build",
     "test": "npm run test:types && npm run test:mocha && npm run test:lint",
     "test:lint": "eslint --cache --fix .",
-    "test:mocha": "cross-env NODE_ENV=test mocha",
+    "test:mocha": "cross-env NODE_ENV=test mocha --require @babel/register test/*.js",
     "test:types": "tsd"
   },
   "sideEffects": false
