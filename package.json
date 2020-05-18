@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@types/react": "^16.9.17",
-    "@types/youtube": "0.0.38",
+    "@types/youtube": "0.0.39",
     "load-script2": "^1.0.1",
     "prop-types": "^15.7.2"
   },
