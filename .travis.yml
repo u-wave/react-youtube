@@ -28,8 +28,3 @@ jobs:
     - node_js: 10
       name: Test on Node.js 10
       script: npm run test:mocha
-    - node_js: 12
-      name: Test on Node.js 8
-      before_script:
-        - nvm install 8 && nvm use 8
-      script: npm run test:mocha
