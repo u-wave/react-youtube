@@ -21,7 +21,7 @@ jobs:
         github-token: $GITHUB_TOKEN
         local-dir: _deploy
         on:
-          branch: master
+          branch: default
     - node_js: 12
       name: Test on Node.js 12
       script: npm run test:mocha
