@@ -1,6 +1,5 @@
 node_modules
 /dist
 /example/bundle.js
-/generated-docs.md
 .eslintcache
 package-lock.json

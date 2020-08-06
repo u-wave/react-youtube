@@ -24,12 +24,12 @@ import YouTube from '@u-wave/react-youtube';
 ```
 
 ## Props
-
 | Name | Type | Default | Description |
 |:-----|:-----|:-----|:-----|
 | video | string |  | An 11-character string representing a YouTube video ID.. |
 | id | string |  | DOM ID for the player element. |
 | className | string |  | CSS className for the player element. |
+| style | object |  | Inline style for container element. |
 | width | number, string |  | Width of the player element. |
 | height | number, string |  | Height of the player element. |
 | paused | bool |  | Pause the video. |
@@ -60,6 +60,7 @@ import YouTube from '@u-wave/react-youtube';
 | onStateChange | function |  |  |
 | onPlaybackRateChange | function |  |  |
 | onPlaybackQualityChange | function |  |  |
+
 
 ## Related
 
