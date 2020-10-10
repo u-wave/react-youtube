@@ -20,7 +20,7 @@ jobs:
     - node_js: 12
       name: Test with react@17
       env:
-        REACT_VERSION: 17.0.0-rc.1
+        REACT_VERSION: 17.0.0-rc.3
       script: npm run test:mocha
 
 before_script: |
