@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.7.2 - 2020-10-21
+ * Allow React 17 in peerDependency range.
+ * Test with React 16 and React 17 on CI.
+
 ## 0.7.1 - 2020-04-01
  * Set `sideEffects: false` in package.json.
  * Add `style` pass-through property to set CSS properties on the container element. (@Authchirion in #90)
