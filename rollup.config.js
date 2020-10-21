@@ -12,6 +12,8 @@ export default {
   external: Object.keys(meta.dependencies)
     .concat(Object.keys(meta.peerDependencies)),
   plugins: [
-    babel(),
+    babel({
+      babelHelpers: 'bundled',
+    }),
   ],
 };
