@@ -18,9 +18,9 @@ jobs:
       name: Test on Node.js 10
       script: npm run test:mocha
     - node_js: 12
-      name: Test with react@17
+      name: Test with react@16
       env:
-        REACT_VERSION: 17.0.0-rc.3
+        REACT_VERSION: 16.0.0
       script: npm run test:mocha
 
 before_script: |
