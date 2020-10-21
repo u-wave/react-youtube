@@ -24,7 +24,7 @@ jobs:
       script: npm run test:mocha
 
 before_script: |
-  if [ $REACT_VERSION != "" ]; then
+  if [[ $REACT_VERSION != "" ]]; then
     npm install --save-dev react@$REACT_VERSION react-dom@$REACT_VERSION react-test-renderer@$REACT_VERSION
   fi
 
