@@ -1,0 +1,61 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  types:
+    name: Types
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      - name: Install dependencies
+        run: npm install
+      - name: Check types
+        run: npm run test:types
+  lint:
+    name: Code style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      - name: Install dependencies
+        run: npm install
+      - name: Check code style
+        run: npm run test:lint
+  test:
+    name: Tests
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 15.x]
+        react-version: 17.x
+        include:
+          - node-version: 12.x
+            react-version: 16.0.0
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: Install Node.js ${{matrix.node-version}}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node-version}}
+      - name: Install dependencies
+        run: npm install
+      - name: Install React ${{matrix.react-version}}
+        if: matrix.react-version != '17.x'
+        run: |
+          npm install --save-dev \
+            react@${{matrix.react-version}} \
+            react-dom@${{matrix.react-version}} \
+            react-test-renderer@${{matrix.react-version}}
+      - name: Run tests
+        run: npm run test:mocha
