@@ -25,7 +25,17 @@ var loadScript__default = /*#__PURE__*/_interopDefaultLegacy(loadScript);
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
+
+  _setPrototypeOf(subClass, superClass);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
 }
 
 function _assertThisInitialized(self) {
@@ -577,10 +587,8 @@ var _ = _interopRequireDefault(require(".."));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
-
+/* eslint-env browser */
+var useState = _react["default"].useState;
 var videos = [{
   id: 'ZuuVjuLNvFY',
   name: 'JUNNY - kontra (Feat. Lil Gimch, Keeflow)'
@@ -600,129 +608,101 @@ var hash = typeof window.location !== 'undefined' ? window.location.hash : ''; /
 
 var defaultVideo = hashVideoRx.test(hash) ? parseInt(hash.replace(hashVideoRx, '$1'), 10) : 0;
 
-var App = /*#__PURE__*/function (_React$Component) {
-  _inheritsLoose(App, _React$Component);
+function App() {
+  var _useState = useState(defaultVideo),
+      videoIndex = _useState[0],
+      setVideoIndex = _useState[1];
 
-  function App(props) {
-    var _this;
+  var _useState2 = useState('auto'),
+      suggestedQuality = _useState2[0],
+      setSuggestedQuality = _useState2[1];
 
-    _this = _React$Component.call(this, props) || this;
-    _this.state = {
-      videoIndex: defaultVideo,
-      suggestedQuality: 'auto',
-      volume: 1,
-      paused: false
-    };
-    _this.handlePause = _this.handlePause.bind(_assertThisInitialized(_this));
-    _this.handlePlayerPause = _this.handlePlayerPause.bind(_assertThisInitialized(_this));
-    _this.handlePlayerPlay = _this.handlePlayerPlay.bind(_assertThisInitialized(_this));
-    _this.handleVolume = _this.handleVolume.bind(_assertThisInitialized(_this));
-    _this.handleQuality = _this.handleQuality.bind(_assertThisInitialized(_this));
-    return _this;
+  var _useState3 = useState(1),
+      volume = _useState3[0],
+      setVolume = _useState3[1];
+
+  var _useState4 = useState(false),
+      paused = _useState4[0],
+      setPaused = _useState4[1];
+
+  var video = videos[videoIndex];
+
+  function selectVideo(index) {
+    setVideoIndex(index);
   }
 
-  var _proto = App.prototype;
+  function handlePause(event) {
+    setPaused(event.target.checked);
+  }
 
-  _proto.selectVideo = function selectVideo(index) {
-    this.setState({
-      videoIndex: index
-    });
-  };
+  function handlePlayerPause() {
+    setPaused(true);
+  }
 
-  _proto.handlePause = function handlePause(event) {
-    this.setState({
-      paused: event.target.checked
-    });
-  };
+  function handlePlayerPlay() {
+    setPaused(false);
+  }
 
-  _proto.handlePlayerPause = function handlePlayerPause() {
-    this.setState({
-      paused: true
-    });
-  };
+  function handleVolume(event) {
+    setVolume(parseFloat(event.target.value));
+  }
 
-  _proto.handlePlayerPlay = function handlePlayerPlay() {
-    this.setState({
-      paused: false
-    });
-  };
+  function handleQuality(event) {
+    setSuggestedQuality(qualities[event.target.selectedIndex]);
+  }
 
-  _proto.handleVolume = function handleVolume(event) {
-    this.setState({
-      volume: parseFloat(event.target.value)
-    });
-  };
-
-  _proto.handleQuality = function handleQuality(event) {
-    this.setState({
-      suggestedQuality: qualities[event.target.selectedIndex]
-    });
-  };
-
-  _proto.render = function render() {
-    var _this2 = this;
-
-    var _this$state = this.state,
-        videoIndex = _this$state.videoIndex,
-        volume = _this$state.volume,
-        paused = _this$state.paused,
-        suggestedQuality = _this$state.suggestedQuality;
-    var video = videos[videoIndex];
-    return /*#__PURE__*/_react["default"].createElement("div", {
-      className: "row"
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      className: "col s4"
-    }, /*#__PURE__*/_react["default"].createElement("h5", null, "Video"), /*#__PURE__*/_react["default"].createElement("div", {
-      className: "collection"
-    }, videos.map(function (choice, index) {
-      return /*#__PURE__*/_react["default"].createElement("a", {
-        key: choice.id,
-        href: "#!/video/" + index,
-        className: "collection-item " + (video === choice ? 'active' : ''),
-        onClick: function onClick() {
-          return _this2.selectVideo(index);
-        }
-      }, choice.name);
-    })), /*#__PURE__*/_react["default"].createElement("h5", null, "Paused"), /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement("label", {
-      htmlFor: "paused"
-    }, /*#__PURE__*/_react["default"].createElement("input", {
-      type: "checkbox",
-      id: "paused",
-      checked: paused,
-      onChange: this.handlePause
-    }), /*#__PURE__*/_react["default"].createElement("span", null, "Paused"))), /*#__PURE__*/_react["default"].createElement("h5", null, "Volume"), /*#__PURE__*/_react["default"].createElement("input", {
-      type: "range",
-      value: volume,
-      min: 0,
-      max: 1,
-      step: 0.01,
-      onChange: this.handleVolume
-    }), /*#__PURE__*/_react["default"].createElement("h5", null, "Quality"), /*#__PURE__*/_react["default"].createElement("select", {
-      className: "browser-default",
-      onChange: this.handleQuality
-    }, qualities.map(function (quality) {
-      return /*#__PURE__*/_react["default"].createElement("option", {
-        key: quality,
-        value: quality
-      }, quality);
-    }))), /*#__PURE__*/_react["default"].createElement("div", {
-      className: "col s8 center-align"
-    }, /*#__PURE__*/_react["default"].createElement(_["default"], {
-      video: video.id,
-      width: 640,
-      height: 480,
-      autoplay: true,
-      controls: false,
-      suggestedQuality: suggestedQuality,
-      volume: volume,
-      paused: paused,
-      onPause: this.handlePlayerPause,
-      onPlaying: this.handlePlayerPlay
-    })));
-  };
-
-  return App;
-}(_react["default"].Component);
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "col s4"
+  }, /*#__PURE__*/_react["default"].createElement("h5", null, "Video"), /*#__PURE__*/_react["default"].createElement("div", {
+    className: "collection"
+  }, videos.map(function (choice, index) {
+    return /*#__PURE__*/_react["default"].createElement("a", {
+      key: choice.id,
+      href: "#!/video/" + index,
+      className: "collection-item " + (video === choice ? 'active' : ''),
+      onClick: function onClick() {
+        return selectVideo(index);
+      }
+    }, choice.name);
+  })), /*#__PURE__*/_react["default"].createElement("h5", null, "Paused"), /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement("label", {
+    htmlFor: "paused"
+  }, /*#__PURE__*/_react["default"].createElement("input", {
+    type: "checkbox",
+    id: "paused",
+    checked: paused,
+    onChange: handlePause
+  }), /*#__PURE__*/_react["default"].createElement("span", null, "Paused"))), /*#__PURE__*/_react["default"].createElement("h5", null, "Volume"), /*#__PURE__*/_react["default"].createElement("input", {
+    type: "range",
+    value: volume,
+    min: 0,
+    max: 1,
+    step: 0.01,
+    onChange: handleVolume
+  }), /*#__PURE__*/_react["default"].createElement("h5", null, "Quality"), /*#__PURE__*/_react["default"].createElement("select", {
+    className: "browser-default",
+    onChange: handleQuality
+  }, qualities.map(function (quality) {
+    return /*#__PURE__*/_react["default"].createElement("option", {
+      key: quality,
+      value: quality
+    }, quality);
+  }))), /*#__PURE__*/_react["default"].createElement("div", {
+    className: "col s8 center-align"
+  }, /*#__PURE__*/_react["default"].createElement(_["default"], {
+    video: video.id,
+    width: 640,
+    height: 480,
+    autoplay: true,
+    controls: false,
+    suggestedQuality: suggestedQuality,
+    volume: volume,
+    paused: paused,
+    onPause: handlePlayerPause,
+    onPlaying: handlePlayerPlay
+  })));
+}
 
 _reactDom["default"].render( /*#__PURE__*/_react["default"].createElement(App, null), document.getElementById('example'));
 
@@ -30609,7 +30589,7 @@ if (process.env.NODE_ENV === 'production') {
 
 }).call(this)}).call(this,require('_process'))
 },{"./cjs/react-is.development.js":26,"./cjs/react-is.production.min.js":27,"_process":4}],29:[function(require,module,exports){
-/** @license React v17.0.0
+/** @license React v17.0.1
  * react.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -30627,7 +30607,7 @@ if ("cjs" !== "production") {
 var _assign = require('object-assign');
 
 // TODO: this is special because it gets imported during build.
-var ReactVersion = '17.0.0';
+var ReactVersion = '17.0.1';
 
 // ATTENTION
 // When adding new symbols to this file,
@@ -32944,7 +32924,7 @@ exports.version = ReactVersion;
 }
 
 },{"object-assign":20}],30:[function(require,module,exports){
-/** @license React v17.0.0
+/** @license React v17.0.1
  * react.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -32966,7 +32946,7 @@ exports.Children={map:P,forEach:function(a,b,c){P(a,function(){b.apply(this,argu
 exports.cloneElement=function(a,b,c){if(null===a||void 0===a)throw Error(z(267,a));var e=l({},a.props),d=a.key,k=a.ref,h=a._owner;if(null!=b){void 0!==b.ref&&(k=b.ref,h=G.current);void 0!==b.key&&(d=""+b.key);if(a.type&&a.type.defaultProps)var g=a.type.defaultProps;for(f in b)H.call(b,f)&&!I.hasOwnProperty(f)&&(e[f]=void 0===b[f]&&void 0!==g?g[f]:b[f])}var f=arguments.length-2;if(1===f)e.children=c;else if(1<f){g=Array(f);for(var m=0;m<f;m++)g[m]=arguments[m+2];e.children=g}return{$$typeof:n,type:a.type,
 key:d,ref:k,props:e,_owner:h}};exports.createContext=function(a,b){void 0===b&&(b=null);a={$$typeof:r,_calculateChangedBits:b,_currentValue:a,_currentValue2:a,_threadCount:0,Provider:null,Consumer:null};a.Provider={$$typeof:q,_context:a};return a.Consumer=a};exports.createElement=J;exports.createFactory=function(a){var b=J.bind(null,a);b.type=a;return b};exports.createRef=function(){return{current:null}};exports.forwardRef=function(a){return{$$typeof:t,render:a}};exports.isValidElement=L;
 exports.lazy=function(a){return{$$typeof:v,_payload:{_status:-1,_result:a},_init:Q}};exports.memo=function(a,b){return{$$typeof:u,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return S().useCallback(a,b)};exports.useContext=function(a,b){return S().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return S().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return S().useImperativeHandle(a,b,c)};
-exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return S().useMemo(a,b)};exports.useReducer=function(a,b,c){return S().useReducer(a,b,c)};exports.useRef=function(a){return S().useRef(a)};exports.useState=function(a){return S().useState(a)};exports.version="17.0.0";
+exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return S().useMemo(a,b)};exports.useReducer=function(a,b,c){return S().useReducer(a,b,c)};exports.useRef=function(a){return S().useRef(a)};exports.useState=function(a){return S().useState(a)};exports.version="17.0.1";
 
 },{"object-assign":20}],31:[function(require,module,exports){
 arguments[4][12][0].apply(exports,arguments)
