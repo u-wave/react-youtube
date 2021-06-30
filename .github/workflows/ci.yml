@@ -49,7 +49,7 @@ jobs:
         with:
           node-version: ${{matrix.node-version}}
       - name: Use npm 7
-        runs: npm install -g npm@7
+        run: npm install -g npm@7
       - name: Install dependencies
         run: npm install
       - name: Install React ${{matrix.react-version}}
