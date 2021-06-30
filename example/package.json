@@ -6,18 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build",
-    "build": "cross-env NODE_ENV=cjs browserify -t babelify -e app.js > bundle.js",
+    "build": "esbuild --bundle app.js --loader:.js=jsx > bundle.js",
     "start": "serve ."
   },
   "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "serve": "^11.3.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "babelify": "^10.0.0",
-    "browserify": "^16.0.0",
-    "cross-env": "^7.0.0"
+    "@u-wave/react-youtube": "file:..",
+    "esbuild": "^0.13.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "serve": "^13.0.0"
   }
 }

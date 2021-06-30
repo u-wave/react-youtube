@@ -60,12 +60,18 @@
   "scripts": {
     "build": "rollup -c",
     "docs": "prop-types-table src/index.js | md-insert README.md --header Props -i",
-    "example": "npm install && cd example && npm install",
+    "example": "npm run -w example build && npm run -w example start",
     "prepare": "npm run build",
     "test": "npm run test:types && npm run test:mocha && npm run test:lint",
     "test:lint": "eslint --cache --fix .",
     "test:mocha": "cross-env NODE_ENV=test mocha --require @babel/register test/*.js",
     "test:types": "tsd"
+  },
+  "workspaces": {
+    "packages": [
+      ".",
+      "./example"
+    ]
   },
   "sideEffects": false
 }

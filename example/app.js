@@ -1,7 +1,7 @@
 /* eslint-env browser */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import YouTube from '..';
+import YouTube from '@u-wave/react-youtube';
 
 const {
   useCallback,
