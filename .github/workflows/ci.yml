@@ -12,7 +12,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version: 16.x
       - name: Install dependencies
         run: npm install
       - name: Check types
@@ -26,7 +26,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version: 16.x
       - name: Install dependencies
         run: npm install
       - name: Check code style
@@ -48,6 +48,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node-version}}
+      - name: Use npm 7
+        runs: npm install -g npm@7
       - name: Install dependencies
         run: npm install
       - name: Install React ${{matrix.react-version}}
