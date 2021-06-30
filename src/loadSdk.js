@@ -1,5 +1,4 @@
-/* global window */
-import loadScript from 'load-script2';
+/* global window, document */
 
 function loadSdk() {
   return new Promise((resolve, reject) => {
@@ -9,13 +8,22 @@ function loadSdk() {
       return;
     }
 
-    loadScript('https://www.youtube.com/iframe_api', (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        window.YT.ready(resolve);
-      }
-    });
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.youtube.com/iframe_api';
+    script.onload = () => {
+      script.onerror = null;
+      script.onload = null;
+      window.YT.ready(resolve);
+    };
+    script.onerror = () => {
+      script.onerror = null;
+      script.onload = null;
+      reject(new Error('Could not load YouTube SDK'));
+    };
+
+    const node = document.head || document.getElementsByTagName('head')[0];
+    node.appendChild(script);
   });
 }
 
