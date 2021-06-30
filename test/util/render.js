@@ -5,15 +5,20 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { act } from 'react-dom/test-utils';
 import env from 'min-react-env';
 import createYouTube from './createYouTube';
 
 Object.assign(global, env);
 
-const render = (initialProps) => {
+async function render(initialProps) {
   const { YouTube, sdkMock, playerMock } = createYouTube();
 
-  let component;
+  let resolveReady;
+  const readyPromise = new Promise((resolve) => {
+    resolveReady = resolve;
+  });
+
   // Emulate changes to component.props using a container component's state
   class Container extends React.Component {
     constructor(ytProps) {
@@ -25,10 +30,15 @@ const render = (initialProps) => {
     render() {
       const { props } = this.state;
 
+      const onReady = (event) => {
+        resolveReady();
+        props.onReady?.(event);
+      };
+
       return (
         <YouTube
-          ref={(youtube) => { component = youtube; }}
           {...props}
+          onReady={onReady}
         />
       );
     }
@@ -38,26 +48,26 @@ const render = (initialProps) => {
   const container = new Promise((resolve) => {
     ReactDOM.render(<Container {...initialProps} ref={resolve} />, div);
   });
+  await readyPromise;
 
-  function rerender(newProps) {
-    return container.then((wrapper) => new Promise((resolve) => {
-      wrapper.setState({ props: newProps }, () => {
-        Promise.resolve().then(resolve);
-      });
-    }));
+  async function rerender(newProps) {
+    const wrapper = await container;
+
+    act(() => {
+      wrapper.setState({ props: newProps });
+    });
   }
 
   function unmount() {
     ReactDOM.unmountComponentAtNode(div);
   }
 
-  return component.player.then(() => ({
+  return {
     sdkMock,
     playerMock,
-    component,
     rerender,
     unmount,
-  }));
-};
+  };
+}
 
 export default render;

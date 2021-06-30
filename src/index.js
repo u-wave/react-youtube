@@ -1,71 +1,103 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import eventNames from './eventNames';
 import loadSdk from './loadSdk';
 
-class YouTube extends React.Component {
-  constructor(props) {
-    super(props);
+const {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} = React;
 
-    this.onPlayerReady = this.onPlayerReady.bind(this);
-    this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
-    this.refContainer = this.refContainer.bind(this);
-  }
-
-  componentDidMount() {
-    this.createPlayer();
-  }
-
-  componentDidUpdate(prevProps) {
-    // eslint-disable-next-line react/destructuring-assignment
-    const changes = Object.keys(this.props).filter((name) => this.props[name] !== prevProps[name]);
-
-    this.updateProps(changes);
-  }
-
-  componentWillUnmount() {
-    if (this.playerInstance) {
-      this.playerInstance.destroy();
+function useEventHandler(player, event, handler) {
+  useEffect(() => {
+    if (handler) {
+      player?.addEventListener(event, handler);
     }
-  }
-
-  onPlayerReady(event) {
-    const {
-      volume,
-      muted,
-      suggestedQuality,
-      playbackRate,
-    } = this.props;
-
-    if (typeof volume !== 'undefined') {
-      event.target.setVolume(volume * 100);
-    }
-    if (typeof muted !== 'undefined') {
-      if (muted) {
-        event.target.mute();
-      } else {
-        event.target.unMute();
+    return () => {
+      if (handler) {
+        player?.removeEventListener(event, handler);
       }
-    }
-    if (typeof suggestedQuality !== 'undefined') {
-      event.target.setPlaybackQuality(suggestedQuality);
-    }
-    if (typeof playbackRate !== 'undefined') {
-      event.target.setPlaybackRate(playbackRate);
-    }
+    };
+  }, [player, event, handler]);
+}
 
-    this.resolvePlayer(event.target);
+function YouTube({
+  video,
+  id,
+  className,
+  style,
+  startSeconds,
+  endSeconds,
+  width,
+  height,
+  lang,
+  paused,
+  muted,
+  volume,
+  suggestedQuality,
+  playbackRate,
+  autoplay = false,
+  showCaptions = false,
+  controls = true,
+  disableKeyboard = false,
+  allowFullscreen = true,
+  annotations = true,
+  modestBranding = false,
+  playsInline = false,
+  showRelatedVideos = true,
+  showInfo = true,
+  onReady,
+  onError,
+  onStateChange,
+  onPlaybackQualityChange,
+  onPlaybackRateChange,
+  onCued = () => {},
+  onBuffering = () => {},
+  onPlaying = () => {},
+  onPause = () => {},
+  onEnd = () => {},
+}) {
+  const container = useRef(null);
+  const createPlayer = useRef(null);
+  const firstRender = useRef(false);
+  const [player, setPlayer] = useState(null);
+
+  const playerVars = {
+    autoplay,
+    cc_load_policy: showCaptions ? 1 : 0,
+    controls: controls ? 1 : 0,
+    disablekb: disableKeyboard ? 1 : 0,
+    fs: allowFullscreen ? 1 : 0,
+    hl: lang,
+    iv_load_policy: annotations ? 1 : 3,
+    start: startSeconds,
+    end: endSeconds,
+    modestbranding: modestBranding ? 1 : 0,
+    playsinline: playsInline ? 1 : 0,
+    rel: showRelatedVideos ? 1 : 0,
+    showinfo: showInfo ? 1 : 0,
+  };
+
+  // Stick the player initialisation in a ref so it has the most recent props values
+  // when it gets instantiated.
+  if (!player) {
+    // eslint-disable-next-line no-undef
+    createPlayer.current = () => new YT.Player(container.current, {
+      videoId: video,
+      width,
+      height,
+      playerVars,
+      events: {
+        onReady: (event) => {
+          firstRender.current = true;
+          setPlayer(event.target);
+        },
+      },
+    });
   }
 
-  onPlayerStateChange(event) {
-    const {
-      onCued,
-      onBuffering,
-      onPause,
-      onPlaying,
-      onEnd,
-    } = this.props;
-
+  const handlePlayerStateChange = useCallback((event) => {
     const State = YT.PlayerState; // eslint-disable-line no-undef
     switch (event.data) {
       case State.CUED:
@@ -86,157 +118,111 @@ class YouTube extends React.Component {
       default:
         // Nothing
     }
-  }
+  }, [onCued, onBuffering, onPause, onPlaying, onEnd]);
 
-  /**
-   * @private
-   */
-  getPlayerParameters() {
-    /* eslint-disable react/destructuring-assignment */
-    return {
-      autoplay: this.props.autoplay,
-      cc_load_policy: this.props.showCaptions ? 1 : 0,
-      controls: this.props.controls ? 1 : 0,
-      disablekb: this.props.disableKeyboard ? 1 : 0,
-      fs: this.props.allowFullscreen ? 1 : 0,
-      hl: this.props.lang,
-      iv_load_policy: this.props.annotations ? 1 : 3,
-      start: this.props.startSeconds,
-      end: this.props.endSeconds,
-      modestbranding: this.props.modestBranding ? 1 : 0,
-      playsinline: this.props.playsInline ? 1 : 0,
-      rel: this.props.showRelatedVideos ? 1 : 0,
-      showinfo: this.props.showInfo ? 1 : 0,
-    };
-    /* eslint-enable react/destructuring-assignment */
-  }
+  // The effect that manages the player's lifetime.
+  useEffect(() => {
+    let instance = null;
+    let cancelled = false;
 
-  /**
-   * @private
-   */
-  getInitialOptions() {
-    /* eslint-disable react/destructuring-assignment */
-    return {
-      videoId: this.props.video,
-      width: this.props.width,
-      height: this.props.height,
-      playerVars: this.getPlayerParameters(),
-      events: {
-        onReady: this.onPlayerReady,
-        onStateChange: this.onPlayerStateChange,
-      },
-    };
-    /* eslint-enable react/destructuring-assignment */
-  }
-
-  /**
-   * @private
-   */
-  updateProps(propNames) {
-    this.player.then((player) => {
-      propNames.forEach((name) => {
-        // eslint-disable-next-line react/destructuring-assignment
-        const value = this.props[name];
-        switch (name) {
-          case 'muted':
-            if (value) {
-              player.mute();
-            } else {
-              player.unMute();
-            }
-            break;
-          case 'suggestedQuality':
-            player.setPlaybackQuality(value);
-            break;
-          case 'volume':
-            player.setVolume(value * 100);
-            break;
-          case 'paused':
-            if (value && player.getPlayerState() !== 2) {
-              player.pauseVideo();
-            } else if (!value && player.getPlayerState() === 2) {
-              player.playVideo();
-            }
-            break;
-          case 'id':
-          case 'className':
-          case 'width':
-          case 'height':
-            player.getIframe()[name] = value; // eslint-disable-line no-param-reassign
-            break;
-          case 'video':
-            if (!value) {
-              player.stopVideo();
-            } else {
-              const { startSeconds, endSeconds, autoplay } = this.props;
-              const opts = {
-                videoId: value,
-                startSeconds: startSeconds || 0,
-                endSeconds,
-              };
-              if (autoplay) {
-                player.loadVideoById(opts);
-              } else {
-                player.cueVideoById(opts);
-              }
-            }
-            break;
-          default:
-            // Nothing
-        }
-      });
+    loadSdk().then(() => {
+      if (!cancelled) {
+        instance = createPlayer.current();
+      }
     });
-  }
 
-  /**
-   * @private
-   */
-  createPlayer() {
-    const { volume } = this.props;
+    return () => {
+      cancelled = true;
+      instance?.destroy();
+    };
+  }, []);
 
-    this.player = loadSdk().then((YT) => new Promise((resolve) => {
-      this.resolvePlayer = resolve;
+  useEventHandler(player, 'onStateChange', handlePlayerStateChange);
+  useEventHandler(player, 'onReady', onReady);
+  useEventHandler(player, 'onStateChange', onStateChange);
+  useEventHandler(player, 'onPlaybackQualityChange', onPlaybackQualityChange);
+  useEventHandler(player, 'onPlaybackRateChange', onPlaybackRateChange);
+  useEventHandler(player, 'onError', onError);
 
-      const player = new YT.Player(this.container, this.getInitialOptions());
-      // Store the instance directly so we can destroy it sync in
-      // `componentWillUnmount`.
-      this.playerInstance = player;
-
-      eventNames.forEach((name) => {
-        player.addEventListener(name, (event) => {
-          // eslint-disable-next-line react/destructuring-assignment
-          const handler = this.props[name];
-          if (handler) {
-            handler(event);
-          }
-        });
-      });
-    }));
-
-    if (typeof volume === 'number') {
-      this.updateProps(['volume']);
+  useEffect(() => {
+    if (player) {
+      player.getIframe().width = width;
     }
-  }
+  }, [player, width]);
 
-  /**
-   * @private
-   */
-  refContainer(container) {
-    this.container = container;
-  }
+  useEffect(() => {
+    if (player) {
+      player.getIframe().height = height;
+    }
+  }, [player, height]);
 
-  render() {
-    const { id, className, style } = this.props;
+  useEffect(() => {
+    if (muted) {
+      player?.mute();
+    } else {
+      player?.unMute();
+    }
+  }, [player, muted]);
 
-    return (
-      <div
-        id={id}
-        className={className}
-        style={style}
-        ref={this.refContainer}
-      />
-    );
-  }
+  useEffect(() => {
+    player?.setPlaybackQuality(suggestedQuality);
+  }, [player, suggestedQuality]);
+
+  useEffect(() => {
+    player?.setPlaybackRate(playbackRate);
+  }, [player, playbackRate]);
+
+  useEffect(() => {
+    player?.setVolume(volume * 100);
+  }, [player, volume]);
+
+  useEffect(() => {
+    if (!player) {
+      return;
+    }
+    if (paused && player.getPlayerState() !== 2) {
+      player.pauseVideo();
+    } else if (!paused && player.getPlayerState() === 2) {
+      player.playVideo();
+    }
+  }, [player, paused]);
+
+  useEffect(() => {
+    if (!player) {
+      return;
+    }
+
+    // Avoid calling a load() function when the player has just initialised,
+    // since it will already be up to date at that stage.
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
+    if (!video) {
+      player.stopVideo();
+    } else {
+      const opts = {
+        videoId: video,
+        startSeconds: startSeconds || 0,
+        endSeconds,
+      };
+      if (autoplay) {
+        player.loadVideoById(opts);
+      } else {
+        player.cueVideoById(opts);
+      }
+    }
+  }, [player, video]);
+
+  return (
+    <div
+      id={id}
+      className={className}
+      style={style}
+      ref={container}
+    />
+  );
 }
 
 if (process.env.NODE_ENV !== 'production') {
@@ -386,7 +372,6 @@ if (process.env.NODE_ENV !== 'production') {
     playbackRate: PropTypes.number,
 
     // Events
-    /* eslint-disable react/no-unused-prop-types */
 
     /**
      * Sent when the YouTube player API has loaded.
@@ -419,8 +404,6 @@ if (process.env.NODE_ENV !== 'production') {
     onStateChange: PropTypes.func,
     onPlaybackRateChange: PropTypes.func,
     onPlaybackQualityChange: PropTypes.func,
-
-    /* eslint-enable react/no-unused-prop-types */
   };
 }
 
