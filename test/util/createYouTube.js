@@ -25,8 +25,9 @@ export default function createYouTube() {
 
   const playerMock = {
     addEventListener: createSpy().andCall((eventName, fn) => {
-      if (eventName === 'ready') fn();
+      if (eventName === 'onReady') fn({ target: playerMock });
     }),
+    removeEventListener: createSpy(),
     mute: createSpy(),
     unMute: createSpy(),
     setVolume: createSpy(),
@@ -65,7 +66,10 @@ export default function createYouTube() {
 
   const YouTube = proxyquire('../../src/index.js', {
     './loadSdk': {
-      default: () => Promise.resolve(sdkMock),
+      default() {
+        global.YT = sdkMock;
+        return Promise.resolve(sdkMock);
+      },
     },
   }).default;
 
