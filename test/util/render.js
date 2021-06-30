@@ -46,7 +46,11 @@ async function render(initialProps) {
 
   const div = env.document.createElement('div');
   const container = new Promise((resolve) => {
-    ReactDOM.render(<Container {...initialProps} ref={resolve} />, div);
+    if (ReactDOM.version.startsWith('18')) {
+      ReactDOM.createRoot(div).render(<Container {...initialProps} ref={resolve} />);
+    } else {
+      ReactDOM.render(<Container {...initialProps} ref={resolve} />, div);
+    }
   });
   await readyPromise;
 
