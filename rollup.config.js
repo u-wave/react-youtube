@@ -5,8 +5,8 @@ const meta = require('./package.json');
 export default {
   input: './src/index.js',
   output: [
-    { format: 'cjs', file: meta.main, exports: 'named' },
-    { format: 'es', file: meta.module },
+    { format: 'cjs', file: meta.exports['.'].require, exports: 'named' },
+    { format: 'esm', file: meta.exports['.'].import },
   ],
 
   external: Object.keys(meta.dependencies)
