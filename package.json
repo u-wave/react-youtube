@@ -47,8 +47,14 @@
     "youtube"
   ],
   "license": "MIT",
-  "main": "dist/react-youtube.js",
-  "module": "dist/react-youtube.es.js",
+  "main": "./dist/react-youtube.js",
+  "module": "./dist/react-youtube.mjs",
+  "exports": {
+    ".": {
+      "require": "./dist/react-youtube.js",
+      "import": "./dist/react-youtube.mjs"
+    }
+  },
   "types": "index.d.ts",
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
