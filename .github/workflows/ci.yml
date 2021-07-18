@@ -12,7 +12,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version: 16.x
       - name: Install dependencies
         run: npm install
       - name: Check types
@@ -26,7 +26,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version: 16.x
       - name: Install dependencies
         run: npm install
       - name: Check code style
@@ -35,11 +35,11 @@ jobs:
     name: Tests
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 15.x]
+        node-version: [12.x, 14.x, 16.x]
         react-version: [17.x]
         include:
-          - node-version: 12.x
-            react-version: 16.0.0
+          - node-version: 16.x
+            react-version: alpha
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -48,12 +48,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node-version}}
+      - name: Use npm 7
+        run: npm install -g npm@7
       - name: Install dependencies
         run: npm install
       - name: Install React ${{matrix.react-version}}
         if: matrix.react-version != '17.x'
         run: |
-          npm install --save-dev \
+          npm install --force --save-dev \
             react@${{matrix.react-version}} \
             react-dom@${{matrix.react-version}} \
             react-test-renderer@${{matrix.react-version}}
