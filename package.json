@@ -18,7 +18,6 @@
     "@babel/preset-react": "^7.8.3",
     "@babel/register": "^7.8.3",
     "@rollup/plugin-babel": "^5.0.4",
-    "cross-env": "^7.0.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.0",
     "eslint-plugin-import": "^2.22.0",
@@ -67,9 +66,10 @@
     "docs": "prop-types-table src/index.js | md-insert README.md --header Props -i",
     "example": "npm run -w example build && npm run -w example start",
     "prepare": "npm run build",
+    "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",
     "test": "npm run test:types && npm run test:mocha && npm run test:lint",
     "test:lint": "eslint --cache --fix .",
-    "test:mocha": "cross-env NODE_ENV=test mocha --require @babel/register test/*.js",
+    "test:mocha": "mocha --require @babel/register test/*.js",
     "test:types": "tsd"
   },
   "workspaces": {

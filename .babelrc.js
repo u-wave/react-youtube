@@ -1,19 +1,12 @@
 module.exports = (api) => {
-  api.cache.never();
-
-  const envOptions = {
-    modules: false,
-    loose: true,
-  };
-
-  if (process.env.NODE_ENV === 'test') {
-    envOptions.modules = 'commonjs';
-    envOptions.targets = { node: 'current' };
-  }
+  const isTest = api.caller((caller) => caller.name === '@babel/register');
 
   return {
+    targets: isTest ? { node: 'current' } : {},
     presets: [
-      ['@babel/env', envOptions],
+      ['@babel/env', {
+        modules: isTest ? 'commonjs' : false,
+      }],
       '@babel/react',
     ],
   };
