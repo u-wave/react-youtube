@@ -597,7 +597,7 @@ YouTube.defaultProps = {
   onPause: function onPause() {},
   onEnd: function onEnd() {}
 };
-exports.default = YouTube;
+exports['default'] = YouTube;
 
 }).call(this)}).call(this,require('_process'))
 },{"_process":4,"load-script2":19,"prop-types":24,"react":31}],2:[function(require,module,exports){
