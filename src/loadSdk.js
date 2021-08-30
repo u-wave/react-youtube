@@ -22,8 +22,7 @@ function loadSdk() {
       reject(new Error('Could not load YouTube SDK'));
     };
 
-    const node = document.head || document.getElementsByTagName('head')[0];
-    node.appendChild(script);
+    document.head.appendChild(script);
   });
 }
 
