@@ -36,7 +36,7 @@ function _interopNamespace(e) {
     });
   }
 
-  n['default'] = e;
+  n["default"] = e;
   return Object.freeze(n);
 }
 
@@ -83,7 +83,7 @@ function loadSdk() {
       return;
     }
 
-    loadScript__default['default']('https://www.youtube.com/iframe_api', function (err) {
+    loadScript__default["default"]('https://www.youtube.com/iframe_api', function (err) {
       if (err) {
         reject(err);
       } else {
@@ -381,38 +381,38 @@ if (process.env.NODE_ENV !== 'production') {
     /**
      * An 11-character string representing a YouTube video ID..
      */
-    video: PropTypes__default['default'].string,
+    video: PropTypes__default["default"].string,
 
     /**
      * DOM ID for the player element.
      */
-    id: PropTypes__default['default'].string,
+    id: PropTypes__default["default"].string,
 
     /**
      * CSS className for the player element.
      */
-    className: PropTypes__default['default'].string,
+    className: PropTypes__default["default"].string,
 
     /**
      * Inline style for container element.
      */
-    style: PropTypes__default['default'].object,
+    style: PropTypes__default["default"].object,
     // eslint-disable-line react/forbid-prop-types
 
     /**
      * Width of the player element.
      */
-    width: PropTypes__default['default'].oneOfType([PropTypes__default['default'].number, PropTypes__default['default'].string]),
+    width: PropTypes__default["default"].oneOfType([PropTypes__default["default"].number, PropTypes__default["default"].string]),
 
     /**
      * Height of the player element.
      */
-    height: PropTypes__default['default'].oneOfType([PropTypes__default['default'].number, PropTypes__default['default'].string]),
+    height: PropTypes__default["default"].oneOfType([PropTypes__default["default"].number, PropTypes__default["default"].string]),
 
     /**
      * Pause the video.
      */
-    paused: PropTypes__default['default'].bool,
+    paused: PropTypes__default["default"].bool,
     // eslint-disable-line react/no-unused-prop-types
     // Player parameters
 
@@ -421,35 +421,35 @@ if (process.env.NODE_ENV !== 'production') {
      *
      * https://developers.google.com/youtube/player_parameters#autoplay
      */
-    autoplay: PropTypes__default['default'].bool,
+    autoplay: PropTypes__default["default"].bool,
 
     /**
      * Whether to show captions below the video.
      *
      * https://developers.google.com/youtube/player_parameters#cc_load_policy
      */
-    showCaptions: PropTypes__default['default'].bool,
+    showCaptions: PropTypes__default["default"].bool,
 
     /**
      * Whether to show video controls.
      *
      * https://developers.google.com/youtube/player_parameters#controls
      */
-    controls: PropTypes__default['default'].bool,
+    controls: PropTypes__default["default"].bool,
 
     /**
      * Ignore keyboard controls.
      *
      * https://developers.google.com/youtube/player_parameters#disablekb
      */
-    disableKeyboard: PropTypes__default['default'].bool,
+    disableKeyboard: PropTypes__default["default"].bool,
 
     /**
      * Whether to display the fullscreen button.
      *
      * https://developers.google.com/youtube/player_parameters#fs
      */
-    allowFullscreen: PropTypes__default['default'].bool,
+    allowFullscreen: PropTypes__default["default"].bool,
 
     /**
      * The player's interface language. The parameter value is an ISO 639-1
@@ -457,49 +457,49 @@ if (process.env.NODE_ENV !== 'production') {
      *
      * https://developers.google.com/youtube/player_parameters#hl
      */
-    lang: PropTypes__default['default'].string,
+    lang: PropTypes__default["default"].string,
 
     /**
      * Whether to show annotations on top of the video.
      *
      * https://developers.google.com/youtube/player_parameters#iv_load_policy
      */
-    annotations: PropTypes__default['default'].bool,
+    annotations: PropTypes__default["default"].bool,
 
     /**
      * Time in seconds at which to start playing the video.
      *
      * https://developers.google.com/youtube/player_parameters#start
      */
-    startSeconds: PropTypes__default['default'].number,
+    startSeconds: PropTypes__default["default"].number,
 
     /**
      * Time in seconds at which to stop playing the video.
      *
      * https://developers.google.com/youtube/player_parameters#end
      */
-    endSeconds: PropTypes__default['default'].number,
+    endSeconds: PropTypes__default["default"].number,
 
     /**
      * Remove most YouTube logos from the player.
      *
      * https://developers.google.com/youtube/player_parameters#modestbranding
      */
-    modestBranding: PropTypes__default['default'].bool,
+    modestBranding: PropTypes__default["default"].bool,
 
     /**
      * Whether to play the video inline on iOS, instead of fullscreen.
      *
      * https://developers.google.com/youtube/player_parameters#playsinline
      */
-    playsInline: PropTypes__default['default'].bool,
+    playsInline: PropTypes__default["default"].bool,
 
     /**
      * Whether to show related videos after the video is over.
      *
      * https://developers.google.com/youtube/player_parameters#rel
      */
-    showRelatedVideos: PropTypes__default['default'].bool,
+    showRelatedVideos: PropTypes__default["default"].bool,
 
     /**
      * Whether to show video information (uploader, title, etc) before the video
@@ -509,31 +509,31 @@ if (process.env.NODE_ENV !== 'production') {
      *
      * https://developers.google.com/youtube/player_parameters#showinfo
      */
-    showInfo: PropTypes__default['default'].bool,
+    showInfo: PropTypes__default["default"].bool,
 
     /**
      * The playback volume, **as a number between 0 and 1**.
      */
-    volume: PropTypes__default['default'].number,
+    volume: PropTypes__default["default"].number,
 
     /**
      * Whether the video's sound should be muted.
      */
-    muted: PropTypes__default['default'].bool,
+    muted: PropTypes__default["default"].bool,
 
     /**
      * The suggested playback quality.
      *
      * https://developers.google.com/youtube/iframe_api_reference#Playback_quality
      */
-    suggestedQuality: PropTypes__default['default'].string,
+    suggestedQuality: PropTypes__default["default"].string,
 
     /**
      * Playback speed.
      *
      * https://developers.google.com/youtube/iframe_api_reference#setPlaybackRate
      */
-    playbackRate: PropTypes__default['default'].number,
+    playbackRate: PropTypes__default["default"].number,
     // Events
 
     /* eslint-disable react/no-unused-prop-types */
@@ -541,40 +541,40 @@ if (process.env.NODE_ENV !== 'production') {
     /**
      * Sent when the YouTube player API has loaded.
      */
-    onReady: PropTypes__default['default'].func,
+    onReady: PropTypes__default["default"].func,
 
     /**
      * Sent when the player triggers an error.
      */
-    onError: PropTypes__default['default'].func,
+    onError: PropTypes__default["default"].func,
 
     /**
      * Sent when the video is cued and ready to play.
      */
-    onCued: PropTypes__default['default'].func,
+    onCued: PropTypes__default["default"].func,
 
     /**
      * Sent when the video is buffering.
      */
-    onBuffering: PropTypes__default['default'].func,
+    onBuffering: PropTypes__default["default"].func,
 
     /**
      * Sent when playback has been started or resumed.
      */
-    onPlaying: PropTypes__default['default'].func,
+    onPlaying: PropTypes__default["default"].func,
 
     /**
      * Sent when playback has been paused.
      */
-    onPause: PropTypes__default['default'].func,
+    onPause: PropTypes__default["default"].func,
 
     /**
      * Sent when playback has stopped.
      */
-    onEnd: PropTypes__default['default'].func,
-    onStateChange: PropTypes__default['default'].func,
-    onPlaybackRateChange: PropTypes__default['default'].func,
-    onPlaybackQualityChange: PropTypes__default['default'].func
+    onEnd: PropTypes__default["default"].func,
+    onStateChange: PropTypes__default["default"].func,
+    onPlaybackRateChange: PropTypes__default["default"].func,
+    onPlaybackQualityChange: PropTypes__default["default"].func
     /* eslint-enable react/no-unused-prop-types */
 
   };
@@ -597,7 +597,7 @@ YouTube.defaultProps = {
   onPause: function onPause() {},
   onEnd: function onEnd() {}
 };
-exports['default'] = YouTube;
+exports["default"] = YouTube;
 
 }).call(this)}).call(this,require('_process'))
 },{"_process":4,"load-script2":19,"prop-types":24,"react":31}],2:[function(require,module,exports){
@@ -612,7 +612,8 @@ var _ = _interopRequireDefault(require(".."));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /* eslint-env browser */
-var useState = _react["default"].useState;
+var useCallback = _react["default"].useCallback,
+    useState = _react["default"].useState;
 var videos = [{
   id: 'ZuuVjuLNvFY',
   name: 'JUNNY - kontra (Feat. Lil Gimch, Keeflow)'
@@ -655,26 +656,21 @@ function App() {
     setVideoIndex(index);
   }
 
-  function handlePause(event) {
+  var handlePause = useCallback(function (event) {
     setPaused(event.target.checked);
-  }
-
-  function handlePlayerPause() {
+  }, []);
+  var handlePlayerPause = useCallback(function () {
     setPaused(true);
-  }
-
-  function handlePlayerPlay() {
+  }, []);
+  var handlePlayerPlay = useCallback(function () {
     setPaused(false);
-  }
-
-  function handleVolume(event) {
+  }, []);
+  var handleVolume = useCallback(function (event) {
     setVolume(parseFloat(event.target.value));
-  }
-
-  function handleQuality(event) {
+  }, []);
+  var handleQuality = useCallback(function (event) {
     setSuggestedQuality(qualities[event.target.selectedIndex]);
-  }
-
+  }, []);
   return /*#__PURE__*/_react["default"].createElement("div", {
     className: "row"
   }, /*#__PURE__*/_react["default"].createElement("div", {
