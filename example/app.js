@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import YouTube from '..';
 
 const {
+  useCallback,
   useState,
 } = React;
 
@@ -35,25 +36,25 @@ function App() {
     setVideoIndex(index);
   }
 
-  function handlePause(event) {
+  const handlePause = useCallback((event) => {
     setPaused(event.target.checked);
-  }
+  }, []);
 
-  function handlePlayerPause() {
+  const handlePlayerPause = useCallback(() => {
     setPaused(true);
-  }
+  }, []);
 
-  function handlePlayerPlay() {
+  const handlePlayerPlay = useCallback(() => {
     setPaused(false);
-  }
+  }, []);
 
-  function handleVolume(event) {
+  const handleVolume = useCallback((event) => {
     setVolume(parseFloat(event.target.value));
-  }
+  }, []);
 
-  function handleQuality(event) {
+  const handleQuality = useCallback((event) => {
     setSuggestedQuality(qualities[event.target.selectedIndex]);
-  }
+  }, []);
 
   return (
     <div className="row">
