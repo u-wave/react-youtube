@@ -16,7 +16,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Check types
-        run: npm run test:types
+        run: npm run tsd
+
   lint:
     name: Code style
     runs-on: ubuntu-latest
@@ -30,7 +31,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Check code style
-        run: npm run test:lint
+        run: npm run lint
+
   test:
     name: Tests
     strategy:
@@ -58,4 +60,4 @@ jobs:
             react-dom@${{matrix.react-version}} \
             react-test-renderer@${{matrix.react-version}}
       - name: Run tests
-        run: npm run test:mocha
+        run: npm run tests-only
