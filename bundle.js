@@ -1595,8 +1595,8 @@
           {
             try {
               var frozenObject = Object.freeze({});
-              new Map([[frozenObject, null]]);
-              new Set([frozenObject]);
+              /* @__PURE__ */ new Map([[frozenObject, null]]);
+              /* @__PURE__ */ new Set([frozenObject]);
             } catch (e) {
             }
           }
@@ -2153,7 +2153,7 @@
           exports.__subscriberRef = null;
           {
             exports.__interactionsRef = {
-              current: new Set()
+              current: /* @__PURE__ */ new Set()
             };
             exports.__subscriberRef = {
               current: null
@@ -2161,7 +2161,7 @@
           }
           function unstable_clear(callback) {
             var prevInteractions = exports.__interactionsRef.current;
-            exports.__interactionsRef.current = new Set();
+            exports.__interactionsRef.current = /* @__PURE__ */ new Set();
             try {
               return callback();
             } finally {
@@ -2282,7 +2282,7 @@
           }
           var subscribers = null;
           {
-            subscribers = new Set();
+            subscribers = /* @__PURE__ */ new Set();
           }
           function unstable_subscribe(subscriber) {
             {
@@ -2510,7 +2510,7 @@
           var enableFundamentalAPI = false;
           var enableNewReconciler = false;
           var warnAboutStringRefs = false;
-          var allNativeEvents = new Set();
+          var allNativeEvents = /* @__PURE__ */ new Set();
           var registrationNameDependencies = {};
           var possibleRegistrationNames = {};
           function registerTwoPhaseEvent(registrationName, dependencies) {
@@ -5705,8 +5705,8 @@
           var queuedFocus = null;
           var queuedDrag = null;
           var queuedMouse = null;
-          var queuedPointers = new Map();
-          var queuedPointerCaptures = new Map();
+          var queuedPointers = /* @__PURE__ */ new Map();
+          var queuedPointerCaptures = /* @__PURE__ */ new Map();
           var queuedExplicitHydrationTargets = [];
           function hasQueuedDiscreteEvents() {
             return queuedDiscreteEvents.length > 0;
@@ -6023,8 +6023,8 @@
           var ANIMATION_ITERATION = getVendorPrefixedEventName("animationiteration");
           var ANIMATION_START = getVendorPrefixedEventName("animationstart");
           var TRANSITION_END = getVendorPrefixedEventName("transitionend");
-          var topLevelEventsToReactNames = new Map();
-          var eventPriorities = new Map();
+          var topLevelEventsToReactNames = /* @__PURE__ */ new Map();
+          var eventPriorities = /* @__PURE__ */ new Map();
           var discreteEventPairsForSimpleEventPlugin = [
             "cancel",
             "cancel",
@@ -8822,7 +8822,7 @@
             }
             assertValidProps(tag, rawProps);
             {
-              extraAttributeNames = new Set();
+              extraAttributeNames = /* @__PURE__ */ new Set();
               var attributes = domElement.attributes;
               for (var _i = 0; _i < attributes.length; _i++) {
                 var name = attributes[_i].name.toLowerCase();
@@ -9707,7 +9707,7 @@
           function getEventListenerSet(node) {
             var elementListenerSet = node[internalEventHandlersKey];
             if (elementListenerSet === void 0) {
-              elementListenerSet = node[internalEventHandlersKey] = new Set();
+              elementListenerSet = node[internalEventHandlersKey] = /* @__PURE__ */ new Set();
             }
             return elementListenerSet;
           }
@@ -10216,7 +10216,7 @@
             var pendingUNSAFE_ComponentWillReceivePropsWarnings = [];
             var pendingComponentWillUpdateWarnings = [];
             var pendingUNSAFE_ComponentWillUpdateWarnings = [];
-            var didWarnAboutUnsafeLifecycles = new Set();
+            var didWarnAboutUnsafeLifecycles = /* @__PURE__ */ new Set();
             ReactStrictModeWarnings.recordUnsafeLifecycleWarnings = function(fiber, instance) {
               if (didWarnAboutUnsafeLifecycles.has(fiber.type)) {
                 return;
@@ -10241,7 +10241,7 @@
               }
             };
             ReactStrictModeWarnings.flushPendingUnsafeLifecycleWarnings = function() {
-              var componentWillMountUniqueNames = new Set();
+              var componentWillMountUniqueNames = /* @__PURE__ */ new Set();
               if (pendingComponentWillMountWarnings.length > 0) {
                 pendingComponentWillMountWarnings.forEach(function(fiber) {
                   componentWillMountUniqueNames.add(getComponentName(fiber.type) || "Component");
@@ -10249,7 +10249,7 @@
                 });
                 pendingComponentWillMountWarnings = [];
               }
-              var UNSAFE_componentWillMountUniqueNames = new Set();
+              var UNSAFE_componentWillMountUniqueNames = /* @__PURE__ */ new Set();
               if (pendingUNSAFE_ComponentWillMountWarnings.length > 0) {
                 pendingUNSAFE_ComponentWillMountWarnings.forEach(function(fiber) {
                   UNSAFE_componentWillMountUniqueNames.add(getComponentName(fiber.type) || "Component");
@@ -10257,7 +10257,7 @@
                 });
                 pendingUNSAFE_ComponentWillMountWarnings = [];
               }
-              var componentWillReceivePropsUniqueNames = new Set();
+              var componentWillReceivePropsUniqueNames = /* @__PURE__ */ new Set();
               if (pendingComponentWillReceivePropsWarnings.length > 0) {
                 pendingComponentWillReceivePropsWarnings.forEach(function(fiber) {
                   componentWillReceivePropsUniqueNames.add(getComponentName(fiber.type) || "Component");
@@ -10265,7 +10265,7 @@
                 });
                 pendingComponentWillReceivePropsWarnings = [];
               }
-              var UNSAFE_componentWillReceivePropsUniqueNames = new Set();
+              var UNSAFE_componentWillReceivePropsUniqueNames = /* @__PURE__ */ new Set();
               if (pendingUNSAFE_ComponentWillReceivePropsWarnings.length > 0) {
                 pendingUNSAFE_ComponentWillReceivePropsWarnings.forEach(function(fiber) {
                   UNSAFE_componentWillReceivePropsUniqueNames.add(getComponentName(fiber.type) || "Component");
@@ -10273,7 +10273,7 @@
                 });
                 pendingUNSAFE_ComponentWillReceivePropsWarnings = [];
               }
-              var componentWillUpdateUniqueNames = new Set();
+              var componentWillUpdateUniqueNames = /* @__PURE__ */ new Set();
               if (pendingComponentWillUpdateWarnings.length > 0) {
                 pendingComponentWillUpdateWarnings.forEach(function(fiber) {
                   componentWillUpdateUniqueNames.add(getComponentName(fiber.type) || "Component");
@@ -10281,7 +10281,7 @@
                 });
                 pendingComponentWillUpdateWarnings = [];
               }
-              var UNSAFE_componentWillUpdateUniqueNames = new Set();
+              var UNSAFE_componentWillUpdateUniqueNames = /* @__PURE__ */ new Set();
               if (pendingUNSAFE_ComponentWillUpdateWarnings.length > 0) {
                 pendingUNSAFE_ComponentWillUpdateWarnings.forEach(function(fiber) {
                   UNSAFE_componentWillUpdateUniqueNames.add(getComponentName(fiber.type) || "Component");
@@ -10314,8 +10314,8 @@
                 warn("componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.\n\nPlease update the following components: %s", _sortedNames5);
               }
             };
-            var pendingLegacyContextWarning = new Map();
-            var didWarnAboutLegacyContext = new Set();
+            var pendingLegacyContextWarning = /* @__PURE__ */ new Map();
+            var didWarnAboutLegacyContext = /* @__PURE__ */ new Set();
             ReactStrictModeWarnings.recordLegacyContextWarning = function(fiber, instance) {
               var strictRoot = findStrictRoot(fiber);
               if (strictRoot === null) {
@@ -10340,7 +10340,7 @@
                   return;
                 }
                 var firstFiber = fiberArray[0];
-                var uniqueNames = new Set();
+                var uniqueNames = /* @__PURE__ */ new Set();
                 fiberArray.forEach(function(fiber) {
                   uniqueNames.add(getComponentName(fiber.type) || "Component");
                   didWarnAboutLegacyContext.add(fiber.type);
@@ -10361,7 +10361,7 @@
               pendingUNSAFE_ComponentWillReceivePropsWarnings = [];
               pendingComponentWillUpdateWarnings = [];
               pendingUNSAFE_ComponentWillUpdateWarnings = [];
-              pendingLegacyContextWarning = new Map();
+              pendingLegacyContextWarning = /* @__PURE__ */ new Map();
             };
           }
           function resolveDefaultProps(Component2, baseProps) {
@@ -10908,15 +10908,15 @@
           var didWarnAboutContextTypeAndContextTypes;
           var didWarnAboutInvalidateContextType;
           {
-            didWarnAboutStateAssignmentForComponent = new Set();
-            didWarnAboutUninitializedState = new Set();
-            didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate = new Set();
-            didWarnAboutLegacyLifecyclesAndDerivedState = new Set();
-            didWarnAboutDirectlyAssigningPropsToState = new Set();
-            didWarnAboutUndefinedDerivedState = new Set();
-            didWarnAboutContextTypeAndContextTypes = new Set();
-            didWarnAboutInvalidateContextType = new Set();
-            var didWarnOnInvalidCallback = new Set();
+            didWarnAboutStateAssignmentForComponent = /* @__PURE__ */ new Set();
+            didWarnAboutUninitializedState = /* @__PURE__ */ new Set();
+            didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate = /* @__PURE__ */ new Set();
+            didWarnAboutLegacyLifecyclesAndDerivedState = /* @__PURE__ */ new Set();
+            didWarnAboutDirectlyAssigningPropsToState = /* @__PURE__ */ new Set();
+            didWarnAboutUndefinedDerivedState = /* @__PURE__ */ new Set();
+            didWarnAboutContextTypeAndContextTypes = /* @__PURE__ */ new Set();
+            didWarnAboutInvalidateContextType = /* @__PURE__ */ new Set();
+            var didWarnOnInvalidCallback = /* @__PURE__ */ new Set();
             warnOnInvalidCallback = function(callback, callerName) {
               if (callback === null || typeof callback === "function") {
                 return;
@@ -11588,7 +11588,7 @@
               return null;
             }
             function mapRemainingChildren(returnFiber, currentFirstChild) {
-              var existingChildren = new Map();
+              var existingChildren = /* @__PURE__ */ new Map();
               var existingChild = currentFirstChild;
               while (existingChild !== null) {
                 if (existingChild.key !== null) {
@@ -11805,7 +11805,7 @@
                       break;
                     }
                     if (knownKeys === null) {
-                      knownKeys = new Set();
+                      knownKeys = /* @__PURE__ */ new Set();
                       knownKeys.add(key);
                       break;
                     }
@@ -12587,7 +12587,7 @@
           var didWarnAboutUseOpaqueIdentifier;
           {
             didWarnAboutUseOpaqueIdentifier = {};
-            didWarnAboutMismatchedHooksForComponent = new Set();
+            didWarnAboutMismatchedHooksForComponent = /* @__PURE__ */ new Set();
           }
           var renderLanes = NoLanes;
           var currentlyRenderingFiber$1 = null;
@@ -16306,12 +16306,12 @@
             var threadIDs;
             if (pingCache === null) {
               pingCache = root2.pingCache = new PossiblyWeakMap$1();
-              threadIDs = new Set();
+              threadIDs = /* @__PURE__ */ new Set();
               pingCache.set(wakeable, threadIDs);
             } else {
               threadIDs = pingCache.get(wakeable);
               if (threadIDs === void 0) {
-                threadIDs = new Set();
+                threadIDs = /* @__PURE__ */ new Set();
                 pingCache.set(wakeable, threadIDs);
               }
             }
@@ -16343,7 +16343,7 @@
                 if (_workInProgress.tag === SuspenseComponent && shouldCaptureSuspense(_workInProgress, hasInvisibleParentBoundary)) {
                   var wakeables = _workInProgress.updateQueue;
                   if (wakeables === null) {
-                    var updateQueue = new Set();
+                    var updateQueue = /* @__PURE__ */ new Set();
                     updateQueue.add(wakeable);
                     _workInProgress.updateQueue = updateQueue;
                   } else {
@@ -16408,7 +16408,7 @@
           }
           var didWarnAboutUndefinedSnapshotBeforeUpdate = null;
           {
-            didWarnAboutUndefinedSnapshotBeforeUpdate = new Set();
+            didWarnAboutUndefinedSnapshotBeforeUpdate = /* @__PURE__ */ new Set();
           }
           var PossiblyWeakSet = typeof WeakSet === "function" ? WeakSet : Set;
           var callComponentWillUnmountWithTimer = function(current2, instance) {
@@ -17396,7 +17396,7 @@
             } else {
               if ((executionContext & DiscreteEventContext) !== NoContext && (priorityLevel === UserBlockingPriority$2 || priorityLevel === ImmediatePriority$1)) {
                 if (rootsWithPendingDiscreteUpdates === null) {
-                  rootsWithPendingDiscreteUpdates = new Set([root2]);
+                  rootsWithPendingDiscreteUpdates = /* @__PURE__ */ new Set([root2]);
                 } else {
                   rootsWithPendingDiscreteUpdates.add(root2);
                 }
@@ -18501,7 +18501,7 @@
           }
           function markLegacyErrorBoundaryAsFailed(instance) {
             if (legacyErrorBoundariesThatAlreadyFailed === null) {
-              legacyErrorBoundariesThatAlreadyFailed = new Set([instance]);
+              legacyErrorBoundariesThatAlreadyFailed = /* @__PURE__ */ new Set([instance]);
             } else {
               legacyErrorBoundariesThatAlreadyFailed.add(instance);
             }
@@ -18650,7 +18650,7 @@
                 }
                 didWarnStateUpdateForNotYetMountedComponent.add(componentName);
               } else {
-                didWarnStateUpdateForNotYetMountedComponent = new Set([componentName]);
+                didWarnStateUpdateForNotYetMountedComponent = /* @__PURE__ */ new Set([componentName]);
               }
               var previousFiber = current;
               try {
@@ -18682,7 +18682,7 @@
                 }
                 didWarnStateUpdateForUnmountedComponent.add(componentName);
               } else {
-                didWarnStateUpdateForUnmountedComponent = new Set([componentName]);
+                didWarnStateUpdateForUnmountedComponent = /* @__PURE__ */ new Set([componentName]);
               }
               if (isFlushingPassiveEffects)
                 ;
@@ -18732,7 +18732,7 @@
           var didWarnAboutUpdateInRender = false;
           var didWarnAboutUpdateInRenderForAnotherComponent;
           {
-            didWarnAboutUpdateInRenderForAnotherComponent = new Set();
+            didWarnAboutUpdateInRenderForAnotherComponent = /* @__PURE__ */ new Set();
           }
           function warnAboutRenderPhaseUpdatesInDEV(fiber) {
             {
@@ -18858,7 +18858,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             scheduleInteractions(root2, lane, tracing.__interactionsRef.current);
           }
           function startWorkOnPendingInteractions(root2, lanes) {
-            var interactions = new Set();
+            var interactions = /* @__PURE__ */ new Set();
             root2.pendingInteractionMap.forEach(function(scheduledInteractions, scheduledLane) {
               if (includesSomeLane(lanes, scheduledLane)) {
                 scheduledInteractions.forEach(function(interaction) {
@@ -19114,7 +19114,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           }
           var findHostInstancesForRefresh = function(root2, families) {
             {
-              var hostInstances = new Set();
+              var hostInstances = /* @__PURE__ */ new Set();
               var types = new Set(families.map(function(family) {
                 return family.current;
               }));
@@ -19213,8 +19213,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             hasBadMapPolyfill = false;
             try {
               var nonExtensibleObject = Object.preventExtensions({});
-              new Map([[nonExtensibleObject, null]]);
-              new Set([nonExtensibleObject]);
+              /* @__PURE__ */ new Map([[nonExtensibleObject, null]]);
+              /* @__PURE__ */ new Set([nonExtensibleObject]);
             } catch (e) {
               hasBadMapPolyfill = true;
             }
@@ -19661,8 +19661,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             }
             {
               this.interactionThreadID = tracing.unstable_getThreadID();
-              this.memoizedInteractions = new Set();
-              this.pendingInteractionMap = new Map();
+              this.memoizedInteractions = /* @__PURE__ */ new Set();
+              this.pendingInteractionMap = /* @__PURE__ */ new Map();
             }
             {
               switch (tag) {
