@@ -34,7 +34,7 @@
     "react-dom": "^17.0.0",
     "react-test-renderer": "^17.0.0",
     "rollup": "^2.0.2",
-    "tsd": "^0.18.0"
+    "tsd": "^0.19.0"
   },
   "homepage": "https://github.com/u-wave/react-youtube#readme",
   "keywords": [
@@ -67,10 +67,10 @@
     "example": "npm run -w example build && npm run -w example start",
     "prepare": "npm run build",
     "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",
-    "test": "npm run test:types && npm run test:mocha && npm run test:lint",
-    "test:lint": "eslint --cache --fix .",
-    "test:mocha": "mocha --require @babel/register test/*.js",
-    "test:types": "tsd"
+    "test": "npm run tsd && npm run tests-only && npm run lint",
+    "lint": "eslint --cache --fix .",
+    "tests-only": "mocha --require @babel/register test/*.js",
+    "tsd": "tsd"
   },
   "workspaces": {
     "packages": [

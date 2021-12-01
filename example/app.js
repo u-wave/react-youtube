@@ -1,7 +1,7 @@
 /* eslint-env browser */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import YouTube from '@u-wave/react-youtube';
+import YouTube from '@u-wave/react-youtube'; // eslint-disable-line import/no-unresolved
 
 const {
   useCallback,
