@@ -1,3 +1,4 @@
+// @ts-check
 import React from 'react';
 import PropTypes from 'prop-types';
 import loadSdk from './loadSdk';
@@ -9,6 +10,12 @@ const {
   useState,
 } = React;
 
+/**
+ * @template {keyof YT.Events} K
+ * @param {YT.Player} player
+ * @param {K} event
+ * @param {YT.Events[K]} handler
+ */
 function useEventHandler(player, event, handler) {
   useEffect(() => {
     if (handler) {
@@ -22,6 +29,7 @@ function useEventHandler(player, event, handler) {
   }, [player, event, handler]);
 }
 
+/** @param {import('../index').YouTubeProps} props */
 function YouTube({
   video,
   id,
@@ -58,13 +66,16 @@ function YouTube({
   onPause = () => {},
   onEnd = () => {},
 }) {
+  /** @type {React.RefObject<HTMLDivElement | null>} */
   const container = useRef(null);
+  /** @type {React.MutableRefObject<() => YT.Player>} */
   const createPlayer = useRef(null);
   const firstRender = useRef(false);
-  const [player, setPlayer] = useState(null);
+  const [player, setPlayer] = useState(/** @type {YT.Player | null} */ (null));
 
+  /** @type {YT.PlayerVars} */
   const playerVars = {
-    autoplay,
+    autoplay: autoplay ? 1 : 0,
     cc_load_policy: showCaptions ? 1 : 0,
     controls: controls ? 1 : 0,
     disablekb: disableKeyboard ? 1 : 0,
