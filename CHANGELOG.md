@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.0-alpha.0 - 2021-12-01
+ * Use hooks internally.
+ * Drop support for React 16. This version requires React 17 or 18.
+ * Target evergreen browsers. If you need to support older browsers, you need to transpile this dependency.
+
 ## 0.7.2 - 2020-10-21
  * Allow React 17 in peerDependency range.
  * Test with React 16 and React 17 on CI.
