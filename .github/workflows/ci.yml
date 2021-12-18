@@ -38,10 +38,10 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
-        react-version: [17.x, 'rc']
+        react-version: [17.x]
         include:
           - node-version: 16.x
-            react-version: alpha
+            react-version: rc
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
