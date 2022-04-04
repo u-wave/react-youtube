@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.7.3 - 2022-04-04
+ * Allow React 18 in peerDependency range.
+ * Test with React 16, 17, and 18 on CI.
+
 ## 0.7.2 - 2020-10-21
  * Allow React 17 in peerDependency range.
  * Test with React 16 and React 17 on CI.
