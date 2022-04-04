@@ -1,24 +1,7 @@
-import React from 'react';
 import expect from 'expect';
 import render from './util/render';
-import createYouTube from './util/createYouTube';
 
 describe('YouTube', () => {
-  /*
-  it('should render a div with an ID and className', () => {
-    const { YouTube } = createYouTube();
-    const renderer = createRenderer();
-    renderer.render(<YouTube id="myId" className="myClassName" />);
-    expect(renderer.getRenderOutput()).toMatch({
-      type: 'div',
-      props: {
-        id: 'myId',
-        className: 'myClassName',
-      },
-    });
-  });
-  */
-
   it('should create a YouTube player when mounted', async () => {
     const { sdkMock } = await render({
       video: 'x2y5kyu',
