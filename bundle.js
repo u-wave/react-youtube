@@ -5,21 +5,18 @@
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
   var __commonJS = (cb, mod) => function __require() {
-    return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
-  var __reExport = (target, module, desc) => {
-    if (module && typeof module === "object" || typeof module === "function") {
-      for (let key of __getOwnPropNames(module))
-        if (!__hasOwnProp.call(target, key) && key !== "default")
-          __defProp(target, key, { get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
     }
-    return target;
+    return to;
   };
-  var __toModule = (module) => {
-    return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
-  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
 
   // ../node_modules/object-assign/index.js
   var require_object_assign = __commonJS({
@@ -19032,7 +19029,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
                 return;
               }
               if (failedBoundaries === null) {
-                failedBoundaries = new WeakSet();
+                failedBoundaries = /* @__PURE__ */ new WeakSet();
               }
               failedBoundaries.add(fiber);
             }
@@ -20594,6 +20591,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     }
   });
 
+  // ../node_modules/prop-types/lib/has.js
+  var require_has = __commonJS({
+    "../node_modules/prop-types/lib/has.js"(exports, module) {
+      module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
+    }
+  });
+
   // ../node_modules/prop-types/checkPropTypes.js
   var require_checkPropTypes = __commonJS({
     "../node_modules/prop-types/checkPropTypes.js"(exports, module) {
@@ -20603,7 +20607,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       if (true) {
         ReactPropTypesSecret = require_ReactPropTypesSecret();
         loggedTypeFailures = {};
-        has = Function.call.bind(Object.prototype.hasOwnProperty);
+        has = require_has();
         printWarning = function(text) {
           var message = "Warning: " + text;
           if (typeof console !== "undefined") {
@@ -20625,7 +20629,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
               var error;
               try {
                 if (typeof typeSpecs[typeSpecName] !== "function") {
-                  var err = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.");
+                  var err = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
                   err.name = "Invariant Violation";
                   throw err;
                 }
@@ -20661,8 +20665,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       var ReactIs = require_react_is();
       var assign = require_object_assign();
       var ReactPropTypesSecret = require_ReactPropTypesSecret();
+      var has = require_has();
       var checkPropTypes = require_checkPropTypes();
-      var has = Function.call.bind(Object.prototype.hasOwnProperty);
       var printWarning = function() {
       };
       if (true) {
@@ -20692,6 +20696,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         var ANONYMOUS = "<<anonymous>>";
         var ReactPropTypes = {
           array: createPrimitiveTypeChecker("array"),
+          bigint: createPrimitiveTypeChecker("bigint"),
           bool: createPrimitiveTypeChecker("boolean"),
           func: createPrimitiveTypeChecker("function"),
           number: createPrimitiveTypeChecker("number"),
@@ -20717,8 +20722,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             return x !== x && y !== y;
           }
         }
-        function PropTypeError(message) {
+        function PropTypeError(message, data) {
           this.message = message;
+          this.data = data && typeof data === "object" ? data : {};
           this.stack = "";
         }
         PropTypeError.prototype = Error.prototype;
@@ -20766,7 +20772,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             var propType = getPropType(propValue);
             if (propType !== expectedType) {
               var preciseType = getPreciseType(propValue);
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + preciseType + "` supplied to `" + componentName + "`, expected ") + ("`" + expectedType + "`."));
+              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + preciseType + "` supplied to `" + componentName + "`, expected ") + ("`" + expectedType + "`."), { expectedType });
             }
             return null;
           }
@@ -20892,13 +20898,19 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             }
           }
           function validate(props, propName, componentName, location, propFullName) {
+            var expectedTypes = [];
             for (var i2 = 0; i2 < arrayOfTypeCheckers.length; i2++) {
               var checker2 = arrayOfTypeCheckers[i2];
-              if (checker2(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
+              var checkerResult = checker2(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
+              if (checkerResult == null) {
                 return null;
               }
+              if (checkerResult.data && has(checkerResult.data, "expectedType")) {
+                expectedTypes.push(checkerResult.data.expectedType);
+              }
             }
-            return new PropTypeError("Invalid " + location + " `" + propFullName + "` supplied to " + ("`" + componentName + "`."));
+            var expectedTypesMessage = expectedTypes.length > 0 ? ", expected one of type [" + expectedTypes.join(", ") + "]" : "";
+            return new PropTypeError("Invalid " + location + " `" + propFullName + "` supplied to " + ("`" + componentName + "`" + expectedTypesMessage + "."));
           }
           return createChainableTypeChecker(validate);
         }
@@ -20911,6 +20923,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           }
           return createChainableTypeChecker(validate);
         }
+        function invalidValidatorError(componentName, location, propFullName, key, type) {
+          return new PropTypeError((componentName || "React class") + ": " + location + " type `" + propFullName + "." + key + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + type + "`.");
+        }
         function createShapeTypeChecker(shapeTypes) {
           function validate(props, propName, componentName, location, propFullName) {
             var propValue = props[propName];
@@ -20920,8 +20935,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             }
             for (var key in shapeTypes) {
               var checker = shapeTypes[key];
-              if (!checker) {
-                continue;
+              if (typeof checker !== "function") {
+                return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
               }
               var error = checker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
               if (error) {
@@ -20942,6 +20957,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             var allKeys = assign({}, props[propName], shapeTypes);
             for (var key in allKeys) {
               var checker = shapeTypes[key];
+              if (has(shapeTypes, key) && typeof checker !== "function") {
+                return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
+              }
               if (!checker) {
                 return new PropTypeError("Invalid " + location + " `" + propFullName + "` key `" + key + "` supplied to `" + componentName + "`.\nBad object: " + JSON.stringify(props[propName], null, "  ") + "\nValid keys: " + JSON.stringify(Object.keys(shapeTypes), null, "  "));
               }
@@ -21108,13 +21126,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   });
 
   // app.js
-  var import_react = __toModule(require_react());
-  var import_react_dom = __toModule(require_react_dom());
+  var import_react = __toESM(require_react());
+  var import_react_dom = __toESM(require_react_dom());
 
   // ../dist/react-youtube.es.js
-  var React = __toModule(require_react());
-  var import_prop_types = __toModule(require_prop_types());
-  var import_load_script2 = __toModule(require_load_script2());
+  var React = __toESM(require_react());
+  var import_prop_types = __toESM(require_prop_types());
+  var import_load_script2 = __toESM(require_load_script2());
   function _inheritsLoose(subClass, superClass) {
     subClass.prototype = Object.create(superClass.prototype);
     subClass.prototype.constructor = subClass;
