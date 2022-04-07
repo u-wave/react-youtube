@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@u-wave/react-youtube": "file:..",
-    "esbuild": "^0.13.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "esbuild": "^0.14.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "serve": "^13.0.0"
   }
 }

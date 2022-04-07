@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: lts/*
       - name: Install dependencies
         run: npm install
       - name: Check types
@@ -23,11 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: lts/*
       - name: Install dependencies
         run: npm install
       - name: Check code style
@@ -37,15 +37,12 @@ jobs:
     name: Tests
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
-        react-version: [17.x]
-        include:
-          - node-version: 16.x
-            react-version: rc
+        node-version: [14.x, 16.x, 17.x]
+        react-version: [17.x, 18.x]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Node.js ${{matrix.node-version}}
         uses: actions/setup-node@v2
         with:
@@ -55,11 +52,10 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Install React ${{matrix.react-version}}
-        if: matrix.react-version != '17.x'
+        if: matrix.react-version != '18.x'
         run: |
           npm install --force --save-dev \
             react@${{matrix.react-version}} \
-            react-dom@${{matrix.react-version}} \
-            react-test-renderer@${{matrix.react-version}}
+            react-dom@${{matrix.react-version}}
       - name: Run tests
         run: npm run tests-only
