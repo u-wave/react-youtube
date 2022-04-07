@@ -157,13 +157,13 @@ function YouTube({
 
   useEffect(() => {
     if (player) {
-      player.getIframe().width = width;
+      player.getIframe().width = String(width);
     }
   }, [player, width]);
 
   useEffect(() => {
     if (player) {
-      player.getIframe().height = height;
+      player.getIframe().height = String(height);
     }
   }, [player, height]);
 

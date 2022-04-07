@@ -114,7 +114,7 @@ describe('YouTube', () => {
     });
 
     expect(playerMock.getIframe().setWidth).toHaveBeenCalledWith('100%');
-    expect(playerMock.getIframe().setHeight).toHaveBeenCalledWith(800);
+    expect(playerMock.getIframe().setHeight).toHaveBeenCalledWith('800');
   });
 
   it('should respect start/endSeconds', async () => {

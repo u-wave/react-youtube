@@ -130,7 +130,7 @@ export interface YouTubeProps {
    *
    * https://developers.google.com/youtube/iframe_api_reference#Playback_quality
    */
-  suggestedQuality?: string;
+  suggestedQuality?: YT.SuggestedVideoQuality;
   /**
    * Playback speed.
    *
