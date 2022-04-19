@@ -1,4 +1,5 @@
 // @ts-check
+/* global YT */
 import React from 'react';
 import PropTypes from 'prop-types';
 import loadSdk from './loadSdk';
@@ -11,8 +12,10 @@ const {
 } = React;
 
 /**
+ * Attach an event listener to a YouTube player.
+ *
  * @template {keyof YT.Events} K
- * @param {YT.Player} player
+ * @param {YT.Player|null} player
  * @param {K} event
  * @param {YT.Events[K]} handler
  */
@@ -73,27 +76,26 @@ function YouTube({
   const firstRender = useRef(false);
   const [player, setPlayer] = useState(/** @type {YT.Player | null} */ (null));
 
-  /** @type {YT.PlayerVars} */
-  const playerVars = {
-    autoplay: autoplay ? 1 : 0,
-    cc_load_policy: showCaptions ? 1 : 0,
-    controls: controls ? 1 : 0,
-    disablekb: disableKeyboard ? 1 : 0,
-    fs: allowFullscreen ? 1 : 0,
-    hl: lang,
-    iv_load_policy: annotations ? 1 : 3,
-    start: startSeconds,
-    end: endSeconds,
-    modestbranding: modestBranding ? 1 : 0,
-    playsinline: playsInline ? 1 : 0,
-    rel: showRelatedVideos ? 1 : 0,
-    showinfo: showInfo ? 1 : 0,
-  };
-
   // Stick the player initialisation in a ref so it has the most recent props values
   // when it gets instantiated.
   if (!player) {
-    // eslint-disable-next-line no-undef
+    /** @type {YT.PlayerVars} */
+    const playerVars = {
+      autoplay: autoplay ? 1 : 0,
+      cc_load_policy: showCaptions ? 1 : 0,
+      controls: controls ? 1 : 0,
+      disablekb: disableKeyboard ? 1 : 0,
+      fs: allowFullscreen ? 1 : 0,
+      hl: lang,
+      iv_load_policy: annotations ? 1 : 3,
+      start: startSeconds,
+      end: endSeconds,
+      modestbranding: modestBranding ? 1 : 0,
+      playsinline: playsInline ? 1 : 0,
+      rel: showRelatedVideos ? 1 : 0,
+      showinfo: showInfo ? 1 : 0,
+    };
+
     createPlayer.current = () => new YT.Player(container.current, {
       videoId: video,
       width,
@@ -109,7 +111,7 @@ function YouTube({
   }
 
   const handlePlayerStateChange = useCallback((event) => {
-    const State = YT.PlayerState; // eslint-disable-line no-undef
+    const State = YT.PlayerState;
     switch (event.data) {
       case State.CUED:
         onCued(event);
