@@ -45,12 +45,25 @@ async function render(initialProps) {
   }
 
   const div = env.document.createElement('div');
+  let root;
+  if (ReactDOM.version.startsWith('18')) {
+    const { createRoot } = await import('react-dom/client');
+    root = createRoot(div);
+  } else {
+    root = {
+      render(element) {
+        ReactDOM.render(element, div);
+      },
+      unmount() {
+        ReactDOM.unmountComponentAtNode(div);
+      },
+    };
+  }
+
   const container = new Promise((resolve) => {
-    if (ReactDOM.version.startsWith('18')) {
-      ReactDOM.createRoot(div).render(<Container {...initialProps} ref={resolve} />);
-    } else {
-      ReactDOM.render(<Container {...initialProps} ref={resolve} />, div);
-    }
+    act(() => {
+      root.render(<Container {...initialProps} ref={resolve} />);
+    });
   });
   await readyPromise;
 
@@ -62,15 +75,13 @@ async function render(initialProps) {
     });
   }
 
-  function unmount() {
-    ReactDOM.unmountComponentAtNode(div);
-  }
-
   return {
     sdkMock,
     playerMock,
     rerender,
-    unmount,
+    unmount() {
+      root.unmount();
+    },
   };
 }
 
