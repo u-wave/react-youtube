@@ -23338,8 +23338,7 @@
         end: this.props.endSeconds,
         modestbranding: this.props.modestBranding ? 1 : 0,
         playsinline: this.props.playsInline ? 1 : 0,
-        rel: this.props.showRelatedVideos ? 1 : 0,
-        showinfo: this.props.showInfo ? 1 : 0
+        rel: this.props.showRelatedVideos ? 1 : 0
       };
     };
     _proto.getInitialOptions = function getInitialOptions() {
@@ -23464,7 +23463,6 @@
       modestBranding: import_prop_types.default.bool,
       playsInline: import_prop_types.default.bool,
       showRelatedVideos: import_prop_types.default.bool,
-      showInfo: import_prop_types.default.bool,
       volume: import_prop_types.default.number,
       muted: import_prop_types.default.bool,
       suggestedQuality: import_prop_types.default.string,
@@ -23491,7 +23489,6 @@
     modestBranding: false,
     playsInline: false,
     showRelatedVideos: true,
-    showInfo: true,
     onCued: function onCued() {
     },
     onBuffering: function onBuffering() {
