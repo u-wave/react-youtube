@@ -45,7 +45,6 @@ import YouTube from '@u-wave/react-youtube';
 | modestBranding | bool | false | Remove most YouTube logos from the player.<br>https://developers.google.com/youtube/player_parameters#modestbranding |
 | playsInline | bool | false | Whether to play the video inline on iOS, instead of fullscreen.<br>https://developers.google.com/youtube/player_parameters#playsinline |
 | showRelatedVideos | bool | true | Whether to show related videos after the video is over.<br>https://developers.google.com/youtube/player_parameters#rel |
-| showInfo | bool | true | Whether to show video information (uploader, title, etc) before the video starts.<br>**This parameter has been deprecated and has no effect.**<br>https://developers.google.com/youtube/player_parameters#showinfo |
 | volume | number |  | The playback volume, **as a number between 0 and 1**. |
 | muted | bool |  | Whether the video's sound should be muted. |
 | suggestedQuality | string |  | The suggested playback quality.<br>https://developers.google.com/youtube/iframe_api_reference#Playback_quality |
@@ -60,7 +59,6 @@ import YouTube from '@u-wave/react-youtube';
 | onStateChange | function |  |  |
 | onPlaybackRateChange | function |  |  |
 | onPlaybackQualityChange | function |  |  |
-
 
 ## Related
 

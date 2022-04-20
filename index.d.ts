@@ -108,10 +108,7 @@ export interface YouTubeProps {
    */
   showRelatedVideos?: boolean;
   /**
-   * Whether to show video information (uploader, title, etc) before the video
-   * starts.
-   *
-   * https://developers.google.com/youtube/player_parameters#showinfo
+   * @deprecated This property was removed from the YouTube API.
    */
   showInfo?: boolean;
 

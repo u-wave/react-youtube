@@ -106,7 +106,6 @@ class YouTube extends React.Component {
       modestbranding: this.props.modestBranding ? 1 : 0,
       playsinline: this.props.playsInline ? 1 : 0,
       rel: this.props.showRelatedVideos ? 1 : 0,
-      showinfo: this.props.showInfo ? 1 : 0,
     };
     /* eslint-enable react/destructuring-assignment */
   }
@@ -352,15 +351,6 @@ if (process.env.NODE_ENV !== 'production') {
      * https://developers.google.com/youtube/player_parameters#rel
      */
     showRelatedVideos: PropTypes.bool,
-    /**
-     * Whether to show video information (uploader, title, etc) before the video
-     * starts.
-     *
-     * **This parameter has been deprecated and has no effect.**
-     *
-     * https://developers.google.com/youtube/player_parameters#showinfo
-     */
-    showInfo: PropTypes.bool,
 
     /**
      * The playback volume, **as a number between 0 and 1**.
@@ -434,7 +424,6 @@ YouTube.defaultProps = {
   modestBranding: false,
   playsInline: false,
   showRelatedVideos: true,
-  showInfo: true,
   onCued: () => {},
   onBuffering: () => {},
   onPlaying: () => {},
