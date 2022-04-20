@@ -409,21 +409,4 @@ if (process.env.NODE_ENV !== 'production') {
   };
 }
 
-YouTube.defaultProps = {
-  autoplay: false,
-  showCaptions: false,
-  controls: true,
-  disableKeyboard: false,
-  allowFullscreen: true,
-  annotations: true,
-  modestBranding: false,
-  playsInline: false,
-  showRelatedVideos: true,
-  onCued: () => {},
-  onBuffering: () => {},
-  onPlaying: () => {},
-  onPause: () => {},
-  onEnd: () => {},
-};
-
 export default YouTube;
