@@ -57,7 +57,6 @@ function YouTube({
   modestBranding = false,
   playsInline = false,
   showRelatedVideos = true,
-  showInfo = true,
   onReady,
   onError,
   onStateChange,
@@ -93,7 +92,6 @@ function YouTube({
       modestbranding: modestBranding ? 1 : 0,
       playsinline: playsInline ? 1 : 0,
       rel: showRelatedVideos ? 1 : 0,
-      showinfo: showInfo ? 1 : 0,
     };
 
     createPlayer.current = () => new YT.Player(container.current, {
@@ -351,15 +349,6 @@ if (process.env.NODE_ENV !== 'production') {
      * https://developers.google.com/youtube/player_parameters#rel
      */
     showRelatedVideos: PropTypes.bool,
-    /**
-     * Whether to show video information (uploader, title, etc) before the video
-     * starts.
-     *
-     * **This parameter has been deprecated and has no effect.**
-     *
-     * https://developers.google.com/youtube/player_parameters#showinfo
-     */
-    showInfo: PropTypes.bool,
 
     /**
      * The playback volume, **as a number between 0 and 1**.
@@ -430,7 +419,6 @@ YouTube.defaultProps = {
   modestBranding: false,
   playsInline: false,
   showRelatedVideos: true,
-  showInfo: true,
   onCued: () => {},
   onBuffering: () => {},
   onPlaying: () => {},

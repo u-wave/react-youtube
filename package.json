@@ -18,6 +18,7 @@
     "@babel/preset-react": "^7.8.3",
     "@babel/register": "^7.8.3",
     "@rollup/plugin-babel": "^5.0.4",
+    "@u-wave/react-youtube-example": "file:example",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.0",
     "eslint-plugin-import": "^2.22.0",
@@ -63,19 +64,13 @@
   "scripts": {
     "build": "rollup -c",
     "docs": "prop-types-table src/index.js | md-insert README.md --header Props -i",
-    "example": "npm run -w example build && npm run -w example start",
+    "example": "npm run --prefix example build && npm run --prefix example start",
     "prepare": "npm run build",
     "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",
     "test": "npm run tsd && npm run tests-only && npm run lint",
     "lint": "eslint --cache --fix .",
     "tests-only": "mocha --require @babel/register test/*.js",
     "tsd": "tsd"
-  },
-  "workspaces": {
-    "packages": [
-      ".",
-      "./example"
-    ]
   },
   "sideEffects": false
 }
