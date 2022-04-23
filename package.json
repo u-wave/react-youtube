@@ -1,7 +1,7 @@
 {
   "name": "@u-wave/react-youtube",
   "description": "YouTube player component for React.",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "author": "Renée Kooi <renee@kooi.me>",
   "bugs": {
     "url": "https://github.com/u-wave/react-youtube/issues"
