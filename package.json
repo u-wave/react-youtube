@@ -7,7 +7,7 @@
     "url": "https://github.com/u-wave/react-youtube/issues"
   },
   "dependencies": {
-    "@types/react": "^17.0.0",
+    "@types/react": "^18.0.6",
     "@types/youtube": "0.0.46",
     "load-script2": "^1.0.1",
     "prop-types": "^15.7.2"
