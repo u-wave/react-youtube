@@ -1,23 +1,11 @@
 /// <reference types="youtube" />
 import * as React from 'react'
 
-export interface YouTubeProps {
+export interface YouTubeOptions {
   /**
-   * An 11-character string representing a YouTube video ID..
+   * An 11-character string representing a YouTube video ID.
    */
   video?: string;
-  /**
-   * DOM ID for the player element.
-   */
-  id?: string;
-  /**
-   * CSS className for the player element.
-   */
-  className?: string;
-  /**
-  * Inline style for container element.
-  */
-  style?: React.CSSProperties;
   /**
    * Width of the player element.
    */
@@ -170,4 +158,20 @@ export interface YouTubeProps {
   onPlaybackQualityChange?: YT.PlayerEventHandler<YT.OnPlaybackQualityChangeEvent>;
 }
 
-export default class YouTube extends React.Component<YouTubeProps> {}
+export interface YouTubeProps extends YouTubeOptions {
+  /**
+   * DOM ID for the player element.
+   */
+  id?: string;
+  /**
+   * CSS className for the player element.
+   */
+  className?: string;
+  /**
+  * Inline style for container element.
+  */
+  style?: React.CSSProperties;
+}
+
+export function useYouTube(container: React.Ref<HTMLElement>, options: YouTubeOptions): YT.Player | null;
+export default function YouTube(props: YouTubeProps): JSX.Element;

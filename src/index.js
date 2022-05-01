@@ -32,12 +32,12 @@ function useEventHandler(player, event, handler) {
   }, [player, event, handler]);
 }
 
-/** @param {import('../index').YouTubeProps} props */
-function YouTube({
+/**
+* @param {React.RefObject<HTMLElement>} container
+* @param {import('../index').YouTubeOptions} options
+*/
+function useYouTube(container, {
   video,
-  id,
-  className,
-  style,
   startSeconds,
   endSeconds,
   width,
@@ -68,12 +68,12 @@ function YouTube({
   onPause = () => {},
   onEnd = () => {},
 }) {
-  /** @type {React.RefObject<HTMLDivElement | null>} */
-  const container = useRef(null);
+  // Storing the player in the very first hook makes it easier to
+  // find in React DevTools :)
+  const [player, setPlayer] = useState(/** @type {YT.Player | null} */ (null));
   /** @type {React.MutableRefObject<() => YT.Player>} */
   const createPlayer = useRef(null);
   const firstRender = useRef(false);
-  const [player, setPlayer] = useState(/** @type {YT.Player | null} */ (null));
 
   // Stick the player initialisation in a ref so it has the most recent props values
   // when it gets instantiated.
@@ -108,6 +108,23 @@ function YouTube({
     });
   }
 
+  // The effect that manages the player's lifetime.
+  useEffect(() => {
+    let instance = null;
+    let cancelled = false;
+
+    loadSdk().then(() => {
+      if (!cancelled) {
+        instance = createPlayer.current();
+      }
+    });
+
+    return () => {
+      cancelled = true;
+      instance?.destroy();
+    };
+  }, []);
+
   const handlePlayerStateChange = useCallback((event) => {
     const State = YT.PlayerState;
     switch (event.data) {
@@ -130,23 +147,6 @@ function YouTube({
         // Nothing
     }
   }, [onCued, onBuffering, onPause, onPlaying, onEnd]);
-
-  // The effect that manages the player's lifetime.
-  useEffect(() => {
-    let instance = null;
-    let cancelled = false;
-
-    loadSdk().then(() => {
-      if (!cancelled) {
-        instance = createPlayer.current();
-      }
-    });
-
-    return () => {
-      cancelled = true;
-      instance?.destroy();
-    };
-  }, []);
 
   useEventHandler(player, 'onStateChange', handlePlayerStateChange);
   useEventHandler(player, 'onReady', onReady);
@@ -225,6 +225,20 @@ function YouTube({
       }
     }
   }, [player, video]);
+
+  return player;
+}
+
+/** @param {import('../index').YouTubeProps} props */
+function YouTube({
+  id,
+  className,
+  style,
+  ...options
+}) {
+  /** @type {React.RefObject<HTMLDivElement>} */
+  const container = useRef(null);
+  useYouTube(container, options);
 
   return (
     <div
@@ -409,4 +423,5 @@ if (process.env.NODE_ENV !== 'production') {
   };
 }
 
+export { useYouTube };
 export default YouTube;
