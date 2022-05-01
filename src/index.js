@@ -73,7 +73,7 @@ function useYouTube(container, {
   const [player, setPlayer] = useState(/** @type {YT.Player | null} */ (null));
   /** @type {React.MutableRefObject<() => YT.Player>} */
   const createPlayer = useRef(null);
-  const firstRender = useRef(false);
+  const firstRender = useRef(true);
 
   // Stick the player initialisation in a ref so it has the most recent props values
   // when it gets instantiated.
@@ -101,7 +101,6 @@ function useYouTube(container, {
       playerVars,
       events: {
         onReady: (event) => {
-          firstRender.current = true;
           setPlayer(event.target);
         },
       },
