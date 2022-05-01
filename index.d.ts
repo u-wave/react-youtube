@@ -158,7 +158,7 @@ export interface YouTubeProps extends YouTubeOptions {
    */
   className?: string;
   /**
-  * Inline style for container element.
+  * Inline style for player element.
   */
   style?: React.CSSProperties;
 }

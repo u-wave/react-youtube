@@ -11,6 +11,13 @@ const {
   useState,
 } = React;
 
+// Player state numbers are documented to be constants, so we can inline them.
+const ENDED = 0;
+const PLAYING = 1;
+const PAUSED = 2;
+const BUFFERING = 3;
+const CUED = 5;
+
 /**
  * Attach an event listener to a YouTube player.
  *
@@ -33,20 +40,13 @@ function useEventHandler(player, event, handler) {
 }
 
 /**
- * @param {React.RefObject<HTMLElement>} container
  * @param {import('../index').YouTubeOptions} options
+ * @return {YT.PlayerVars}
  */
-function useYouTube(container, {
-  video,
+function getPlayerVars({
   startSeconds,
   endSeconds,
-  width,
-  height,
   lang,
-  paused,
-  muted,
-  volume,
-  playbackRate,
   autoplay = false,
   showCaptions = false,
   controls = true,
@@ -56,17 +56,51 @@ function useYouTube(container, {
   modestBranding = false,
   playsInline = false,
   showRelatedVideos = true,
-  onReady,
-  onError,
-  onStateChange,
-  onPlaybackQualityChange,
-  onPlaybackRateChange,
-  onCued = () => {},
-  onBuffering = () => {},
-  onPlaying = () => {},
-  onPause = () => {},
-  onEnd = () => {},
 }) {
+  return {
+    autoplay: autoplay ? 1 : 0,
+    cc_load_policy: showCaptions ? 1 : 0,
+    controls: controls ? 1 : 0,
+    disablekb: disableKeyboard ? 1 : 0,
+    fs: allowFullscreen ? 1 : 0,
+    hl: lang,
+    iv_load_policy: annotations ? 1 : 3,
+    start: startSeconds,
+    end: endSeconds,
+    modestbranding: modestBranding ? 1 : 0,
+    playsinline: playsInline ? 1 : 0,
+    rel: showRelatedVideos ? 1 : 0,
+  };
+}
+
+/**
+ * @param {React.RefObject<HTMLElement>} container
+ * @param {import('../index').YouTubeOptions} options
+ */
+function useYouTube(container, options) {
+  const {
+    video,
+    startSeconds,
+    endSeconds,
+    width,
+    height,
+    paused,
+    muted,
+    volume,
+    playbackRate,
+    autoplay = false,
+    onReady,
+    onError,
+    onStateChange,
+    onPlaybackQualityChange,
+    onPlaybackRateChange,
+    onCued = () => {},
+    onBuffering = () => {},
+    onPlaying = () => {},
+    onPause = () => {},
+    onEnd = () => {},
+  } = options;
+
   // Storing the player in the very first hook makes it easier to
   // find in React DevTools :)
   const [player, setPlayer] = useState(/** @type {YT.Player | null} */ (null));
@@ -77,27 +111,11 @@ function useYouTube(container, {
   // Stick the player initialisation in a ref so it has the most recent props values
   // when it gets instantiated.
   if (!player) {
-    /** @type {YT.PlayerVars} */
-    const playerVars = {
-      autoplay: autoplay ? 1 : 0,
-      cc_load_policy: showCaptions ? 1 : 0,
-      controls: controls ? 1 : 0,
-      disablekb: disableKeyboard ? 1 : 0,
-      fs: allowFullscreen ? 1 : 0,
-      hl: lang,
-      iv_load_policy: annotations ? 1 : 3,
-      start: startSeconds,
-      end: endSeconds,
-      modestbranding: modestBranding ? 1 : 0,
-      playsinline: playsInline ? 1 : 0,
-      rel: showRelatedVideos ? 1 : 0,
-    };
-
     createPlayer.current = () => new YT.Player(container.current, {
       videoId: video,
       width,
       height,
-      playerVars,
+      playerVars: getPlayerVars(options),
       events: {
         onReady: (event) => {
           setPlayer(event.target);
@@ -107,21 +125,20 @@ function useYouTube(container, {
   }
 
   const handlePlayerStateChange = useCallback((event) => {
-    const State = YT.PlayerState;
     switch (event.data) {
-      case State.CUED:
+      case CUED:
         onCued(event);
         break;
-      case State.BUFFERING:
+      case BUFFERING:
         onBuffering(event);
         break;
-      case State.PAUSED:
+      case PAUSED:
         onPause(event);
         break;
-      case State.PLAYING:
+      case PLAYING:
         onPlaying(event);
         break;
-      case State.ENDED:
+      case ENDED:
         onEnd(event);
         break;
       default:
@@ -245,7 +262,7 @@ function YouTube({
 if (process.env.NODE_ENV !== 'production') {
   YouTube.propTypes = {
     /**
-     * An 11-character string representing a YouTube video ID..
+     * An 11-character string representing a YouTube video ID.
      */
     video: PropTypes.string,
     /**
@@ -257,7 +274,7 @@ if (process.env.NODE_ENV !== 'production') {
      */
     className: PropTypes.string,
     /**
-     * Inline style for container element.
+     * Inline style for the player element.
      */
     style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     /**
