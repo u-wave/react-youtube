@@ -13,6 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  * Drop support for React 16. This version requires React 17 or 18.
  * Target evergreen browsers. If you need to support older browsers, you need to transpile this dependency.
 
+## 0.7.4 - 2022-04-23
+ * Fix a warning about workspaces when installing with yarn.
+
 ## 0.7.3 - 2022-04-04
  * Allow React 18 in peerDependency range.
  * Test with React 16, 17, and 18 on CI.
