@@ -95,10 +95,6 @@ export interface YouTubeOptions {
    * https://developers.google.com/youtube/player_parameters#rel
    */
   showRelatedVideos?: boolean;
-  /**
-   * @deprecated This property was removed from the YouTube API.
-   */
-  showInfo?: boolean;
 
   /**
    * The playback volume, **as a number between 0 and 1**.
