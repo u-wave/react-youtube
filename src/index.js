@@ -106,23 +106,6 @@ function useYouTube(container, {
     });
   }
 
-  // The effect that manages the player's lifetime.
-  useEffect(() => {
-    let instance = null;
-    let cancelled = false;
-
-    loadSdk().then(() => {
-      if (!cancelled) {
-        instance = createPlayer.current();
-      }
-    });
-
-    return () => {
-      cancelled = true;
-      instance?.destroy();
-    };
-  }, []);
-
   const handlePlayerStateChange = useCallback((event) => {
     const State = YT.PlayerState;
     switch (event.data) {
@@ -213,6 +196,27 @@ function useYouTube(container, {
       }
     }
   }, [player, video]);
+
+  // The effect that manages the player's lifetime.
+  // This must be done at the end to ensure that `.destroy()` runs last.
+  // Else, other hooks will attempt to do things like `.removeEventListener()`
+  // after the player is destroyed.
+  useEffect(() => {
+    /** @type {YT.Player|null} */
+    let instance = null;
+    let cancelled = false;
+
+    loadSdk().then(() => {
+      if (!cancelled) {
+        instance = createPlayer.current();
+      }
+    });
+
+    return () => {
+      cancelled = true;
+      instance?.destroy();
+    };
+  }, []);
 
   return player;
 }
