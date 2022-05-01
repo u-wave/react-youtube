@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.0-alpha.2 - 2022-05-01
+ * Expose all functionality as a `useYouTube` hook.
+ * Remove props no longer supported by YouTube: `showInfo`, `suggestedQuality`.
+
 ## 1.0.0-alpha.1 - 2022-04-20
  * Improve typings.
  * Remove duplicate `defaultProps`.
