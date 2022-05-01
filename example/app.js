@@ -15,8 +15,6 @@ const videos = [
   { id: null, name: '<none>' },
 ];
 
-const qualities = ['auto', '240', '380', '480', '720', '1080', '1440', '2160'];
-
 const hashVideoRx = /^#!\/video\/(\d)$/;
 const hash = typeof window.location !== 'undefined'
   ? window.location.hash : ''; // eslint-disable-line no-undef
@@ -26,7 +24,6 @@ const defaultVideo = hashVideoRx.test(hash)
 
 function App() {
   const [videoIndex, setVideoIndex] = useState(defaultVideo);
-  const [suggestedQuality, setSuggestedQuality] = useState('auto');
   const [volume, setVolume] = useState(1);
   const [paused, setPaused] = useState(false);
 
@@ -50,10 +47,6 @@ function App() {
 
   const handleVolume = useCallback((event) => {
     setVolume(parseFloat(event.target.value));
-  }, []);
-
-  const handleQuality = useCallback((event) => {
-    setSuggestedQuality(qualities[event.target.selectedIndex]);
   }, []);
 
   return (
@@ -99,16 +92,6 @@ function App() {
           step={0.01}
           onChange={handleVolume}
         />
-        <h5>
-          Quality
-        </h5>
-        <select className="browser-default" onChange={handleQuality}>
-          {qualities.map((quality) => (
-            <option key={quality} value={quality}>
-              {quality}
-            </option>
-          ))}
-        </select>
       </div>
       <div className="col s8 center-align">
         <YouTube
@@ -117,7 +100,6 @@ function App() {
           height={480}
           autoplay
           controls={false}
-          suggestedQuality={suggestedQuality}
           volume={volume}
           paused={paused}
           onPause={handlePlayerPause}

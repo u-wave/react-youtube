@@ -46,7 +46,6 @@ function useYouTube(container, {
   paused,
   muted,
   volume,
-  suggestedQuality,
   playbackRate,
   autoplay = false,
   showCaptions = false,
@@ -167,10 +166,6 @@ function useYouTube(container, {
       player?.unMute();
     }
   }, [player, muted]);
-
-  useEffect(() => {
-    player?.setPlaybackQuality(suggestedQuality);
-  }, [player, suggestedQuality]);
 
   useEffect(() => {
     player?.setPlaybackRate(playbackRate);
@@ -367,12 +362,6 @@ if (process.env.NODE_ENV !== 'production') {
      */
     muted: PropTypes.bool,
 
-    /**
-     * The suggested playback quality.
-     *
-     * https://developers.google.com/youtube/iframe_api_reference#Playback_quality
-     */
-    suggestedQuality: PropTypes.string,
     /**
      * Playback speed.
      *

@@ -20,7 +20,6 @@ export default function createYouTube() {
     mute: createSpy(),
     unMute: createSpy(),
     setVolume: createSpy(),
-    setPlaybackQuality: createSpy(),
     setPlaybackRate: createSpy(),
     loadVideoById: createSpy(),
     cueVideoById: createSpy(),

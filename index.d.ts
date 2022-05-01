@@ -111,12 +111,6 @@ export interface YouTubeOptions {
   muted?: boolean;
 
   /**
-   * The suggested playback quality.
-   *
-   * https://developers.google.com/youtube/iframe_api_reference#Playback_quality
-   */
-  suggestedQuality?: YT.SuggestedVideoQuality;
-  /**
    * Playback speed.
    *
    * https://developers.google.com/youtube/iframe_api_reference#setPlaybackRate

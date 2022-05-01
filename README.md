@@ -44,7 +44,6 @@ import YouTube from '@u-wave/react-youtube';
 | showRelatedVideos | bool | true | Whether to show related videos after the video is over.<br>https://developers.google.com/youtube/player_parameters#rel |
 | volume | number |  | The playback volume, **as a number between 0 and 1**. |
 | muted | bool |  | Whether the video's sound should be muted. |
-| suggestedQuality | string |  | The suggested playback quality.<br>https://developers.google.com/youtube/iframe_api_reference#Playback_quality |
 | playbackRate | number |  | Playback speed.<br>https://developers.google.com/youtube/iframe_api_reference#setPlaybackRate |
 | onReady | function |  | Sent when the YouTube player API has loaded. |
 | onError | function |  | Sent when the player triggers an error. |
@@ -60,7 +59,7 @@ import YouTube from '@u-wave/react-youtube';
 ## Related
  - [react-dailymotion][] - A Dailymotion component with a similar declarative API.
  - [@u-wave/react-vimeo][] - A Vimeo component with a similar declarative API.
- - [react-youtube][] - A widely-used YouTube component. Its API matches the YouTube iframe API more closely, and it doesn't support prop-based volume/quality/playback changes.
+ - [react-youtube][] - A widely-used YouTube component. Its API matches the YouTube iframe API more closely, and it doesn't support prop-based volume/playback changes.
 
 ## License
 [MIT][]

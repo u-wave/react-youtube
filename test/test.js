@@ -85,18 +85,6 @@ describe('YouTube', () => {
     expect(playerMock.mute).toHaveBeenCalled();
   });
 
-  it('should set the quality when the "suggestedQuality" prop changes', async () => {
-    const { playerMock, rerender } = await render({
-      video: 'x2y5kyu',
-      suggestedQuality: 'default',
-    });
-
-    await rerender({ suggestedQuality: '720hd' });
-    expect(playerMock.setPlaybackQuality).toHaveBeenCalledWith('720hd');
-    await rerender({ suggestedQuality: 'highres' });
-    expect(playerMock.setPlaybackQuality).toHaveBeenCalledWith('highres');
-  });
-
   it('should set the iframe width/height using the width/height props', async () => {
     const { sdkMock, playerMock, rerender } = await render({
       video: 'x2y5kyu',
