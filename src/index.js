@@ -33,9 +33,9 @@ function useEventHandler(player, event, handler) {
 }
 
 /**
-* @param {React.RefObject<HTMLElement>} container
-* @param {import('../index').YouTubeOptions} options
-*/
+ * @param {React.RefObject<HTMLElement>} container
+ * @param {import('../index').YouTubeOptions} options
+ */
 function useYouTube(container, {
   video,
   startSeconds,
