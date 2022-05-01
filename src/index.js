@@ -206,7 +206,7 @@ function useYouTube(container, {
     let instance = null;
     let cancelled = false;
 
-    loadSdk().then(() => {
+    loadSdk(() => {
       if (!cancelled) {
         instance = createPlayer.current();
       }

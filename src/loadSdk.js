@@ -2,12 +2,6 @@
 
 function loadSdk() {
   return new Promise((resolve, reject) => {
-    if (typeof window.YT === 'object' && typeof window.YT.ready === 'function') {
-      // A YouTube SDK is already loaded, so reuse that
-      window.YT.ready(resolve);
-      return;
-    }
-
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://www.youtube.com/iframe_api';
@@ -27,9 +21,13 @@ function loadSdk() {
 }
 
 let sdk = null;
-export default function getSdk() {
-  if (!sdk) {
-    sdk = loadSdk();
+export default function getSdk(callback) {
+  if (typeof window.YT === 'object' && typeof window.YT.ready === 'function') {
+    // A YouTube SDK is already loaded, so reuse that
+    window.YT.ready(callback);
+    return;
   }
-  return sdk;
+
+  sdk ??= loadSdk();
+  sdk.then(callback);
 }
