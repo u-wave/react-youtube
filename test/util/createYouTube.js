@@ -5,19 +5,8 @@ export default function createYouTube() {
   let isPaused = true;
 
   const iframeMock = {
-    setWidth: createSpy(),
-    setHeight: createSpy(),
     setId: createSpy(),
     setClassName: createSpy(),
-    set width(width) {
-      iframeMock.setWidth(width);
-    },
-    set height(height) {
-      iframeMock.setHeight(height);
-    },
-    set id(id) {
-      iframeMock.setId(id);
-    },
     set className(className) {
       iframeMock.setClassName(className);
     },
@@ -48,6 +37,7 @@ export default function createYouTube() {
     getIframe() {
       return iframeMock;
     },
+    setSize: createSpy(),
   };
 
   const sdkMock = {

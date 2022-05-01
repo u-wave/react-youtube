@@ -156,16 +156,10 @@ function useYouTube(container, {
   useEventHandler(player, 'onError', onError);
 
   useEffect(() => {
-    if (player) {
-      player.getIframe().width = String(width);
-    }
-  }, [player, width]);
-
-  useEffect(() => {
-    if (player) {
-      player.getIframe().height = String(height);
-    }
-  }, [player, height]);
+    // We pretend to be a bit smarter than the typescript definitions here, since
+    // YouTube teeeechnically supports strings like '100%' too.
+    player?.setSize(/** @type {number} */ (width), /** @type {number} */ (height));
+  }, [player, width, height]);
 
   useEffect(() => {
     if (muted) {
