@@ -164,4 +164,6 @@ export interface YouTubeProps extends YouTubeOptions {
 }
 
 export function useYouTube(container: React.Ref<HTMLElement>, options: YouTubeOptions): YT.Player | null;
-export default function YouTube(props: YouTubeProps): JSX.Element;
+
+declare const YouTube: React.FunctionComponent<YouTubeProps>;
+export default YouTube;
