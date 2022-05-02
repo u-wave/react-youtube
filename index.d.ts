@@ -26,30 +26,40 @@ export interface YouTubeOptions {
    * Whether the video should start playing automatically.
    *
    * https://developers.google.com/youtube/player_parameters#autoplay
+   *
+   * @default false
    */
   autoplay?: boolean;
   /**
    * Whether to show captions below the video.
    *
    * https://developers.google.com/youtube/player_parameters#cc_load_policy
+   *
+   * @default false
    */
   showCaptions?: boolean;
   /**
    * Whether to show video controls.
    *
    * https://developers.google.com/youtube/player_parameters#controls
+   *
+   * @default true
    */
   controls?: boolean;
   /**
    * Ignore keyboard controls.
    *
    * https://developers.google.com/youtube/player_parameters#disablekb
+   *
+   * @default false
    */
   disableKeyboard?: boolean;
   /**
    * Whether to display the fullscreen button.
    *
    * https://developers.google.com/youtube/player_parameters#fs
+   *
+   * @default true
    */
   allowFullscreen?: boolean;
   /**
@@ -63,6 +73,8 @@ export interface YouTubeOptions {
    * Whether to show annotations on top of the video.
    *
    * https://developers.google.com/youtube/player_parameters#iv_load_policy
+   *
+   * @default true
    */
   annotations?: boolean;
   /**
@@ -81,18 +93,24 @@ export interface YouTubeOptions {
    * Remove most YouTube logos from the player.
    *
    * https://developers.google.com/youtube/player_parameters#modestbranding
+   *
+   * @default false
    */
   modestBranding?: boolean;
   /**
    * Whether to play the video inline on iOS, instead of fullscreen.
    *
    * https://developers.google.com/youtube/player_parameters#playsinline
+   *
+   * @default false
    */
   playsInline?: boolean;
   /**
    * Whether to show related videos after the video is over.
    *
    * https://developers.google.com/youtube/player_parameters#rel
+   *
+   * @default true
    */
   showRelatedVideos?: boolean;
 
