@@ -47,6 +47,7 @@ function getPlayerVars({
   startSeconds,
   endSeconds,
   lang,
+  muted = false,
   autoplay = false,
   showCaptions = false,
   controls = true,
@@ -70,6 +71,7 @@ function getPlayerVars({
     modestbranding: modestBranding ? 1 : 0,
     playsinline: playsInline ? 1 : 0,
     rel: showRelatedVideos ? 1 : 0,
+    mute: muted ? 1 : 0,
   };
 }
 
