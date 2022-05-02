@@ -1,4 +1,4 @@
-/* global window, document */
+/* global YT, document */
 
 function loadSdk() {
   return new Promise((resolve, reject) => {
@@ -8,7 +8,7 @@ function loadSdk() {
     script.onload = () => {
       script.onerror = null;
       script.onload = null;
-      window.YT.ready(resolve);
+      YT.ready(resolve);
     };
     script.onerror = () => {
       script.onerror = null;
@@ -21,10 +21,11 @@ function loadSdk() {
 }
 
 let sdk = null;
+/** @param {(sdk: typeof YT) => void} callback */
 export default function getSdk(callback) {
-  if (typeof window.YT === 'object' && typeof window.YT.ready === 'function') {
+  if (typeof YT === 'object' && typeof YT.ready === 'function') {
     // A YouTube SDK is already loaded, so reuse that
-    window.YT.ready(callback);
+    YT.ready(callback);
     return;
   }
 
