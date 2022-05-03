@@ -10,6 +10,7 @@ const {
   useRef,
   useState,
 } = React;
+const useLayoutEffect = typeof document !== 'undefined' ? React.useLayoutEffect : useEffect;
 
 // Player state numbers are documented to be constants, so we can inline them.
 const ENDED = 0;
@@ -28,12 +29,14 @@ const CUED = 5;
  */
 function useEventHandler(player, event, handler) {
   useEffect(() => {
-    if (handler) {
-      player?.addEventListener(event, handler);
+    if (handler && player) {
+      player.addEventListener(event, handler);
     }
     return () => {
-      if (handler) {
-        player?.removeEventListener(event, handler);
+      // If the iframe was already deleted, removing event
+      // listeners is unnecessary, and can actually cause a crash.
+      if (handler && player && player.getIframe()) {
+        player.removeEventListener(event, handler);
       }
     };
   }, [player, event, handler]);
@@ -126,6 +129,30 @@ function useYouTube(container, options) {
     });
   }
 
+  useLayoutEffect(() => {
+    /** @type {YT.Player|null} */
+    let instance = null;
+    let cancelled = false;
+
+    loadSdk(() => {
+      if (!cancelled) {
+        instance = createPlayer.current();
+      }
+    });
+
+    return () => {
+      cancelled = true;
+      // Destroying the player here means that some other hooks cannot access its methods anymore,
+      // so they do need to be careful in their unsubscribe effects.
+      // There isn't really a way around this aside from manually implementing parts of the
+      // `destroy()` method.
+      // It's tempting to just remove the iframe here just in time for React to move in,
+      // but we must use `.destroy()` to avoid memory leaks, since the YouTube SDK holds on
+      // to references to player objects globally.
+      instance?.destroy();
+    };
+  }, []);
+
   const handlePlayerStateChange = useCallback((event) => {
     switch (event.data) {
       case CUED:
@@ -215,27 +242,6 @@ function useYouTube(container, options) {
       }
     }
   }, [player, video]);
-
-  // The effect that manages the player's lifetime.
-  // This must be done at the end to ensure that `.destroy()` runs last.
-  // Else, other hooks will attempt to do things like `.removeEventListener()`
-  // after the player is destroyed.
-  useEffect(() => {
-    /** @type {YT.Player|null} */
-    let instance = null;
-    let cancelled = false;
-
-    loadSdk(() => {
-      if (!cancelled) {
-        instance = createPlayer.current();
-      }
-    });
-
-    return () => {
-      cancelled = true;
-      instance?.destroy();
-    };
-  }, []);
 
   return player;
 }
