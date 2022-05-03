@@ -1,5 +1,5 @@
 // @ts-check
-/* global YT */
+/* global YT, window */
 import React from 'react';
 import PropTypes from 'prop-types';
 import loadSdk from './loadSdk';
@@ -60,6 +60,7 @@ function getPlayerVars({
   modestBranding = false,
   playsInline = false,
   showRelatedVideos = true,
+  origin = typeof window.location === 'object' ? window.location.origin : undefined,
 }) {
   return {
     autoplay: autoplay ? 1 : 0,
@@ -75,6 +76,7 @@ function getPlayerVars({
     playsinline: playsInline ? 1 : 0,
     rel: showRelatedVideos ? 1 : 0,
     mute: muted ? 1 : 0,
+    origin,
   };
 }
 
@@ -120,6 +122,7 @@ function useYouTube(container, options) {
       videoId: video,
       width,
       height,
+      host: options.host,
       playerVars: getPlayerVars(options),
       events: {
         onReady: (event) => {
@@ -303,7 +306,10 @@ if (process.env.NODE_ENV !== 'production') {
     /**
      * Pause the video.
      */
-    paused: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
+    paused: PropTypes.bool,
+
+    host: PropTypes.string,
+    origin: PropTypes.string,
 
     // Player parameters
 

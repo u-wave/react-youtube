@@ -35,6 +35,8 @@ the iframe than this component provides, consider using the `useYouTube` hook di
 | video | string |  | An 11-character string representing a YouTube video ID.. |
 | width | number, string |  | Width of the player element. |
 | height | number, string |  | Height of the player element. |
+| host | string | https://www.youtube.com | YouTube host to use: 'https://www.youtube.com' or 'https://www.youtube-nocookie.com'. |
+| origin | string |  | The YouTube API will usually default this value correctly. It is exposed for completeness.<br>https://developers.google.com/youtube/player_parameters#origin |
 | paused | bool |  | Pause the video. |
 | autoplay | bool | false | Whether the video should start playing automatically.<br>https://developers.google.com/youtube/player_parameters#autoplay |
 | showCaptions | bool | false | Whether to show captions below the video.<br>https://developers.google.com/youtube/player_parameters#cc_load_policy |
@@ -88,6 +90,8 @@ function Player() {
 | video | string |  | An 11-character string representing a YouTube video ID.. |
 | width | number, string |  | Width of the player element. |
 | height | number, string |  | Height of the player element. |
+| host | string | https://www.youtube.com | YouTube host to use: 'https://www.youtube.com' or 'https://www.youtube-nocookie.com'. |
+| origin | string |  | The YouTube API will usually default this value correctly. It is exposed for completeness.<br>https://developers.google.com/youtube/player_parameters#origin |
 | paused | bool |  | Pause the video. |
 | autoplay | bool | false | Whether the video should start playing automatically.<br>https://developers.google.com/youtube/player_parameters#autoplay |
 | showCaptions | bool | false | Whether to show captions below the video.<br>https://developers.google.com/youtube/player_parameters#cc_load_policy |

@@ -16,6 +16,18 @@ export interface YouTubeOptions {
   height?: number | string;
 
   /**
+   * YouTube host to use: 'https://www.youtube.com' or 'https://www.youtube-nocookie.com'.
+   *
+   * @default 'https://www.youtube.com'
+   */
+  host?: string;
+
+  /**
+   * The YouTube API will usually default this value correctly. It is exposed for completeness.
+   */
+  origin?: string;
+
+  /**
    * Pause the video.
    */
   paused?: boolean;
