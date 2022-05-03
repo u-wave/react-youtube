@@ -68,7 +68,7 @@
     "prepare": "npm run build",
     "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",
     "test": "npm run tsd && npm run tests-only && npm run lint",
-    "lint": "eslint --cache --fix .",
+    "lint": "eslint --fix .",
     "tests-only": "mocha --require @babel/register test/*.js",
     "tsd": "tsd"
   },
