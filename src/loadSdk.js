@@ -21,7 +21,7 @@ function loadSdk() {
 }
 
 let sdk = null;
-/** @param {(sdk: typeof YT) => void} callback */
+/** @param {() => void} callback */
 export default function getSdk(callback) {
   if (typeof YT === 'object' && typeof YT.ready === 'function') {
     // A YouTube SDK is already loaded, so reuse that
