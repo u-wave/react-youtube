@@ -9,7 +9,7 @@
   "dependencies": {
     "@types/react": "^17.0.0",
     "@types/youtube": "0.0.47",
-    "load-script2": "^1.0.1",
+    "load-script2": "^2.0.6",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
