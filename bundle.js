@@ -16,7 +16,10 @@
     }
     return to;
   };
-  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
 
   // ../node_modules/react/cjs/react.development.js
   var require_react_development = __commonJS({
@@ -631,7 +634,10 @@
                       checkKeyStringCoercion(mappedChild.key);
                     }
                   }
-                  mappedChild = cloneAndReplaceKey(mappedChild, escapedPrefix + (mappedChild.key && (!_child || _child.key !== mappedChild.key) ? escapeUserProvidedKey("" + mappedChild.key) + "/" : "") + childKey);
+                  mappedChild = cloneAndReplaceKey(
+                    mappedChild,
+                    escapedPrefix + (mappedChild.key && (!_child || _child.key !== mappedChild.key) ? escapeUserProvidedKey("" + mappedChild.key) + "/" : "") + childKey
+                  );
                 }
                 array.push(mappedChild);
               }
@@ -2578,17 +2584,49 @@
             "style"
           ];
           reservedProps.forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(name, RESERVED, false, name, null, false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              RESERVED,
+              false,
+              name,
+              null,
+              false,
+              false
+            );
           });
           [["acceptCharset", "accept-charset"], ["className", "class"], ["htmlFor", "for"], ["httpEquiv", "http-equiv"]].forEach(function(_ref) {
             var name = _ref[0], attributeName = _ref[1];
-            properties[name] = new PropertyInfoRecord(name, STRING, false, attributeName, null, false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              STRING,
+              false,
+              attributeName,
+              null,
+              false,
+              false
+            );
           });
           ["contentEditable", "draggable", "spellCheck", "value"].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(name, BOOLEANISH_STRING, false, name.toLowerCase(), null, false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              BOOLEANISH_STRING,
+              false,
+              name.toLowerCase(),
+              null,
+              false,
+              false
+            );
           });
           ["autoReverse", "externalResourcesRequired", "focusable", "preserveAlpha"].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(name, BOOLEANISH_STRING, false, name, null, false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              BOOLEANISH_STRING,
+              false,
+              name,
+              null,
+              false,
+              false
+            );
           });
           [
             "allowFullScreen",
@@ -2615,7 +2653,15 @@
             "seamless",
             "itemScope"
           ].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(name, BOOLEAN, false, name.toLowerCase(), null, false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              BOOLEAN,
+              false,
+              name.toLowerCase(),
+              null,
+              false,
+              false
+            );
           });
           [
             "checked",
@@ -2623,13 +2669,29 @@
             "muted",
             "selected"
           ].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(name, BOOLEAN, true, name, null, false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              BOOLEAN,
+              true,
+              name,
+              null,
+              false,
+              false
+            );
           });
           [
             "capture",
             "download"
           ].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(name, OVERLOADED_BOOLEAN, false, name, null, false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              OVERLOADED_BOOLEAN,
+              false,
+              name,
+              null,
+              false,
+              false
+            );
           });
           [
             "cols",
@@ -2637,10 +2699,26 @@
             "size",
             "span"
           ].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(name, POSITIVE_NUMERIC, false, name, null, false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              POSITIVE_NUMERIC,
+              false,
+              name,
+              null,
+              false,
+              false
+            );
           });
           ["rowSpan", "start"].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(name, NUMERIC, false, name.toLowerCase(), null, false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              NUMERIC,
+              false,
+              name.toLowerCase(),
+              null,
+              false,
+              false
+            );
           });
           var CAMELIZE = /[\-\:]([a-z])/g;
           var capitalize = function(token) {
@@ -2722,7 +2800,15 @@
             "x-height"
           ].forEach(function(attributeName) {
             var name = attributeName.replace(CAMELIZE, capitalize);
-            properties[name] = new PropertyInfoRecord(name, STRING, false, attributeName, null, false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              STRING,
+              false,
+              attributeName,
+              null,
+              false,
+              false
+            );
           });
           [
             "xlink:actuate",
@@ -2733,7 +2819,15 @@
             "xlink:type"
           ].forEach(function(attributeName) {
             var name = attributeName.replace(CAMELIZE, capitalize);
-            properties[name] = new PropertyInfoRecord(name, STRING, false, attributeName, "http://www.w3.org/1999/xlink", false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              STRING,
+              false,
+              attributeName,
+              "http://www.w3.org/1999/xlink",
+              false,
+              false
+            );
           });
           [
             "xml:base",
@@ -2741,15 +2835,47 @@
             "xml:space"
           ].forEach(function(attributeName) {
             var name = attributeName.replace(CAMELIZE, capitalize);
-            properties[name] = new PropertyInfoRecord(name, STRING, false, attributeName, "http://www.w3.org/XML/1998/namespace", false, false);
+            properties[name] = new PropertyInfoRecord(
+              name,
+              STRING,
+              false,
+              attributeName,
+              "http://www.w3.org/XML/1998/namespace",
+              false,
+              false
+            );
           });
           ["tabIndex", "crossOrigin"].forEach(function(attributeName) {
-            properties[attributeName] = new PropertyInfoRecord(attributeName, STRING, false, attributeName.toLowerCase(), null, false, false);
+            properties[attributeName] = new PropertyInfoRecord(
+              attributeName,
+              STRING,
+              false,
+              attributeName.toLowerCase(),
+              null,
+              false,
+              false
+            );
           });
           var xlinkHref = "xlinkHref";
-          properties[xlinkHref] = new PropertyInfoRecord("xlinkHref", STRING, false, "xlink:href", "http://www.w3.org/1999/xlink", true, false);
+          properties[xlinkHref] = new PropertyInfoRecord(
+            "xlinkHref",
+            STRING,
+            false,
+            "xlink:href",
+            "http://www.w3.org/1999/xlink",
+            true,
+            false
+          );
           ["src", "href", "action", "formAction"].forEach(function(attributeName) {
-            properties[attributeName] = new PropertyInfoRecord(attributeName, STRING, false, attributeName.toLowerCase(), null, true, true);
+            properties[attributeName] = new PropertyInfoRecord(
+              attributeName,
+              STRING,
+              false,
+              attributeName.toLowerCase(),
+              null,
+              true,
+              true
+            );
           });
           var isJavaScriptProtocol = /^[\u0000-\u001F ]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\r\n\t]*r[\r\n\t]*i[\r\n\t]*p[\r\n\t]*t[\r\n\t]*\:/i;
           var didWarn = false;
@@ -4133,7 +4259,11 @@
                 return;
               }
               warnedStyleNames[name] = true;
-              error("Unsupported style property %s. Did you mean %s?", name, camelize(name.replace(msPattern$1, "ms-")));
+              error(
+                "Unsupported style property %s. Did you mean %s?",
+                name,
+                camelize(name.replace(msPattern$1, "ms-"))
+              );
             };
             var warnBadVendoredStyleName = function(name) {
               if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
@@ -10652,7 +10782,13 @@
                 }
                 case HostComponent: {
                   var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                  didNotHydrateInstance(returnFiber.type, returnFiber.memoizedProps, returnFiber.stateNode, instance, isConcurrentMode);
+                  didNotHydrateInstance(
+                    returnFiber.type,
+                    returnFiber.memoizedProps,
+                    returnFiber.stateNode,
+                    instance,
+                    isConcurrentMode
+                  );
                   break;
                 }
                 case SuspenseComponent: {
@@ -10707,13 +10843,26 @@
                       var _type = fiber.type;
                       var _props = fiber.pendingProps;
                       var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                      didNotFindHydratableInstance(parentType, parentProps, parentInstance, _type, _props, isConcurrentMode);
+                      didNotFindHydratableInstance(
+                        parentType,
+                        parentProps,
+                        parentInstance,
+                        _type,
+                        _props,
+                        isConcurrentMode
+                      );
                       break;
                     }
                     case HostText: {
                       var _text = fiber.pendingProps;
                       var _isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                      didNotFindHydratableTextInstance(parentType, parentProps, parentInstance, _text, _isConcurrentMode);
+                      didNotFindHydratableTextInstance(
+                        parentType,
+                        parentProps,
+                        parentInstance,
+                        _text,
+                        _isConcurrentMode
+                      );
                       break;
                     }
                   }
@@ -10851,7 +11000,12 @@
                   case HostRoot: {
                     var parentContainer = returnFiber.stateNode.containerInfo;
                     var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                    didNotMatchHydratedContainerTextInstance(parentContainer, textInstance, textContent, isConcurrentMode);
+                    didNotMatchHydratedContainerTextInstance(
+                      parentContainer,
+                      textInstance,
+                      textContent,
+                      isConcurrentMode
+                    );
                     break;
                   }
                   case HostComponent: {
@@ -10859,7 +11013,14 @@
                     var parentProps = returnFiber.memoizedProps;
                     var parentInstance = returnFiber.stateNode;
                     var _isConcurrentMode2 = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                    didNotMatchHydratedTextInstance(parentType, parentProps, parentInstance, textInstance, textContent, _isConcurrentMode2);
+                    didNotMatchHydratedTextInstance(
+                      parentType,
+                      parentProps,
+                      parentInstance,
+                      textInstance,
+                      textContent,
+                      _isConcurrentMode2
+                    );
                     break;
                   }
                 }
@@ -15542,7 +15703,12 @@
               if (workInProgress2.type !== workInProgress2.elementType) {
                 var innerPropTypes = Component2.propTypes;
                 if (innerPropTypes) {
-                  checkPropTypes(innerPropTypes, nextProps, "prop", getComponentNameFromType(Component2));
+                  checkPropTypes(
+                    innerPropTypes,
+                    nextProps,
+                    "prop",
+                    getComponentNameFromType(Component2)
+                  );
                 }
               }
             }
@@ -15602,7 +15768,12 @@
               {
                 var innerPropTypes = type.propTypes;
                 if (innerPropTypes) {
-                  checkPropTypes(innerPropTypes, nextProps, "prop", getComponentNameFromType(type));
+                  checkPropTypes(
+                    innerPropTypes,
+                    nextProps,
+                    "prop",
+                    getComponentNameFromType(type)
+                  );
                 }
               }
               var child = createFiberFromTypeAndProps(Component2.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
@@ -15615,7 +15786,12 @@
               var _type = Component2.type;
               var _innerPropTypes = _type.propTypes;
               if (_innerPropTypes) {
-                checkPropTypes(_innerPropTypes, nextProps, "prop", getComponentNameFromType(_type));
+                checkPropTypes(
+                  _innerPropTypes,
+                  nextProps,
+                  "prop",
+                  getComponentNameFromType(_type)
+                );
               }
             }
             var currentChild = current2.child;
@@ -15650,7 +15826,12 @@
                   }
                   var outerPropTypes = outerMemoType && outerMemoType.propTypes;
                   if (outerPropTypes) {
-                    checkPropTypes(outerPropTypes, nextProps, "prop", getComponentNameFromType(outerMemoType));
+                    checkPropTypes(
+                      outerPropTypes,
+                      nextProps,
+                      "prop",
+                      getComponentNameFromType(outerMemoType)
+                    );
                   }
                 }
               }
@@ -15763,7 +15944,12 @@
               if (workInProgress2.type !== workInProgress2.elementType) {
                 var innerPropTypes = Component2.propTypes;
                 if (innerPropTypes) {
-                  checkPropTypes(innerPropTypes, nextProps, "prop", getComponentNameFromType(Component2));
+                  checkPropTypes(
+                    innerPropTypes,
+                    nextProps,
+                    "prop",
+                    getComponentNameFromType(Component2)
+                  );
                 }
               }
             }
@@ -15833,7 +16019,12 @@
               if (workInProgress2.type !== workInProgress2.elementType) {
                 var innerPropTypes = Component2.propTypes;
                 if (innerPropTypes) {
-                  checkPropTypes(innerPropTypes, nextProps, "prop", getComponentNameFromType(Component2));
+                  checkPropTypes(
+                    innerPropTypes,
+                    nextProps,
+                    "prop",
+                    getComponentNameFromType(Component2)
+                  );
                 }
               }
             }
@@ -16048,11 +16239,22 @@
                   if (workInProgress2.type !== workInProgress2.elementType) {
                     var outerPropTypes = Component2.propTypes;
                     if (outerPropTypes) {
-                      checkPropTypes(outerPropTypes, resolvedProps, "prop", getComponentNameFromType(Component2));
+                      checkPropTypes(
+                        outerPropTypes,
+                        resolvedProps,
+                        "prop",
+                        getComponentNameFromType(Component2)
+                      );
                     }
                   }
                 }
-                child = updateMemoComponent(null, workInProgress2, Component2, resolveDefaultProps(Component2.type, resolvedProps), renderLanes2);
+                child = updateMemoComponent(
+                  null,
+                  workInProgress2,
+                  Component2,
+                  resolveDefaultProps(Component2.type, resolvedProps),
+                  renderLanes2
+                );
                 return child;
               }
             }
@@ -16464,7 +16666,12 @@
             if (!didSuspend) {
               warnIfHydrating();
               if ((workInProgress2.mode & ConcurrentMode) === NoMode) {
-                return retrySuspenseComponentWithoutHydrating(current2, workInProgress2, renderLanes2, null);
+                return retrySuspenseComponentWithoutHydrating(
+                  current2,
+                  workInProgress2,
+                  renderLanes2,
+                  null
+                );
               }
               if (isSuspenseInstanceFallback(suspenseInstance)) {
                 var digest, message, stack;
@@ -16717,7 +16924,13 @@
                     tail = lastContentRow.sibling;
                     lastContentRow.sibling = null;
                   }
-                  initSuspenseListRenderState(workInProgress2, false, tail, lastContentRow, tailMode);
+                  initSuspenseListRenderState(
+                    workInProgress2,
+                    false,
+                    tail,
+                    lastContentRow,
+                    tailMode
+                  );
                   break;
                 }
                 case "backwards": {
@@ -16735,11 +16948,23 @@
                     _tail = row;
                     row = nextRow;
                   }
-                  initSuspenseListRenderState(workInProgress2, true, _tail, null, tailMode);
+                  initSuspenseListRenderState(
+                    workInProgress2,
+                    true,
+                    _tail,
+                    null,
+                    tailMode
+                  );
                   break;
                 }
                 case "together": {
-                  initSuspenseListRenderState(workInProgress2, false, null, null, void 0);
+                  initSuspenseListRenderState(
+                    workInProgress2,
+                    false,
+                    null,
+                    null,
+                    void 0
+                  );
                   break;
                 }
                 default: {
@@ -17090,7 +17315,12 @@
                   if (workInProgress2.type !== workInProgress2.elementType) {
                     var outerPropTypes = _type2.propTypes;
                     if (outerPropTypes) {
-                      checkPropTypes(outerPropTypes, _resolvedProps3, "prop", getComponentNameFromType(_type2));
+                      checkPropTypes(
+                        outerPropTypes,
+                        _resolvedProps3,
+                        "prop",
+                        getComponentNameFromType(_type2)
+                      );
                     }
                   }
                 }
@@ -19060,7 +19290,11 @@
                   var child = firstChild;
                   while (child !== null) {
                     nextEffect = child;
-                    commitLayoutEffects_begin(child, root2, committedLanes);
+                    commitLayoutEffects_begin(
+                      child,
+                      root2,
+                      committedLanes
+                    );
                     child = child.sibling;
                   }
                   nextEffect = fiber;
@@ -21987,7 +22221,12 @@
                   delete updated[oldKey];
                 }
               } else {
-                updated[oldKey] = copyWithRenameImpl(obj[oldKey], oldPath, newPath, index2 + 1);
+                updated[oldKey] = copyWithRenameImpl(
+                  obj[oldKey],
+                  oldPath,
+                  newPath,
+                  index2 + 1
+                );
               }
               return updated;
             };
@@ -22350,7 +22589,17 @@
                   originalCallback.call(instance);
                 };
               }
-              var root2 = createHydrationContainer(initialChildren, callback, container, LegacyRoot, null, false, false, "", noopOnRecoverableError);
+              var root2 = createHydrationContainer(
+                initialChildren,
+                callback,
+                container,
+                LegacyRoot,
+                null,
+                false,
+                false,
+                "",
+                noopOnRecoverableError
+              );
               container._reactRootContainer = root2;
               markContainerAsRoot(root2.current, container);
               var rootContainerElement = container.nodeType === COMMENT_NODE ? container.parentNode : container;
@@ -22369,7 +22618,15 @@
                   _originalCallback.call(instance);
                 };
               }
-              var _root = createContainer(container, LegacyRoot, null, false, false, "", noopOnRecoverableError);
+              var _root = createContainer(
+                container,
+                LegacyRoot,
+                null,
+                false,
+                false,
+                "",
+                noopOnRecoverableError
+              );
               container._reactRootContainer = _root;
               markContainerAsRoot(_root.current, container);
               var _rootContainerElement = container.nodeType === COMMENT_NODE ? container.parentNode : container;
@@ -22891,7 +23148,9 @@
               var error;
               try {
                 if (typeof typeSpecs[typeSpecName] !== "function") {
-                  var err = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                  var err = Error(
+                    (componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`."
+                  );
                   err.name = "Invariant Violation";
                   throw err;
                 }
@@ -22900,12 +23159,16 @@
                 error = ex;
               }
               if (error && !(error instanceof Error)) {
-                printWarning((componentName || "React class") + ": type specification of " + location + " `" + typeSpecName + "` is invalid; the type checker function must return `null` or an `Error` but returned a " + typeof error + ". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).");
+                printWarning(
+                  (componentName || "React class") + ": type specification of " + location + " `" + typeSpecName + "` is invalid; the type checker function must return `null` or an `Error` but returned a " + typeof error + ". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument)."
+                );
               }
               if (error instanceof Error && !(error.message in loggedTypeFailures)) {
                 loggedTypeFailures[error.message] = true;
                 var stack = getStack ? getStack() : "";
-                printWarning("Failed " + location + " type: " + error.message + (stack != null ? stack : ""));
+                printWarning(
+                  "Failed " + location + " type: " + error.message + (stack != null ? stack : "")
+                );
               }
             }
           }
@@ -23000,13 +23263,17 @@
             propFullName = propFullName || propName;
             if (secret !== ReactPropTypesSecret) {
               if (throwOnDirectAccess) {
-                var err = new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types");
+                var err = new Error(
+                  "Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types"
+                );
                 err.name = "Invariant Violation";
                 throw err;
               } else if (typeof console !== "undefined") {
                 var cacheKey = componentName + ":" + propName;
                 if (!manualPropTypeCallCache[cacheKey] && manualPropTypeWarningCount < 3) {
-                  printWarning("You are manually calling a React.PropTypes validation function for the `" + propFullName + "` prop on `" + componentName + "`. This is deprecated and will throw in the standalone `prop-types` package. You may be seeing this warning due to a third-party PropTypes library. See https://fb.me/react-warning-dont-call-proptypes for details.");
+                  printWarning(
+                    "You are manually calling a React.PropTypes validation function for the `" + propFullName + "` prop on `" + componentName + "`. This is deprecated and will throw in the standalone `prop-types` package. You may be seeing this warning due to a third-party PropTypes library. See https://fb.me/react-warning-dont-call-proptypes for details."
+                  );
                   manualPropTypeCallCache[cacheKey] = true;
                   manualPropTypeWarningCount++;
                 }
@@ -23034,7 +23301,10 @@
             var propType = getPropType(propValue);
             if (propType !== expectedType) {
               var preciseType = getPreciseType(propValue);
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + preciseType + "` supplied to `" + componentName + "`, expected ") + ("`" + expectedType + "`."), { expectedType });
+              return new PropTypeError(
+                "Invalid " + location + " `" + propFullName + "` of type " + ("`" + preciseType + "` supplied to `" + componentName + "`, expected ") + ("`" + expectedType + "`."),
+                { expectedType }
+              );
             }
             return null;
           }
@@ -23100,7 +23370,9 @@
           if (!Array.isArray(expectedValues)) {
             if (true) {
               if (arguments.length > 1) {
-                printWarning("Invalid arguments supplied to oneOf, expected an array, got " + arguments.length + " arguments. A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).");
+                printWarning(
+                  "Invalid arguments supplied to oneOf, expected an array, got " + arguments.length + " arguments. A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z])."
+                );
               } else {
                 printWarning("Invalid argument supplied to oneOf, expected an array.");
               }
@@ -23155,7 +23427,9 @@
           for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
             var checker = arrayOfTypeCheckers[i];
             if (typeof checker !== "function") {
-              printWarning("Invalid argument supplied to oneOfType. Expected an array of check functions, but received " + getPostfixForTypeWarning(checker) + " at index " + i + ".");
+              printWarning(
+                "Invalid argument supplied to oneOfType. Expected an array of check functions, but received " + getPostfixForTypeWarning(checker) + " at index " + i + "."
+              );
               return emptyFunctionThatReturnsNull;
             }
           }
@@ -23186,7 +23460,9 @@
           return createChainableTypeChecker(validate);
         }
         function invalidValidatorError(componentName, location, propFullName, key, type) {
-          return new PropTypeError((componentName || "React class") + ": " + location + " type `" + propFullName + "." + key + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + type + "`.");
+          return new PropTypeError(
+            (componentName || "React class") + ": " + location + " type `" + propFullName + "." + key + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + type + "`."
+          );
         }
         function createShapeTypeChecker(shapeTypes) {
           function validate(props, propName, componentName, location, propFullName) {
@@ -23223,7 +23499,9 @@
                 return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
               }
               if (!checker) {
-                return new PropTypeError("Invalid " + location + " `" + propFullName + "` key `" + key + "` supplied to `" + componentName + "`.\nBad object: " + JSON.stringify(props[propName], null, "  ") + "\nValid keys: " + JSON.stringify(Object.keys(shapeTypes), null, "  "));
+                return new PropTypeError(
+                  "Invalid " + location + " `" + propFullName + "` key `" + key + "` supplied to `" + componentName + "`.\nBad object: " + JSON.stringify(props[propName], null, "  ") + "\nValid keys: " + JSON.stringify(Object.keys(shapeTypes), null, "  ")
+                );
               }
               var error = checker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
               if (error) {
