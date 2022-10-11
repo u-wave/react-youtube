@@ -17,7 +17,7 @@
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "@babel/register": "^7.8.3",
-    "@rollup/plugin-babel": "^5.0.4",
+    "@rollup/plugin-babel": "^6.0.0",
     "@u-wave/react-youtube-example": "file:example",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.0",
