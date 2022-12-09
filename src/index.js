@@ -308,7 +308,16 @@ if (process.env.NODE_ENV !== 'production') {
      */
     paused: PropTypes.bool,
 
+    /**
+     * YouTube host to use: 'https://www.youtube.com' or 'https://www.youtube-nocookie.com'.
+     *
+     * @default 'https://www.youtube.com'
+     */
     host: PropTypes.string,
+
+    /**
+     * The YouTube API will usually default this value correctly. It is exposed for completeness.
+     */
     origin: PropTypes.string,
 
     // Player parameters
