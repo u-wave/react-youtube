@@ -562,34 +562,34 @@ if (process.env.NODE_ENV !== 'production') {
     /**
      * Sent when the YouTube player API has loaded.
      */
-    onReady: PropTypes.func,
+    onReady: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.PlayerEvent>>,
     /**
      * Sent when the player triggers an error.
      */
-    onError: PropTypes.func,
+    onError: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnErrorEvent>>,
     /**
      * Sent when the video is cued and ready to play.
      */
-    onCued: PropTypes.func,
+    onCued: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnStateChangeEvent>>,
     /**
      * Sent when the video is buffering.
      */
-    onBuffering: PropTypes.func,
+    onBuffering: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnStateChangeEvent>>,
     /**
      * Sent when playback has been started or resumed.
      */
-    onPlaying: PropTypes.func,
+    onPlaying: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnStateChangeEvent>>,
     /**
      * Sent when playback has been paused.
      */
-    onPause: PropTypes.func,
+    onPause: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnStateChangeEvent>>,
     /**
      * Sent when playback has stopped.
      */
-    onEnd: PropTypes.func,
-    onStateChange: PropTypes.func,
-    onPlaybackRateChange: PropTypes.func,
-    onPlaybackQualityChange: PropTypes.func,
+    onEnd: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnStateChangeEvent>>,
+    onStateChange: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnStateChangeEvent>>,
+    onPlaybackRateChange: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnPlaybackRateChangeEvent>>,
+    onPlaybackQualityChange: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnPlaybackQualityChangeEvent>>,
   };
 }
 
