@@ -20,7 +20,7 @@ const CUED = 5;
 
 export interface YouTubeOptions {
   /** An 11-character string representing a YouTube video ID. */
-  video?: string;
+  video?: string | null;
   /** Width of the player element. */
   width?: number | string;
   /** Height of the player element. */

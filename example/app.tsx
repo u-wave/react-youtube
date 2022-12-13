@@ -1,7 +1,6 @@
-/* eslint-env browser */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import YouTube from '@u-wave/react-youtube'; // eslint-disable-line import/no-unresolved
+import YouTube from '@u-wave/react-youtube';
 
 const {
   useCallback,
@@ -15,25 +14,26 @@ const videos = [
   { id: null, name: '<none>' },
 ];
 
-const hashVideoRx = /^#!\/video\/(\d)$/;
-const hash = typeof window.location !== 'undefined'
-  ? window.location.hash : ''; // eslint-disable-line no-undef
-const defaultVideo = hashVideoRx.test(hash)
-  ? parseInt(hash.replace(hashVideoRx, '$1'), 10)
-  : 0;
+function getInitialVideo() {
+  const hashVideoRx = /^#!\/video\/(\d)$/;
+  const hash = typeof window.location !== 'undefined' ? window.location.hash : '';
+  return hashVideoRx.test(hash)
+    ? parseInt(hash.replace(hashVideoRx, '$1'), 10)
+    : 0;
+}
 
 function App() {
-  const [videoIndex, setVideoIndex] = useState(defaultVideo);
+  const [videoIndex, setVideoIndex] = useState(getInitialVideo);
   const [volume, setVolume] = useState(1);
   const [paused, setPaused] = useState(false);
 
   const video = videos[videoIndex];
 
-  function selectVideo(index) {
+  function selectVideo(index: number) {
     setVideoIndex(index);
   }
 
-  const handlePause = useCallback((event) => {
+  const handlePause = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setPaused(event.target.checked);
   }, []);
 
@@ -45,7 +45,7 @@ function App() {
     setPaused(false);
   }, []);
 
-  const handleVolume = useCallback((event) => {
+  const handleVolume = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setVolume(parseFloat(event.target.value));
   }, []);
 
