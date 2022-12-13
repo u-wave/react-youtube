@@ -9,7 +9,7 @@ import { act } from 'react-dom/test-utils';
 import env from 'min-react-env';
 import createYouTube from './createYouTube';
 
-Object.assign(global, env);
+Object.assign(globalThis, env);
 
 async function render(initialProps) {
   const { YouTube, sdkMock, playerMock } = createYouTube();

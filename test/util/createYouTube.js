@@ -1,46 +1,52 @@
-import { createSpy } from 'expect';
-import proxyquire from 'proxyquire';
+import { vi } from 'vitest';
+import YouTube from '../../src/index.tsx';
+
+vi.mock('../../src/loadSdk.ts', () => ({
+  default(callback) {
+    setImmediate(() => callback(globalThis.YT));
+  },
+}));
 
 export default function createYouTube() {
   let isPaused = true;
 
   const iframeMock = {
-    setId: createSpy(),
-    setClassName: createSpy(),
+    setId: vi.fn(),
+    setClassName: vi.fn(),
     set className(className) {
       iframeMock.setClassName(className);
     },
   };
 
   const playerMock = {
-    addEventListener: createSpy().andCall((eventName, fn) => {
+    addEventListener: vi.fn((eventName, fn) => {
       if (eventName === 'onReady') fn({ target: playerMock });
     }),
-    removeEventListener: createSpy(),
-    mute: createSpy(),
-    unMute: createSpy(),
-    setVolume: createSpy(),
-    setPlaybackRate: createSpy(),
-    loadVideoById: createSpy(),
-    cueVideoById: createSpy(),
-    playVideo: createSpy().andCall(() => {
+    removeEventListener: vi.fn(),
+    mute: vi.fn(),
+    unMute: vi.fn(),
+    setVolume: vi.fn(),
+    setPlaybackRate: vi.fn(),
+    loadVideoById: vi.fn(),
+    cueVideoById: vi.fn(),
+    playVideo: vi.fn(() => {
       isPaused = false;
     }),
-    pauseVideo: createSpy().andCall(() => {
+    pauseVideo: vi.fn(() => {
       isPaused = true;
     }),
-    stopVideo: createSpy(),
+    stopVideo: vi.fn(),
     getPlayerState() {
       return isPaused ? 2 : 1;
     },
     getIframe() {
       return iframeMock;
     },
-    setSize: createSpy(),
+    setSize: vi.fn(),
   };
 
   const sdkMock = {
-    Player: createSpy().andCall((container, options) => {
+    Player: vi.fn((container, options) => {
       isPaused = !options.playerVars.autoplay;
 
       if (options.events && options.events.onReady) {
@@ -53,14 +59,7 @@ export default function createYouTube() {
     }),
   };
 
-  const YouTube = proxyquire('../../src/index.tsx', {
-    './loadSdk': {
-      default(callback) {
-        global.YT = sdkMock;
-        setImmediate(() => callback(sdkMock));
-      },
-    },
-  }).default;
+  globalThis.YT = sdkMock;
 
   return { YouTube, sdkMock, playerMock };
 }

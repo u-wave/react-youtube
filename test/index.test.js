@@ -1,13 +1,17 @@
-import expect from 'expect';
+import { describe, it, afterEach, vi, expect } from 'vitest';
 import render from './util/render';
 
 describe('YouTube', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it('should create a YouTube player when mounted', async () => {
     const { sdkMock } = await render({
       video: 'x2y5kyu',
     });
     expect(sdkMock.Player).toHaveBeenCalled();
-    expect(sdkMock.Player.calls[0].arguments[1]).toMatch({ videoId: 'x2y5kyu' });
+    expect(sdkMock.Player.calls[0][1]).toMatchObject({ videoId: 'x2y5kyu' });
   });
 
   it('should load a different video when "video" prop changes', async () => {
@@ -15,14 +19,14 @@ describe('YouTube', () => {
       video: 'x2y5kyu',
     });
     expect(sdkMock.Player).toHaveBeenCalled();
-    expect(sdkMock.Player.calls[0].arguments[1]).toMatch({
+    expect(sdkMock.Player.calls[0][1]).toMatchObject({
       videoId: 'x2y5kyu',
     });
 
     await rerender({ video: 'x3pn5cb' });
 
     expect(playerMock.cueVideoById).toHaveBeenCalled();
-    expect(playerMock.cueVideoById.calls[0].arguments[0]).toMatch({
+    expect(playerMock.cueVideoById.calls[0][0]).toMatchObject({
       videoId: 'x3pn5cb',
     });
   });
@@ -31,7 +35,7 @@ describe('YouTube', () => {
     const { sdkMock, playerMock, rerender } = await render({
       video: 'ZuuVjuLNvFY',
     });
-    expect(sdkMock.Player.calls[0].arguments[1]).toMatch({
+    expect(sdkMock.Player.calls[0][1]).toMatchObject({
       videoId: 'ZuuVjuLNvFY',
     });
 
@@ -49,7 +53,7 @@ describe('YouTube', () => {
 
     // Don't call `play` again when we were already playing
     await rerender({ paused: false });
-    expect(playerMock.playVideo).toNotHaveBeenCalled();
+    expect(playerMock.playVideo).not.toHaveBeenCalled();
 
     await rerender({ paused: true });
     expect(playerMock.pauseVideo).toHaveBeenCalled();
@@ -91,7 +95,7 @@ describe('YouTube', () => {
       width: 640,
       height: 320,
     });
-    expect(sdkMock.Player.calls[0].arguments[1]).toMatch({
+    expect(sdkMock.Player.calls[0][1]).toMatchObject({
       width: 640,
       height: 320,
     });
@@ -111,7 +115,7 @@ describe('YouTube', () => {
       endSeconds: 60,
     });
 
-    expect(sdkMock.Player.calls[0].arguments[1]).toMatch({
+    expect(sdkMock.Player.calls[0][1]).toMatchObject({
       videoId: 'pRKqlw0DaDI',
       playerVars: {
         start: 30,
@@ -126,7 +130,7 @@ describe('YouTube', () => {
     });
 
     expect(playerMock.cueVideoById).toHaveBeenCalled();
-    expect(playerMock.cueVideoById.calls[0].arguments[0]).toMatch({
+    expect(playerMock.cueVideoById.calls[0][0]).toMatchObject({
       videoId: 'hlk7o5T56iw',
       startSeconds: 40,
       endSeconds: undefined,
@@ -140,7 +144,7 @@ describe('YouTube', () => {
     await rerender({ video: 'x3pn5cb' });
 
     expect(playerMock.cueVideoById).toHaveBeenCalled();
-    expect(playerMock.loadVideoById).toNotHaveBeenCalled();
+    expect(playerMock.loadVideoById).not.toHaveBeenCalled();
 
     playerMock.cueVideoById.reset();
 
@@ -149,7 +153,7 @@ describe('YouTube', () => {
       video: 'r6534246435',
     });
 
-    expect(playerMock.cueVideoById).toNotHaveBeenCalled();
+    expect(playerMock.cueVideoById).not.toHaveBeenCalled();
     expect(playerMock.loadVideoById).toHaveBeenCalled();
   });
 });
