@@ -62,7 +62,7 @@
   "scripts": {
     "build": "tsup src/index.tsx --format esm,cjs --dts",
     "docs": "prop-types-table src/index.js | md-insert README.md --header Props -i",
-    "example": "npm run --prefix example build && npm run --prefix example start",
+    "example": "npm run --prefix example start",
     "prepare": "npm run build",
     "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",
     "test": "npm run tests-only && npm run lint",

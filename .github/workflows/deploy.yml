@@ -18,16 +18,13 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Build example
-        run: |
-          npm run --prefix example build
-          mkdir _deploy
-          cp example/bundle.js example/index.html _deploy
+        run: npm run --prefix example build
       - name: Publish site
         if: success()
         uses: crazy-max/ghaction-github-pages@v1
         with:
           target_branch: gh-pages
-          build_dir: _deploy
+          build_dir: example/dist
           keep_history: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
