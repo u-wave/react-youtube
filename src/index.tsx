@@ -1,4 +1,3 @@
-// @ts-check
 /* global YT, window */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -19,15 +18,172 @@ const PAUSED = 2;
 const BUFFERING = 3;
 const CUED = 5;
 
+export interface YouTubeOptions {
+  /** An 11-character string representing a YouTube video ID. */
+  video?: string;
+  /** Width of the player element. */
+  width?: number | string;
+  /** Height of the player element. */
+  height?: number | string;
+
+  /**
+   * YouTube host to use: 'https://www.youtube.com' or 'https://www.youtube-nocookie.com'.
+   *
+   * @default 'https://www.youtube.com'
+   */
+  host?: string;
+
+  /** The YouTube API will usually default this value correctly. It is exposed for completeness. */
+  origin?: string;
+
+  /** Pause the video. */
+  paused?: boolean;
+
+  // Player parameters
+
+  /**
+   * Whether the video should start playing automatically.
+   *
+   * https://developers.google.com/youtube/player_parameters#autoplay
+   *
+   * @default false
+   */
+  autoplay?: boolean;
+  /**
+   * Whether to show captions below the video.
+   *
+   * https://developers.google.com/youtube/player_parameters#cc_load_policy
+   *
+   * @default false
+   */
+  showCaptions?: boolean;
+  /**
+   * Whether to show video controls.
+   *
+   * https://developers.google.com/youtube/player_parameters#controls
+   *
+   * @default true
+   */
+  controls?: boolean;
+  /**
+   * Ignore keyboard controls.
+   *
+   * https://developers.google.com/youtube/player_parameters#disablekb
+   *
+   * @default false
+   */
+  disableKeyboard?: boolean;
+  /**
+   * Whether to display the fullscreen button.
+   *
+   * https://developers.google.com/youtube/player_parameters#fs
+   *
+   * @default true
+   */
+  allowFullscreen?: boolean;
+  /**
+   * The player's interface language. The parameter value is an ISO 639-1
+   * two-letter language code or a fully specified locale.
+   *
+   * https://developers.google.com/youtube/player_parameters#hl
+   */
+  lang?: string;
+  /**
+   * Whether to show annotations on top of the video.
+   *
+   * https://developers.google.com/youtube/player_parameters#iv_load_policy
+   *
+   * @default true
+   */
+  annotations?: boolean;
+  /**
+   * Time in seconds at which to start playing the video.
+   *
+   * https://developers.google.com/youtube/player_parameters#start
+   */
+  startSeconds?: number;
+  /**
+   * Time in seconds at which to stop playing the video.
+   *
+   * https://developers.google.com/youtube/player_parameters#end
+   */
+  endSeconds?: number;
+  /**
+   * Remove most YouTube logos from the player.
+   *
+   * https://developers.google.com/youtube/player_parameters#modestbranding
+   *
+   * @default false
+   */
+  modestBranding?: boolean;
+  /**
+   * Whether to play the video inline on iOS, instead of fullscreen.
+   *
+   * https://developers.google.com/youtube/player_parameters#playsinline
+   *
+   * @default false
+   */
+  playsInline?: boolean;
+  /**
+   * Whether to show related videos after the video is over.
+   *
+   * https://developers.google.com/youtube/player_parameters#rel
+   *
+   * @default true
+   */
+  showRelatedVideos?: boolean;
+
+  /** The playback volume, **as a number between 0 and 1**. */
+  volume?: number;
+
+  /** Whether the video's sound should be muted. */
+  muted?: boolean;
+
+  /**
+   * Playback speed.
+   *
+   * https://developers.google.com/youtube/iframe_api_reference#setPlaybackRate
+   */
+  playbackRate?: number;
+
+  /** Sent when the YouTube player API has loaded. */
+  onReady?: YT.PlayerEventHandler<YT.PlayerEvent>;
+  /** Sent when the player triggers an error. */
+  onError?: YT.PlayerEventHandler<YT.OnErrorEvent>;
+  /** Sent when the video is cued and ready to play. */
+  onCued?: YT.PlayerEventHandler<YT.OnStateChangeEvent>;
+  /** Sent when the video is buffering. */
+  onBuffering?: YT.PlayerEventHandler<YT.OnStateChangeEvent>;
+  /** Sent when playback has been started or resumed. */
+  onPlaying?: YT.PlayerEventHandler<YT.OnStateChangeEvent>;
+  /** Sent when playback has been paused. */
+  onPause?: YT.PlayerEventHandler<YT.OnStateChangeEvent>;
+  /** Sent when playback has stopped. */
+  onEnd?: YT.PlayerEventHandler<YT.OnStateChangeEvent>;
+  onStateChange?: YT.PlayerEventHandler<YT.OnStateChangeEvent>;
+  onPlaybackRateChange?: YT.PlayerEventHandler<YT.OnPlaybackRateChangeEvent>;
+  onPlaybackQualityChange?: YT.PlayerEventHandler<YT.OnPlaybackQualityChangeEvent>;
+}
+
+export interface YouTubeProps extends YouTubeOptions {
+  /**
+   * DOM ID for the player element.
+   */
+  id?: string;
+  /**
+   * CSS className for the player element.
+   */
+  className?: string;
+  /**
+  * Inline style for player element.
+  */
+  style?: React.CSSProperties;
+}
+
 /**
  * Attach an event listener to a YouTube player.
- *
- * @template {keyof YT.Events} K
- * @param {YT.Player|null} player
- * @param {K} event
- * @param {YT.Events[K]} handler
  */
-function useEventHandler(player, event, handler) {
+function useEventHandler<K extends keyof YT.Events>(player: YT.Player|null, event: K, handler: YT.Events[K]) {
   useEffect(() => {
     if (handler && player) {
       player.addEventListener(event, handler);
@@ -42,10 +198,6 @@ function useEventHandler(player, event, handler) {
   }, [player, event, handler]);
 }
 
-/**
- * @param {import('../index').YouTubeOptions} options
- * @return {YT.PlayerVars}
- */
 function getPlayerVars({
   startSeconds,
   endSeconds,
@@ -61,7 +213,7 @@ function getPlayerVars({
   playsInline = false,
   showRelatedVideos = true,
   origin = typeof window.location === 'object' ? window.location.origin : undefined,
-}) {
+}: YouTubeOptions): YT.PlayerVars {
   return {
     autoplay: autoplay ? 1 : 0,
     cc_load_policy: showCaptions ? 1 : 0,
@@ -80,11 +232,7 @@ function getPlayerVars({
   };
 }
 
-/**
- * @param {React.RefObject<HTMLElement>} container
- * @param {import('../index').YouTubeOptions} options
- */
-function useYouTube(container, options) {
+function useYouTube(container: React.RefObject<HTMLElement>, options: YouTubeOptions) {
   const {
     video,
     startSeconds,
@@ -110,9 +258,8 @@ function useYouTube(container, options) {
 
   // Storing the player in the very first hook makes it easier to
   // find in React DevTools :)
-  const [player, setPlayer] = useState(/** @type {YT.Player | null} */ (null));
-  /** @type {React.MutableRefObject<() => YT.Player>} */
-  const createPlayer = useRef(null);
+  const [player, setPlayer] = useState<YT.Player|null>(null);
+  const createPlayer = useRef<() => YT.Player>(null);
   const firstRender = useRef(true);
 
   // Stick the player initialisation in a ref so it has the most recent props values
@@ -133,8 +280,7 @@ function useYouTube(container, options) {
   }
 
   useLayoutEffect(() => {
-    /** @type {YT.Player|null} */
-    let instance = null;
+    let instance: YT.Player|null = null;
     let cancelled = false;
 
     loadSdk(() => {
@@ -156,7 +302,7 @@ function useYouTube(container, options) {
     };
   }, []);
 
-  const handlePlayerStateChange = useCallback((event) => {
+  const handlePlayerStateChange = useCallback((event: YT.OnStateChangeEvent) => {
     switch (event.data) {
       case CUED:
         onCued(event);
@@ -188,7 +334,7 @@ function useYouTube(container, options) {
   useEffect(() => {
     // We pretend to be a bit smarter than the typescript definitions here, since
     // YouTube teeeechnically supports strings like '100%' too.
-    player?.setSize(/** @type {number} */ (width), /** @type {number} */ (height));
+    player?.setSize(width as number, height as number);
   }, [player, width, height]);
 
   useEffect(() => {
@@ -249,15 +395,13 @@ function useYouTube(container, options) {
   return player;
 }
 
-/** @param {import('../index').YouTubeProps} props */
 function YouTube({
   id,
   className,
   style,
   ...options
-}) {
-  /** @type {React.RefObject<HTMLDivElement>} */
-  const container = useRef(null);
+}: YouTubeProps) {
+  const container = useRef<HTMLDivElement>(null);
   useYouTube(container, options);
 
   return (

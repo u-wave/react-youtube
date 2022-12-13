@@ -1,4 +1,4 @@
-/* global YT, document */
+/// <reference lib="youtube" />
 
 function loadSdk() {
   return new Promise((resolve, reject) => {
@@ -21,8 +21,7 @@ function loadSdk() {
 }
 
 let sdk = null;
-/** @param {() => void} callback */
-export default function getSdk(callback) {
+export default function getSdk(callback: () => void) {
   if (typeof YT === 'object' && typeof YT.ready === 'function') {
     // A YouTube SDK is already loaded, so reuse that
     YT.ready(callback);

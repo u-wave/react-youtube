@@ -7,18 +7,15 @@
     "url": "https://github.com/u-wave/react-youtube/issues"
   },
   "dependencies": {
+    "@types/prop-types": "^15.7.5",
     "@types/react": "^17.0.0 || ^18.0.0",
     "@types/youtube": "0.0.47",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "@babel/preset-react": "^7.8.3",
-    "@babel/register": "^7.8.3",
-    "@rollup/plugin-babel": "^6.0.0",
+    "@types/node": "^18.11.14",
     "@u-wave/react-youtube-example": "file:example",
+    "esbuild-register": "^3.4.1",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.0",
     "eslint-plugin-import": "^2.22.0",
@@ -33,8 +30,8 @@
     "proxyquire": "^2.1.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "rollup": "^3.2.5",
-    "tsd": "^0.25.0"
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4"
   },
   "homepage": "https://github.com/u-wave/react-youtube#readme",
   "keywords": [
@@ -45,15 +42,16 @@
     "youtube"
   ],
   "license": "MIT",
-  "main": "./dist/react-youtube.js",
-  "module": "./dist/react-youtube.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "require": "./dist/react-youtube.js",
-      "import": "./dist/react-youtube.mjs"
-    }
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
   },
-  "types": "index.d.ts",
+  "types": "./dist/index.d.ts",
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0"
   },
@@ -62,15 +60,14 @@
     "url": "git+https://github.com/u-wave/react-youtube.git"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "tsup src/index.tsx --format esm,cjs --dts",
     "docs": "prop-types-table src/index.js | md-insert README.md --header Props -i",
     "example": "npm run --prefix example build && npm run --prefix example start",
     "prepare": "npm run build",
     "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",
-    "test": "npm run tsd && npm run tests-only && npm run lint",
+    "test": "npm run tests-only && npm run lint",
     "lint": "eslint --fix .",
-    "tests-only": "mocha --require @babel/register test/*.js",
-    "tsd": "tsd"
+    "tests-only": "mocha --require esbuild-register test/*.js"
   },
   "sideEffects": false
 }
