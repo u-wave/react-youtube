@@ -2,7 +2,7 @@
   "compilerOptions": {
     "lib": ["dom", "es2020"],
     "noEmit": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "skipLibCheck": true
   },
