@@ -183,7 +183,11 @@ export interface YouTubeProps extends YouTubeOptions {
 /**
  * Attach an event listener to a YouTube player.
  */
-function useEventHandler<K extends keyof YT.Events>(player: YT.Player|null, event: K, handler: YT.Events[K]) {
+function useEventHandler<K extends keyof YT.Events>(
+  player: YT.Player | null,
+  event: K,
+  handler: YT.Events[K],
+) {
   useEffect(() => {
     if (handler && player) {
       player.addEventListener(event, handler);
@@ -258,7 +262,7 @@ function useYouTube(container: React.RefObject<HTMLElement>, options: YouTubeOpt
 
   // Storing the player in the very first hook makes it easier to
   // find in React DevTools :)
-  const [player, setPlayer] = useState<YT.Player|null>(null);
+  const [player, setPlayer] = useState<YT.Player | null>(null);
   const createPlayer = useRef<() => YT.Player>(null);
   const firstRender = useRef(true);
 
@@ -280,7 +284,7 @@ function useYouTube(container: React.RefObject<HTMLElement>, options: YouTubeOpt
   }
 
   useLayoutEffect(() => {
-    let instance: YT.Player|null = null;
+    let instance: YT.Player | null = null;
     let cancelled = false;
 
     loadSdk(() => {
@@ -574,11 +578,15 @@ if (process.env.NODE_ENV !== 'production') {
     /**
      * Sent when the video is buffering.
      */
-    onBuffering: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnStateChangeEvent>>,
+    onBuffering: PropTypes.func as PropTypes.Requireable<
+    YT.PlayerEventHandler<YT.OnStateChangeEvent>
+    >,
     /**
      * Sent when playback has been started or resumed.
      */
-    onPlaying: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnStateChangeEvent>>,
+    onPlaying: PropTypes.func as PropTypes.Requireable<
+    YT.PlayerEventHandler<YT.OnStateChangeEvent>
+    >,
     /**
      * Sent when playback has been paused.
      */
@@ -587,9 +595,15 @@ if (process.env.NODE_ENV !== 'production') {
      * Sent when playback has stopped.
      */
     onEnd: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnStateChangeEvent>>,
-    onStateChange: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnStateChangeEvent>>,
-    onPlaybackRateChange: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnPlaybackRateChangeEvent>>,
-    onPlaybackQualityChange: PropTypes.func as PropTypes.Requireable<YT.PlayerEventHandler<YT.OnPlaybackQualityChangeEvent>>,
+    onStateChange: PropTypes.func as PropTypes.Requireable<
+    YT.PlayerEventHandler<YT.OnStateChangeEvent>
+    >,
+    onPlaybackRateChange: PropTypes.func as PropTypes.Requireable<
+    YT.PlayerEventHandler<YT.OnPlaybackRateChangeEvent>
+    >,
+    onPlaybackQualityChange: PropTypes.func as PropTypes.Requireable<
+    YT.PlayerEventHandler<YT.OnPlaybackQualityChangeEvent>
+    >,
   };
 }
 

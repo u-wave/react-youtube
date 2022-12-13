@@ -236,7 +236,7 @@ function Example() {
 }
 
 function App() {
-  return(
+  return (
     <>
       <Nav>
         <LogoLink href="https://u-wave.net">
@@ -252,9 +252,15 @@ function App() {
         <Header>
           <H1>@u-wave/react-youtube example</H1>
           <p>
-            An example YouTube player using <Link href="https://facebook.github.io/react">React</Link>
-            {' '}and <Link href="https://github.com/u-wave/react-youtube">@u-wave/react-youtube</Link>.
-            {' '}<Link href="https://github.com/u-wave/react-youtube/tree/default/example">view source</Link>
+            An example YouTube player using
+            {' '}
+            <Link href="https://facebook.github.io/react">React</Link>
+            {' '}
+            and
+            <Link href="https://github.com/u-wave/react-youtube">@u-wave/react-youtube</Link>
+            .
+            {' '}
+            <Link href="https://github.com/u-wave/react-youtube/tree/default/example">view source</Link>
           </p>
         </Header>
         <Example />

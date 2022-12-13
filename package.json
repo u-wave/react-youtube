@@ -14,9 +14,12 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.14",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
     "@u-wave/react-youtube-example": "file:example",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.3",
@@ -65,7 +68,7 @@
     "prepare": "npm run build",
     "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",
     "test": "npm run tests-only && npm run lint",
-    "lint": "eslint --fix .",
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
     "tests-only": "vitest run"
   },
   "sideEffects": false

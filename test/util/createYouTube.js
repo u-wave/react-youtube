@@ -3,7 +3,7 @@ import YouTube from '../../src/index.tsx';
 
 vi.mock('../../src/loadSdk.ts', () => ({
   default(callback) {
-    setImmediate(() => callback(globalThis.YT));
+    setImmediate(() => callback(global.YT));
   },
 }));
 
@@ -59,7 +59,7 @@ export default function createYouTube() {
     }),
   };
 
-  globalThis.YT = sdkMock;
+  global.YT = sdkMock;
 
   return { YouTube, sdkMock, playerMock };
 }

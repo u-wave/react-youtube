@@ -1,4 +1,6 @@
-import { describe, it, afterEach, vi, expect } from 'vitest';
+import {
+  describe, it, afterEach, vi, expect,
+} from 'vitest';
 import render from './util/render';
 
 describe('YouTube', () => {
