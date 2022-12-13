@@ -53,7 +53,7 @@ export default function createYouTube() {
     }),
   };
 
-  const YouTube = proxyquire('../../src/index.js', {
+  const YouTube = proxyquire('../../src/index.tsx', {
     './loadSdk': {
       default(callback) {
         global.YT = sdkMock;
