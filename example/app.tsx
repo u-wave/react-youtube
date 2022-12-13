@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import YouTube from '@u-wave/react-youtube';
 
 const {
@@ -29,10 +29,6 @@ function App() {
 
   const video = videos[videoIndex];
 
-  function selectVideo(index: number) {
-    setVideoIndex(index);
-  }
-
   const handlePause = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setPaused(event.target.checked);
   }, []);
@@ -61,7 +57,7 @@ function App() {
               key={choice.id}
               href={`#!/video/${index}`}
               className={`collection-item ${video === choice ? 'active' : ''}`}
-              onClick={() => selectVideo(index)}
+              onClick={() => setVideoIndex(index)}
             >
               {choice.name}
             </a>
@@ -110,4 +106,5 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('example'));
+const root = createRoot(document.getElementById('example'));
+root.render(<App />);
