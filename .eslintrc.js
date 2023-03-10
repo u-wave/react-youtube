@@ -1,12 +1,11 @@
 module.exports = {
   extends: 'airbnb',
+  parserOptions: {
+    ecmaVersion: 2021,
+  },
   rules: {
     // I disagree
-    'react/jsx-filename-extension': 'off',
-    // I disagree
     'react/require-default-props': 'off',
-    // Our babel config doesn't support class properties
-    'react/state-in-constructor': 'off',
     // I disagree
     'react/function-component-definition': ['error', {
       namedComponents: 'function-declaration',
@@ -21,4 +20,13 @@ module.exports = {
       allowChildren: false,
     }],
   },
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      extends: ['airbnb-typescript'],
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+    },
+  ],
 };

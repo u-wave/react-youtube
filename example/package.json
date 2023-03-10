@@ -5,14 +5,15 @@
   "version": "0.0.0-example",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild --bundle app.js --loader:.js=jsx > bundle.js",
-    "start": "serve ."
+    "build": "vite build",
+    "start": "vite"
   },
   "dependencies": {
+    "@stitches/react": "^1.2.8",
     "@u-wave/react-youtube": "file:..",
-    "esbuild": "^0.14.0",
+    "@vitejs/plugin-react": "^3.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "serve": "^13.0.0"
+    "vite": "^4.0.1"
   }
 }

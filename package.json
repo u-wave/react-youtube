@@ -1,42 +1,37 @@
 {
   "name": "@u-wave/react-youtube",
   "description": "YouTube player component for React.",
-  "version": "0.7.4",
+  "version": "1.0.0-alpha.4",
   "author": "Renée Kooi <renee@kooi.me>",
   "bugs": {
     "url": "https://github.com/u-wave/react-youtube/issues"
   },
   "dependencies": {
-    "@types/react": "^17.0.0",
+    "@types/prop-types": "^15.7.5",
+    "@types/react": "^17.0.0 || ^18.0.0",
     "@types/youtube": "0.0.47",
-    "load-script2": "^1.0.1",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "@babel/preset-react": "^7.8.3",
-    "@babel/register": "^7.8.3",
-    "@rollup/plugin-babel": "^6.0.0",
+    "@types/node": "^18.11.14",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
     "@u-wave/react-youtube-example": "file:example",
-    "cross-env": "^7.0.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.5",
-    "expect": "^1.20.2",
     "md-insert": "^1.0.1",
     "min-react-env": "^1.0.1",
-    "mocha": "^10.0.0",
     "prop-types-table": "^1.0.0",
-    "proxyquire": "^2.1.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "rollup": "^2.0.2",
-    "tsd": "^0.26.0"
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4",
+    "vitest": "^0.29.2"
   },
   "homepage": "https://github.com/u-wave/react-youtube#readme",
   "keywords": [
@@ -47,25 +42,32 @@
     "youtube"
   ],
   "license": "MIT",
-  "main": "dist/react-youtube.js",
-  "module": "dist/react-youtube.es.js",
-  "types": "index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.ts",
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0"
+    "react": "^17.0.0 || ^18.0.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/u-wave/react-youtube.git"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "tsup src/index.tsx --format esm,cjs --dts",
     "docs": "prop-types-table src/index.js | md-insert README.md --header Props -i",
-    "example": "npm run --prefix example build && npm run --prefix example start",
+    "example": "npm run --prefix example start",
     "prepare": "npm run build",
-    "test": "npm run tsd && npm run tests-only && npm run lint",
-    "lint": "eslint --cache --fix .",
-    "tests-only": "cross-env NODE_ENV=test mocha --require @babel/register test/*.js",
-    "tsd": "tsd"
+    "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",
+    "test": "npm run tests-only && npm run lint",
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "tests-only": "vitest run"
   },
   "sideEffects": false
 }
