@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: '16.x'
       - name: Install
@@ -24,7 +24,7 @@ jobs:
           cp example/bundle.js example/index.html _deploy
       - name: Publish site
         if: success()
-        uses: crazy-max/ghaction-github-pages@v1
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: gh-pages
           build_dir: _deploy
