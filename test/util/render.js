@@ -36,6 +36,7 @@ const render = (initialProps) => {
 
   const div = env.document.createElement('div');
   const container = new Promise((resolve) => {
+    // eslint-disable-next-line react/no-deprecated
     ReactDOM.render(<Container {...initialProps} ref={resolve} />, div);
   });
 
@@ -48,6 +49,7 @@ const render = (initialProps) => {
   }
 
   function unmount() {
+    // eslint-disable-next-line react/no-deprecated
     ReactDOM.unmountComponentAtNode(div);
   }
 
