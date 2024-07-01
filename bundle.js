@@ -31,7 +31,7 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var ReactVersion = "18.3.0";
+          var ReactVersion = "18.3.1";
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -1777,6 +1777,7 @@
           exports.StrictMode = REACT_STRICT_MODE_TYPE;
           exports.Suspense = REACT_SUSPENSE_TYPE;
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
+          exports.act = act;
           exports.cloneElement = cloneElement$1;
           exports.createContext = createContext;
           exports.createElement = createElement$1;
@@ -21982,7 +21983,7 @@
             initializeUpdateQueue(uninitializedFiber);
             return root2;
           }
-          var ReactVersion = "18.3.0";
+          var ReactVersion = "18.3.1";
           function createPortal(children, containerInfo, implementation) {
             var key = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : null;
             {
@@ -23710,17 +23711,13 @@
   var React = __toESM(require_react());
   var import_prop_types = __toESM(require_prop_types());
   var import_load_script2 = __toESM(require_load_script2());
-  function _inheritsLoose(subClass, superClass) {
-    subClass.prototype = Object.create(superClass.prototype);
-    subClass.prototype.constructor = subClass;
-    _setPrototypeOf(subClass, superClass);
+  function _inheritsLoose(t, o) {
+    t.prototype = Object.create(o.prototype), t.prototype.constructor = t, _setPrototypeOf(t, o);
   }
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf2(o2, p2) {
-      o2.__proto__ = p2;
-      return o2;
-    };
-    return _setPrototypeOf(o, p);
+  function _setPrototypeOf(t, e) {
+    return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function(t2, e2) {
+      return t2.__proto__ = e2, t2;
+    }, _setPrototypeOf(t, e);
   }
   var eventNames = ["onReady", "onStateChange", "onPlaybackQualityChange", "onPlaybackRateChange", "onError", "onApiChange"];
   function loadSdk() {
