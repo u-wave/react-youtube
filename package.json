@@ -28,7 +28,7 @@
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.5",
     "expect": "^1.20.2",
-    "md-insert": "^1.0.1",
+    "md-insert": "^2.0.0",
     "min-react-env": "^1.0.1",
     "mocha": "^10.0.0",
     "prop-types-table": "^1.0.0",
