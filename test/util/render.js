@@ -5,6 +5,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+// Doing this after React is loaded makes React do a bit less DOM work
+import 'min-react-env/install';
 import env from 'min-react-env';
 import createYouTube from './createYouTube';
 
