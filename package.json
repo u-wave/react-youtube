@@ -21,7 +21,7 @@
     "@rollup/plugin-babel": "^6.0.0",
     "@u-wave/react-youtube-example": "file:example",
     "cross-env": "^7.0.0",
-    "eslint": "^8.2.0",
+    "eslint": "^9.14.0",
     "eslint-config-airbnb": "^19.0.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
