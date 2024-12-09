@@ -38,7 +38,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x, 18.x, 20.x]
-        react-version: [17.x, 18.x]
+        react-version: [17.x, 18.x, 19.x]
         include:
           - node-version: 12.x
             react-version: 16.0.0
@@ -53,10 +53,11 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Install React ${{matrix.react-version}}
-        if: matrix.react-version != '18.x'
+        if: matrix.react-version != '19.x'
         run: |
           npm install --save-dev \
             react@${{matrix.react-version}} \
-            react-dom@${{matrix.react-version}}
+            react-dom@${{matrix.react-version}}\
+            @types/react@${{matrix.react-version}}
       - name: Run tests
         run: npm run tests-only

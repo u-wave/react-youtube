@@ -1,6 +1,6 @@
 /* eslint-env browser */
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import YouTube from '@u-wave/react-youtube'; // eslint-disable-line import/no-unresolved
 
 const {
@@ -128,5 +128,5 @@ function App() {
   );
 }
 
-// eslint-disable-next-line react/no-deprecated
-ReactDOM.render(<App />, document.getElementById('example'));
+const root = ReactDOM.createRoot(document.getElementById('example'));
+root.render(<App />);
