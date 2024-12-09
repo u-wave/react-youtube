@@ -7,12 +7,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // Doing this after React is loaded makes React do a bit less DOM work
 import 'min-react-env/install';
-import env from 'min-react-env';
 import createYouTube from './createYouTube';
 
-Object.assign(global, env);
+const reactMajor = parseInt((ReactDOM.version || '16').split('.')[0], 10);
 
-const render = (initialProps) => {
+async function render(initialProps) {
   const { YouTube, sdkMock, playerMock } = createYouTube();
 
   let component;
@@ -36,18 +35,33 @@ const render = (initialProps) => {
     }
   }
 
-  const div = env.document.createElement('div');
-  const container = new Promise((resolve) => {
-    // eslint-disable-next-line react/no-deprecated
-    ReactDOM.render(<Container {...initialProps} ref={resolve} />, div);
+  const div = document.createElement('div');
+  let root;
+  if (reactMajor >= 18) {
+    const { createRoot } = await import('react-dom/client');
+    root = createRoot(div);
+  } else {
+    root = {
+      render(element) {
+        // eslint-disable-next-line react/no-deprecated
+        ReactDOM.render(element, div);
+      },
+      unmount() {
+        // eslint-disable-next-line react/no-deprecated
+        ReactDOM.unmountComponentAtNode(div);
+      },
+    };
+  }
+  const container = await new Promise((resolve) => {
+    root.render(<Container {...initialProps} ref={resolve} />);
   });
 
   function rerender(newProps) {
-    return container.then((wrapper) => new Promise((resolve) => {
-      wrapper.setState({ props: newProps }, () => {
+    return new Promise((resolve) => {
+      container.setState({ props: newProps }, () => {
         Promise.resolve().then(resolve);
       });
-    }));
+    });
   }
 
   function unmount() {
@@ -62,6 +76,6 @@ const render = (initialProps) => {
     rerender,
     unmount,
   }));
-};
+}
 
 export default render;
