@@ -52,9 +52,11 @@ async function render(initialProps) {
   } else {
     root = {
       render(element) {
+        // eslint-disable-next-line react/no-deprecated
         ReactDOM.render(element, div);
       },
       unmount() {
+        // eslint-disable-next-line react/no-deprecated
         ReactDOM.unmountComponentAtNode(div);
       },
     };
