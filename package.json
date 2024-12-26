@@ -13,6 +13,7 @@
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.48.1",
     "@types/node": "^18.11.14",
     "@types/react-dom": "^19.0.2",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
@@ -30,8 +31,8 @@
     "prop-types-table": "^1.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "tsup": "^6.5.0",
-    "typescript": "^5.0.2",
+    "tsup": "^8.3.5",
+    "typescript": "5.4.2",
     "vitest": "^0.29.8"
   },
   "homepage": "https://github.com/u-wave/react-youtube#readme",
@@ -61,7 +62,7 @@
     "url": "git+https://github.com/u-wave/react-youtube.git"
   },
   "scripts": {
-    "build": "tsup src/index.tsx --format esm,cjs --dts",
+    "build": "tsup src/index.tsx --format esm,cjs --experimental-dts",
     "docs": "prop-types-table src/index.js | md-insert README.md --header Props -i",
     "example": "npm run --prefix example start",
     "prepare": "npm run build",
