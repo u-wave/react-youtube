@@ -17,6 +17,8 @@ jobs:
         run: npm install
       - name: Run tests
         run: npm test
+      - name: Build module
+        run: npm run build
       - name: Build example
         run: npm run --prefix example build
       - name: Publish site

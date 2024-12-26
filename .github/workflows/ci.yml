@@ -40,5 +40,7 @@ jobs:
           npm install --force --save-dev \
             react@${{matrix.react-version}} \
             react-dom@${{matrix.react-version}}
+      - name: Build module
+        run: npm run build
       - name: Run tests
         run: npm run tests-only
