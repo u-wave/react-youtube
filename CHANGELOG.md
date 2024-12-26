@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.0-alpha.5 - 2024-12-26
+ * Use TypeScript for source code.
+ * Support React 19.
+
 ## 1.0.0-alpha.4 - 2022-05-03
  * Add docs for the `useYouTube` hook.
  * Add props for `origin` / `host` settings.
