@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.0-alpha.6 - 2024-12-26
+ * Allow React 19 in peer dependencies range.
+
 ## 1.0.0-alpha.5 - 2024-12-26
  * Use TypeScript for source code.
  * Support React 19.

@@ -1,7 +1,7 @@
 {
   "name": "@u-wave/react-youtube",
   "description": "YouTube player component for React.",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "author": "Renée Kooi <renee@kooi.me>",
   "bugs": {
     "url": "https://github.com/u-wave/react-youtube/issues"
@@ -55,7 +55,7 @@
   },
   "types": "./dist/index.d.ts",
   "peerDependencies": {
-    "react": "^17.0.0 || ^18.0.0"
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "repository": {
     "type": "git",
