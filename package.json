@@ -62,7 +62,7 @@
     "url": "git+https://github.com/u-wave/react-youtube.git"
   },
   "scripts": {
-    "build": "tsup src/index.tsx --format esm,cjs --experimental-dts",
+    "build": "tsup src/index.tsx --format esm,cjs && tsc --declaration --emitDeclarationOnly -p .",
     "docs": "prop-types-table src/index.js | md-insert README.md --header Props -i",
     "example": "npm run --prefix example start",
     "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",

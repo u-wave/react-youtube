@@ -28,5 +28,12 @@ module.exports = {
         project: './tsconfig.json',
       },
     },
+    {
+      files: ['example/**/*.ts', 'example/**/*.tsx'],
+      extends: ['airbnb-typescript'],
+      parserOptions: {
+        project: './example/tsconfig.json',
+      },
+    },
   ],
 };
