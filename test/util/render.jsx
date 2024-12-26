@@ -46,7 +46,7 @@ async function render(initialProps) {
 
   const div = env.document.createElement('div');
   let root;
-  if (ReactDOM.version.startsWith('18')) {
+  if (ReactDOM.version.startsWith('18') || ReactDOM.version.startsWith('19')) {
     const { createRoot } = await import('react-dom/client');
     root = createRoot(div);
   } else {
