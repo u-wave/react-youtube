@@ -1,4 +1,8 @@
-/// <reference lib="youtube" />
+declare global {
+  namespace YT {
+    function ready(callback: (value: typeof YT) => void): void;
+  }
+}
 
 function loadSdk() {
   return new Promise((resolve, reject) => {
