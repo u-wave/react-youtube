@@ -27,7 +27,7 @@
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.5",
     "md-insert": "^1.0.1",
-    "min-react-env": "^1.0.1",
+    "min-react-env": "^2.0.0",
     "prop-types-table": "^1.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
