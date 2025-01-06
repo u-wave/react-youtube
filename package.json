@@ -7,10 +7,8 @@
     "url": "https://github.com/u-wave/react-youtube/issues"
   },
   "dependencies": {
-    "@types/prop-types": "^15.7.5",
     "@types/react": "^17.0.0 || ^18.0.0 || ^19.0.0",
-    "@types/youtube": "^0.1.0",
-    "prop-types": "^15.8.1"
+    "@types/youtube": "^0.1.0"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.48.1",
