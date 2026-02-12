@@ -296,8 +296,7 @@ function useYouTube(
 
     loadSdk(() => {
       if (!cancelled) {
-        // `createPlayer` is always initialised during the first render
-        instance = createPlayerRef.current!();
+        instance = createPlayerRef.current();
       }
     });
 
