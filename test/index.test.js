@@ -13,7 +13,7 @@ describe('YouTube', () => {
       video: 'x2y5kyu',
     });
     expect(sdkMock.Player).toHaveBeenCalled();
-    expect(sdkMock.Player.calls[0][1]).toMatchObject({ videoId: 'x2y5kyu' });
+    expect(sdkMock.Player.mock.calls[0][1]).toMatchObject({ videoId: 'x2y5kyu' });
   });
 
   it('should load a different video when "video" prop changes', async () => {
@@ -21,14 +21,14 @@ describe('YouTube', () => {
       video: 'x2y5kyu',
     });
     expect(sdkMock.Player).toHaveBeenCalled();
-    expect(sdkMock.Player.calls[0][1]).toMatchObject({
+    expect(sdkMock.Player.mock.calls[0][1]).toMatchObject({
       videoId: 'x2y5kyu',
     });
 
     await rerender({ video: 'x3pn5cb' });
 
     expect(playerMock.cueVideoById).toHaveBeenCalled();
-    expect(playerMock.cueVideoById.calls[0][0]).toMatchObject({
+    expect(playerMock.cueVideoById.mock.calls[0][0]).toMatchObject({
       videoId: 'x3pn5cb',
     });
   });
@@ -37,7 +37,7 @@ describe('YouTube', () => {
     const { sdkMock, playerMock, rerender } = await render({
       video: 'ZuuVjuLNvFY',
     });
-    expect(sdkMock.Player.calls[0][1]).toMatchObject({
+    expect(sdkMock.Player.mock.calls[0][1]).toMatchObject({
       videoId: 'ZuuVjuLNvFY',
     });
 
@@ -97,7 +97,7 @@ describe('YouTube', () => {
       width: 640,
       height: 320,
     });
-    expect(sdkMock.Player.calls[0][1]).toMatchObject({
+    expect(sdkMock.Player.mock.calls[0][1]).toMatchObject({
       width: 640,
       height: 320,
     });
@@ -117,7 +117,7 @@ describe('YouTube', () => {
       endSeconds: 60,
     });
 
-    expect(sdkMock.Player.calls[0][1]).toMatchObject({
+    expect(sdkMock.Player.mock.calls[0][1]).toMatchObject({
       videoId: 'pRKqlw0DaDI',
       playerVars: {
         start: 30,
@@ -132,7 +132,7 @@ describe('YouTube', () => {
     });
 
     expect(playerMock.cueVideoById).toHaveBeenCalled();
-    expect(playerMock.cueVideoById.calls[0][0]).toMatchObject({
+    expect(playerMock.cueVideoById.mock.calls[0][0]).toMatchObject({
       videoId: 'hlk7o5T56iw',
       startSeconds: 40,
       endSeconds: undefined,
@@ -148,7 +148,7 @@ describe('YouTube', () => {
     expect(playerMock.cueVideoById).toHaveBeenCalled();
     expect(playerMock.loadVideoById).not.toHaveBeenCalled();
 
-    playerMock.cueVideoById.reset();
+    playerMock.cueVideoById.mockReset();
 
     await rerender({
       autoplay: true,
