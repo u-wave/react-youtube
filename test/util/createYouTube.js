@@ -45,18 +45,20 @@ export default function createYouTube() {
     setSize: vi.fn(),
   };
 
+  function MockPlayer(container, options) {
+    isPaused = !options.playerVars.autoplay;
+
+    if (options.events && options.events.onReady) {
+      setImmediate(() => {
+        options.events.onReady({ target: playerMock });
+      });
+    }
+
+    return playerMock;
+  }
+
   const sdkMock = {
-    Player: vi.fn(function (container, options) {
-      isPaused = !options.playerVars.autoplay;
-
-      if (options.events && options.events.onReady) {
-        setImmediate(() => {
-          options.events.onReady({ target: playerMock });
-        });
-      }
-
-      return playerMock;
-    }),
+    Player: vi.fn(MockPlayer),
   };
 
   global.YT = sdkMock;
