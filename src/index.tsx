@@ -226,7 +226,15 @@ function buildPlayerVars({
   };
 }
 
-function useYouTube(container: React.RefObject<HTMLElement>, options: YouTubeOptions) {
+/**
+ * Create a YouTube player at `container`. `container` must be a ref object.
+ *
+ * Returns the `YT.Player` object, or `null` until the player is ready.
+ */
+function useYouTube(
+  container: React.RefObject<HTMLElement | null | undefined>,
+  options: YouTubeOptions,
+) {
   const {
     video,
     startSeconds,
@@ -259,18 +267,24 @@ function useYouTube(container: React.RefObject<HTMLElement>, options: YouTubeOpt
   // Stick the player initialisation in a ref so it has the most recent props values
   // when it gets instantiated.
   if (!player) {
-    createPlayer.current = () => new YT.Player(container.current, {
-      videoId: video,
-      width,
-      height,
-      host: options.host,
-      playerVars: buildPlayerVars(options),
-      events: {
-        onReady: (event) => {
-          setPlayer(event.target);
+    createPlayer.current = () => {
+      if (!container.current) {
+        throw new Error('react-youtube: container ref missing. The container must *always* be mounted when calling `useYouTube`');
+      }
+
+      return new YT.Player(container.current, {
+        videoId: video ?? undefined,
+        width,
+        height,
+        host: options.host,
+        playerVars: buildPlayerVars(options),
+        events: {
+          onReady: (event) => {
+            setPlayer(event.target);
+          },
         },
-      },
-    });
+      });
+    };
   }
 
   useLayoutEffect(() => {
@@ -279,7 +293,8 @@ function useYouTube(container: React.RefObject<HTMLElement>, options: YouTubeOpt
 
     loadSdk(() => {
       if (!cancelled) {
-        instance = createPlayer.current();
+        // `createPlayer` is always initialised during the first render
+        instance = createPlayer.current!();
       }
     });
 
@@ -340,11 +355,15 @@ function useYouTube(container: React.RefObject<HTMLElement>, options: YouTubeOpt
   }, [player, muted]);
 
   useEffect(() => {
-    player?.setPlaybackRate(playbackRate);
+    if (playbackRate != null) {
+      player?.setPlaybackRate(playbackRate);
+    }
   }, [player, playbackRate]);
 
   useEffect(() => {
-    player?.setVolume(volume * 100);
+    if (volume != null) {
+      player?.setVolume(volume * 100);
+    }
   }, [player, volume]);
 
   useEffect(() => {
@@ -389,6 +408,13 @@ function useYouTube(container: React.RefObject<HTMLElement>, options: YouTubeOpt
   return player;
 }
 
+/**
+ * Renders an iframe and attaches the YouTube player to it.
+ *
+ * It supports all the same options as the `useYouTube` hook, plus a few to configure the iframe.
+ * If you need to do more with the iframe than this component provides, consider using the
+ * `useYouTube` hook directly.
+ */
 function YouTube({
   id,
   className,
