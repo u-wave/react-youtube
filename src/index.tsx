@@ -261,31 +261,34 @@ function useYouTube(
   // Storing the player in the very first hook makes it easier to
   // find in React DevTools :)
   const [player, setPlayer] = useState<YT.Player | null>(null);
-  const createPlayerRef = useRef<() => YT.Player>(null);
+
+  function createPlayer() {
+    if (!container.current) {
+      throw new Error('react-youtube: container ref missing. The container must *always* be mounted when calling `useYouTube`');
+    }
+
+    return new YT.Player(container.current, {
+      videoId: video ?? undefined,
+      width,
+      height,
+      host: options.host,
+      playerVars: buildPlayerVars(options),
+      events: {
+        onReady: (event) => {
+          setPlayer(event.target);
+        },
+      },
+    });
+  }
+
   const firstRenderRef = useRef(true);
 
   // Stick the player initialisation in a ref so it has the most recent props values
   // when it gets instantiated.
-  if (!player) {
-    createPlayerRef.current = () => {
-      if (!container.current) {
-        throw new Error('react-youtube: container ref missing. The container must *always* be mounted when calling `useYouTube`');
-      }
-
-      return new YT.Player(container.current, {
-        videoId: video ?? undefined,
-        width,
-        height,
-        host: options.host,
-        playerVars: buildPlayerVars(options),
-        events: {
-          onReady: (event) => {
-            setPlayer(event.target);
-          },
-        },
-      });
-    };
-  }
+  const createPlayerRef = useRef<() => YT.Player>(createPlayer);
+  useEffect(() => {
+    createPlayerRef.current = createPlayer;
+  });
 
   useLayoutEffect(() => {
     let instance: YT.Player | null = null;
