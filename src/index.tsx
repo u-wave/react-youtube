@@ -194,7 +194,7 @@ function useEventHandler<K extends keyof YT.Events>(
   }, [player, event, handler]);
 }
 
-function getPlayerVars({
+function buildPlayerVars({
   startSeconds,
   endSeconds,
   lang,
@@ -264,7 +264,7 @@ function useYouTube(container: React.RefObject<HTMLElement>, options: YouTubeOpt
       width,
       height,
       host: options.host,
-      playerVars: getPlayerVars(options),
+      playerVars: buildPlayerVars(options),
       events: {
         onReady: (event) => {
           setPlayer(event.target);
