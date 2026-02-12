@@ -46,7 +46,7 @@ export default function createYouTube() {
   };
 
   const sdkMock = {
-    Player: vi.fn((container, options) => {
+    Player: vi.fn(function (container, options) {
       isPaused = !options.playerVars.autoplay;
 
       if (options.events && options.events.onReady) {
