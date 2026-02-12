@@ -4,8 +4,9 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## 1.0.0-rc.0 - 2026-02-12
  * Remove props no longer supported by YouTube: `modestBranding`.
+ * Remove runtime type checking using `YouTube.propTypes`.
 
 ## 1.0.0-alpha.6 - 2024-12-26
  * Allow React 19 in peer dependencies range.
