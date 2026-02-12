@@ -1,3 +1,4 @@
+/* global global, setImmediate */
 import { vi } from 'vitest';
 import YouTube from '../../src/index.tsx';
 

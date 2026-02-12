@@ -11,19 +11,16 @@
     "@types/youtube": "^0.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@microsoft/api-extractor": "^7.48.1",
     "@types/node": "^22.19.11",
     "@types/react-dom": "^19.0.2",
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
     "@u-wave/react-youtube-example": "file:example",
-    "eslint": "^8.2.0",
-    "eslint-config-airbnb": "^19.0.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-react-hooks": "^4.0.5",
+    "@vitest/eslint-plugin": "^1.6.7",
+    "eslint": "^9.39.2",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.0",
     "md-insert": "^2.0.0",
     "min-react-env": "^2.0.0",
     "prop-types-table": "^2.0.0",
@@ -31,6 +28,7 @@
     "react-dom": "^18.0.0",
     "tsdown": "^0.20.3",
     "typescript": "~5.9.0",
+    "typescript-eslint": "^8.54.0",
     "vitest": "^4.0.18"
   },
   "homepage": "https://github.com/u-wave/react-youtube#readme",
@@ -66,7 +64,7 @@
     "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",
     "test": "npm run tests-only && npm run types && npm run lint",
     "types": "tsc --noEmit -p .",
-    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "lint": "eslint .",
     "tests-only": "vitest run"
   },
   "sideEffects": false

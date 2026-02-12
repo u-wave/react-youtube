@@ -261,13 +261,13 @@ function useYouTube(
   // Storing the player in the very first hook makes it easier to
   // find in React DevTools :)
   const [player, setPlayer] = useState<YT.Player | null>(null);
-  const createPlayer = useRef<() => YT.Player>(null);
-  const firstRender = useRef(true);
+  const createPlayerRef = useRef<() => YT.Player>(null);
+  const firstRenderRef = useRef(true);
 
   // Stick the player initialisation in a ref so it has the most recent props values
   // when it gets instantiated.
   if (!player) {
-    createPlayer.current = () => {
+    createPlayerRef.current = () => {
       if (!container.current) {
         throw new Error('react-youtube: container ref missing. The container must *always* be mounted when calling `useYouTube`');
       }
@@ -294,7 +294,7 @@ function useYouTube(
     loadSdk(() => {
       if (!cancelled) {
         // `createPlayer` is always initialised during the first render
-        instance = createPlayer.current!();
+        instance = createPlayerRef.current!();
       }
     });
 
@@ -384,8 +384,8 @@ function useYouTube(
 
     // Avoid calling a load() function when the player has just initialised,
     // since it will already be up to date at that stage.
-    if (firstRender.current) {
-      firstRender.current = false;
+    if (firstRenderRef.current) {
+      firstRenderRef.current = false;
       return;
     }
 
