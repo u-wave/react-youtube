@@ -107,14 +107,6 @@ export interface YouTubeOptions {
    */
   endSeconds?: number;
   /**
-   * Remove most YouTube logos from the player.
-   *
-   * https://developers.google.com/youtube/player_parameters#modestbranding
-   *
-   * @default false
-   */
-  modestBranding?: boolean;
-  /**
    * Whether to play the video inline on iOS, instead of fullscreen.
    *
    * https://developers.google.com/youtube/player_parameters#playsinline
@@ -123,7 +115,9 @@ export interface YouTubeOptions {
    */
   playsInline?: boolean;
   /**
-   * Whether to show related videos after the video is over.
+   * Whether to show related videos from other channels after the video is over.
+   *
+   * When `false`, only related videos from the same channel as the previous video are shown.
    *
    * https://developers.google.com/youtube/player_parameters#rel
    *
@@ -211,7 +205,6 @@ function getPlayerVars({
   disableKeyboard = false,
   allowFullscreen = true,
   annotations = true,
-  modestBranding = false,
   playsInline = false,
   showRelatedVideos = true,
   origin = typeof window.location === 'object' ? window.location.origin : undefined,
@@ -226,7 +219,6 @@ function getPlayerVars({
     iv_load_policy: annotations ? 1 : 3,
     start: startSeconds,
     end: endSeconds,
-    modestbranding: modestBranding ? 1 : 0,
     playsinline: playsInline ? 1 : 0,
     rel: showRelatedVideos ? 1 : 0,
     mute: muted ? 1 : 0,
