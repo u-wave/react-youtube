@@ -22,7 +22,7 @@ jobs:
     name: Tests
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [18.x, 20.x, 22.x, 24.x]
         react-version: [17.x, 18.x, 19.x]
     runs-on: ubuntu-latest
     steps:
