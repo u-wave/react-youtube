@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.0-rc.1 - 2026-02-27
+ * Fix several file paths in `package.json` `exports` field.
+
 ## 1.0.0-rc.0 - 2026-02-12
  * Remove props no longer supported by YouTube: `modestBranding`.
  * Remove runtime type checking using `YouTube.propTypes`.
