@@ -1,73 +1,68 @@
-import { createSpy } from 'expect';
-import proxyquire from 'proxyquire';
+/* global global, setImmediate */
+import { vi } from 'vitest';
+import YouTube from '../../src/index.tsx';
+
+vi.mock('../../src/loadSdk.ts', () => ({
+  default(callback) {
+    setImmediate(() => callback(global.YT));
+  },
+}));
 
 export default function createYouTube() {
   let isPaused = true;
 
   const iframeMock = {
-    setWidth: createSpy(),
-    setHeight: createSpy(),
-    setId: createSpy(),
-    setClassName: createSpy(),
-    set width(width) {
-      iframeMock.setWidth(width);
-    },
-    set height(height) {
-      iframeMock.setHeight(height);
-    },
-    set id(id) {
-      iframeMock.setId(id);
-    },
+    setId: vi.fn(),
+    setClassName: vi.fn(),
     set className(className) {
       iframeMock.setClassName(className);
     },
   };
 
   const playerMock = {
-    addEventListener: createSpy().andCall((eventName, fn) => {
-      if (eventName === 'ready') fn();
+    addEventListener: vi.fn((eventName, fn) => {
+      if (eventName === 'onReady') fn({ target: playerMock });
     }),
-    mute: createSpy(),
-    unMute: createSpy(),
-    setVolume: createSpy(),
-    setPlaybackQuality: createSpy(),
-    setPlaybackRate: createSpy(),
-    loadVideoById: createSpy(),
-    cueVideoById: createSpy(),
-    playVideo: createSpy().andCall(() => {
+    removeEventListener: vi.fn(),
+    mute: vi.fn(),
+    unMute: vi.fn(),
+    setVolume: vi.fn(),
+    setPlaybackRate: vi.fn(),
+    loadVideoById: vi.fn(),
+    cueVideoById: vi.fn(),
+    playVideo: vi.fn(() => {
       isPaused = false;
     }),
-    pauseVideo: createSpy().andCall(() => {
+    pauseVideo: vi.fn(() => {
       isPaused = true;
     }),
-    stopVideo: createSpy(),
+    stopVideo: vi.fn(),
     getPlayerState() {
       return isPaused ? 2 : 1;
     },
     getIframe() {
       return iframeMock;
     },
+    setSize: vi.fn(),
   };
+
+  function MockPlayer(container, options) {
+    isPaused = !options.playerVars.autoplay;
+
+    if (options.events && options.events.onReady) {
+      setImmediate(() => {
+        options.events.onReady({ target: playerMock });
+      });
+    }
+
+    return playerMock;
+  }
 
   const sdkMock = {
-    Player: createSpy().andCall((container, options) => {
-      isPaused = !options.playerVars.autoplay;
-
-      if (options.events && options.events.onReady) {
-        setImmediate(() => {
-          options.events.onReady({ target: playerMock });
-        });
-      }
-
-      return playerMock;
-    }),
+    Player: vi.fn(MockPlayer),
   };
 
-  const YouTube = proxyquire('../../src/index.js', {
-    './loadSdk': {
-      default: () => Promise.resolve(sdkMock),
-    },
-  }).default;
+  global.YT = sdkMock;
 
   return { YouTube, sdkMock, playerMock };
 }

@@ -4,6 +4,42 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.0-rc.1 - 2026-02-27
+ * Fix several file paths in `package.json` `exports` field.
+
+## 1.0.0-rc.0 - 2026-02-12
+ * Remove props no longer supported by YouTube: `modestBranding`.
+ * Remove runtime type checking using `YouTube.propTypes`.
+
+## 1.0.0-alpha.6 - 2024-12-26
+ * Allow React 19 in peer dependencies range.
+
+## 1.0.0-alpha.5 - 2024-12-26
+ * Use TypeScript for source code.
+ * Support React 19.
+
+## 1.0.0-alpha.4 - 2022-05-03
+ * Add docs for the `useYouTube` hook.
+ * Add props for `origin` / `host` settings.
+ * Pass-through `muted` to the player initially, so `<YouTube autoplay muted />` works as expected.
+
+## 1.0.0-alpha.3 - 2022-05-01
+ * Fix unmount order.
+ * Start player synchronously if the SDK is already loaded.
+
+## 1.0.0-alpha.2 - 2022-05-01
+ * Expose all functionality as a `useYouTube` hook.
+ * Remove props no longer supported by YouTube: `showInfo`, `suggestedQuality`.
+
+## 1.0.0-alpha.1 - 2022-04-20
+ * Improve typings.
+ * Remove duplicate `defaultProps`.
+
+## 1.0.0-alpha.0 - 2021-12-01
+ * Use hooks internally.
+ * Drop support for React 16. This version requires React 17 or 18.
+ * Target evergreen browsers. If you need to support older browsers, you need to transpile this dependency.
+
 ## 0.7.4 - 2022-04-23
  * Fix a warning about workspaces when installing with yarn.
 

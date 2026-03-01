@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   types:
-    name: Types
+    name: TypeScript
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Check types
-        run: npm run tsd
+        run: npm run types
 
   lint:
     name: Code style
@@ -37,11 +37,8 @@ jobs:
     name: Tests
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 20.x]
-        react-version: [17.x, 18.x]
-        include:
-          - node-version: 12.x
-            react-version: 16.0.0
+        node-version: [20.x, 22.x, 24.x]
+        react-version: [17.x, 18.x, 19.x]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -55,8 +52,10 @@ jobs:
       - name: Install React ${{matrix.react-version}}
         if: matrix.react-version != '18.x'
         run: |
-          npm install --save-dev \
+          npm install --force --save-dev \
             react@${{matrix.react-version}} \
             react-dom@${{matrix.react-version}}
+      - name: Build module
+        run: npm run build
       - name: Run tests
         run: npm run tests-only

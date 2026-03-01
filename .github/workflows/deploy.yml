@@ -12,22 +12,21 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 'lts/*'
       - name: Install
         run: npm install
       - name: Run tests
         run: npm test
+      - name: Build module
+        run: npm run build
       - name: Build example
-        run: |
-          npm run --prefix example build
-          mkdir _deploy
-          cp example/bundle.js example/index.html _deploy
+        run: npm run --prefix example build
       - name: Publish site
         if: success()
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: gh-pages
-          build_dir: _deploy
+          build_dir: example/dist
           keep_history: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

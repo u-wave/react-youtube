@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "es2020"],
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["*.tsx", "*.ts"]
+}
