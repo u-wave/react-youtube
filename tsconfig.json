@@ -5,7 +5,8 @@
     "jsx": "react-jsx",
     "outDir": "dist",
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["youtube"]
   },
   "include": ["src/*.tsx", "src/*.ts"]
 }
