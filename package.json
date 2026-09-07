@@ -29,7 +29,7 @@
     "tsdown": "^0.22.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.54.0",
-    "vitest": "^4.0.18"
+    "vitest": "^5.0.0"
   },
   "homepage": "https://github.com/u-wave/react-youtube#readme",
   "keywords": [
