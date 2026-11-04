@@ -23,7 +23,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "tsdown": "^0.22.0",
-    "typescript": "~6.0.3",
+    "typescript": "~7.0.2",
     "vitest": "^4.0.18"
   },
   "homepage": "https://github.com/u-wave/react-youtube#readme",
