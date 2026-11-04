@@ -167,8 +167,8 @@ export interface YouTubeProps extends YouTubeOptions {
    */
   className?: string;
   /**
-  * Inline style for player element.
-  */
+   * Inline style for player element.
+   */
   style?: React.CSSProperties;
 }
 
@@ -264,7 +264,9 @@ function useYouTube(
 
   function createPlayer() {
     if (!container.current) {
-      throw new Error('react-youtube: container ref missing. The container must *always* be mounted when calling `useYouTube`');
+      throw new Error(
+        'react-youtube: container ref missing. The container must *always* be mounted when calling `useYouTube`',
+      );
     }
 
     return new YT.Player(container.current, {
