@@ -405,6 +405,7 @@ function useYouTube(
         player.cueVideoById(opts);
       }
     }
+    // eslint-disable-next-line react/exhaustive-deps
   }, [player, video]);
 
   return player;
