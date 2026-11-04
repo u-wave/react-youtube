@@ -15,6 +15,7 @@
     "@types/node": "^22.19.11",
     "@types/react-dom": "^19.0.2",
     "@u-wave/react-youtube-example": "file:example",
+    "dprint": "^0.64.3",
     "md-insert": "^2.0.0",
     "min-react-env": "^2.0.0",
     "oxlint": "^1.91.0",
@@ -62,7 +63,7 @@
     "browserslist": "npx browserslist --mobile-to-desktop '> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11' > .browserslistrc",
     "test": "npm run tests-only && npm run types && npm run lint",
     "types": "tsc --noEmit -p .",
-    "lint": "oxlint",
+    "lint": "oxlint && dprint check",
     "tests-only": "vitest run"
   },
   "sideEffects": false
