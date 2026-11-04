@@ -1,5 +1,4 @@
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace YT {
     function ready(callback: (value: typeof YT) => void): void;
   }
